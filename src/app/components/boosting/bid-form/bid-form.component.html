@@ -1,0 +1,256 @@
+<!-- <div style="margin: 20px 0px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card chat-container">
+                <div class="card-header">
+                    <h5>Bid</h5>
+                </div>
+                <div class="card-body content">
+                  <div class="inner-content">
+                    <div class="inner-header">
+                        <span>BID TYPE AND VALUE</span>
+                        <span>
+                            <app-feather-icons [icon]="'info'" class="font-primary"></app-feather-icons>
+                        </span>
+                    </div>
+                    <div class="form-input">
+                        <div class="form-group row">
+                            <label for="cpc" class="col-sm-6 col-form-label" style="text-align: center;">CPC (Cost Per Click)</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" [(ngModel)]="bid" name="bid" id="cpc" placeholder="Your bid" style="text-align: right;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-footer">
+                        <span>SUGGETED BID FOR THESE SETTINGS:</span>
+                    </div>
+                  </div> 
+                </div>
+                <div class="action-footer">
+                    <button class="btn btn-primary" [disabled]="!bid" data-toggle="modal" (click)="openPaymentModal(gateway)">Pay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div style="margin: 20px 0px">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card chat-container">
+        <div class="card-header">
+          <div class="row">
+            <h5 class="col-12 col-md-6">
+              {{ "bid_set_daily_bud" | translate }}
+            </h5>
+            <span class="col-12 col-md-6" style="text-align: right"
+              >{{ "bid_curr_balnc" | translate }}: 1,169
+              <span style="font-weight: bold; color: red">HKD</span></span
+            >
+          </div>
+        </div>
+        <div class="card-body content">
+          <div class="inner-content">
+            <div class="form-input">
+              <div class="form-group row">
+                <label for="cpc" class="col-sm-3 col-form-label"
+                  ><strong> {{ "bid_daily_bud" | translate }}</strong>
+                </label>
+                <div class="col-sm-6 budgetbarAlignment">
+                  <ng5-slider
+                    [(value)]="value1"
+                    [options]="options2"
+                  ></ng5-slider>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cpc" class="col-sm-3 col-form-label"
+                  ><strong> {{ "bid_bid_click" | translate }}</strong></label
+                >
+                <div class="col-sm-6 budgetbarAlignment">
+                  <ng5-slider
+                    [(value)]="value2"
+                    [options]="options2"
+                  ></ng5-slider>
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group input-grp-p">
+                    <input
+                      class="datepicker-here form-control digits"
+                      ngbDatepicker
+                      placeholder="dd-mm-yyyy"
+                      [(ngModel)]="date"
+                      #f="ngbDatepicker"
+                      readonly
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn calendar"
+                        (click)="f.toggle()"
+                        type="button"
+                      >
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-top: 10px">
+                <div class="col-sm-12">
+                  <ng5-slider
+                    [(value)]="value3"
+                    [options]="options3"
+                  ></ng5-slider>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cpc" class="col-12 col-form-label">{{
+                  "bid_select_prod" | translate
+                }}</label>
+                <div class="col-12">
+                  <ng-select2
+                    (valueChanged)="addProduct($event)"
+                    [data]="productOptions"
+                    [options]="productConfig"
+                    [placeholder]="'Select Product'"
+                    [width]="300"
+                  >
+                  </ng-select2>
+                </div>
+                <div
+                  class="col-12 product-list-container"
+                  *ngIf="products.length > 0"
+                >
+                  <ul class="list-inline product-list">
+                    <li class="list-inline-item" *ngFor="let prod of products">
+                      <div class="product-list-item">
+                        <img
+                          style="display: block; width: 60px"
+                          [src]="prod.additional.img"
+                          alt="product-image"
+                        />
+                        <span>{{ prod.text }}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cpc" class="col-12 col-form-label">{{
+                  "bid_select_keywords" | translate
+                }}</label>
+                <div class="col-12">
+                  <ng-select2
+                    [(ngModel)]="selectedKeyWords"
+                    [data]="keyWords"
+                    [options]="labelConfig"
+                    placeholder="Select Keywords"
+                    [width]="300"
+                  >
+                  </ng-select2>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-12 col-md-6"
+                  >{{ "bid_selected_keywords" | translate }}:
+                  {{ selectedKeyWords.length }}
+                  {{ "bid_new_keywords" | translate }}:
+                  {{ totalAddedLabels.length }}</label
+                >
+                <!-- <div class="col-12 col-md-6">
+                    <strong>{{  }}</strong>
+                  </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="action-footer row">
+            <div class="col-12 col-md-6">
+              <span style="display: block"
+                >7560 <strong style="color: red">HKD</strong></span
+              >
+              <span>{{ "total_clicks_ratio" | translate }}</span>
+            </div>
+            <button
+              class="btn btn-primary col-12 col-md-6"
+              [disabled]="false"
+              data-toggle="modal"
+              (click)="openPaymentModal(gateway)"
+            >
+              {{ "bid_boost_now" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #gateway let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Stripe</h5>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="main-container" ngbAutofocus>
+        <app-stripe-gateway [_totalAmount]="bid"></app-stripe-gateway>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #keyWordModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add Keyword</h5>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="main-container" ngbAutofocus>
+        <div
+          style="display: flex; justify-content: flex-end; margin-right: 30px"
+        >
+          0.1 bid (HKD) / Keyword
+        </div>
+        <div class="form-group row" style="align-items: center">
+          <label for="keyword" class="col-xl-3 col-sm-4 mb-0">Keyword </label>
+          <input
+            class="form-control col-xl-8 col-sm-7"
+            id="keyword"
+            type="text"
+            [(ngModel)]="keyword"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-primary mr-1">Add</button>
+      <button type="button" class="btn btn-light">Discard</button> -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!keyword"
+        (click)="onAddKeyword()"
+      >
+        {{ "prod_add" | translate }}
+      </button>
+      <button
+        class="btn btn-light"
+        type="button"
+        data-dismiss="modal"
+        (click)="modal.dismiss('Cross click')"
+      >
+        {{ "prod_close" | translate }}
+      </button>
+    </div>
+  </ng-template>
+</div>

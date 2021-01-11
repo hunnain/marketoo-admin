@@ -1,0 +1,118 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ "all_coupons" | translate }}</h5>
+        </div>
+        <div class="card-body">
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <app-loader [loading]="loading"></app-loader>
+          </div>
+          <div class="custom-datatable" *ngIf="!loading">
+            <button class="btn btn-primary mr-1 mb-3" style="float: right">
+              {{ "delete" | translate }}
+            </button>
+            <div class="clearfix"></div>
+            <ngx-datatable
+              class="bootstrap"
+              [rows]="digital_categories"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+              [selected]="selected"
+              [selectionType]="'checkbox'"
+              [selectAllRowsOnPage]="false"
+              (select)="onSelect($event)"
+            >
+              <!-- [externalPaging]="true" 
+              [count]="pagination.TotalCount"
+              [offset]="pagination.CurrentPage"
+              [limit]="pagination.PageSize"
+              (page)="setPage($event)"-->
+              <ngx-datatable-column
+                [width]="30"
+                [sortable]="false"
+                [canAutoResize]="false"
+                [draggable]="false"
+                [resizeable]="false"
+                [headerCheckboxable]="true"
+                [checkboxable]="true"
+              >
+                <button type="button" class="btn btn-primery">
+                  {{ "delete" | translate }}
+                </button>
+              </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'coupon_title' | translate }}"
+                prop="couponTitle"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'coupon_code' | translate }}"
+                prop="couponCode"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'coupon_code_discount' | translate }}"
+                prop="percentageDiscount"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'coupon_duedate' | translate }}"
+                prop="startDate"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'coupon_duedate' | translate }}"
+                prop="endDate"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'coupon_code_action' | translate }}"
+                sortable="false"
+                prop="couponCode"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <div>
+                    <span style="color: blue; cursor: pointer">
+                      <i class="fa fa-edit" (click)="onEdit(value)"></i>
+                    </span>
+                    <span
+                      style="color: blue; cursor: pointer; margin-left: 10px"
+                    >
+                      <i class="fa fa-trash" (click)="onDelete(value)"></i>
+                    </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->

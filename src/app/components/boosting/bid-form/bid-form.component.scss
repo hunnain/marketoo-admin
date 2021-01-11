@@ -1,0 +1,100 @@
+.chat-container{
+    height: 100%;
+    .card-header{
+        padding: 10px 30px;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .card-body{
+        padding-bottom:0px;
+        .inner-content{
+            padding: 20px;
+            background-color: whitesmoke;
+            .inner-header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid #4B5335;
+                .font-primary{
+                    color:#4B5335 !important;
+                }
+            }
+            .form-input{
+                margin-top: 10px;
+            }
+            .inner-footer{
+                background-color: bisque;
+                padding: 5px 10px;
+            }
+            .keywordChip{
+                input[type="checkbox"] {
+                    display: none;
+                  }
+                  
+                  input[type="checkbox"] + label {
+                    -webkit-transition: all 500ms ease;
+                    transition: all 500ms ease;
+                    font-size: 13px;
+                    margin-left:5px;
+                    cursor: pointer;
+                    border-radius: 50px;
+                    background-color: #fff;
+                    border:solid 2px #7d7d7d;
+                    padding: 0.3rem 1rem;
+                    display: inline-block;
+                    -moz-user-select: -moz-none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                  }
+                  
+                  
+                  input[type="checkbox"]:checked + label {
+                    -webkit-transition: all 500ms ease;
+                    transition: all 500ms ease;
+                    background-color: #4B5335; color: white; border-color:#4B5335;
+                  }
+                  
+            }
+        }
+    }
+    .action-footer{
+        text-align: right;
+        padding:0px 30px;
+        padding-bottom:10px;
+    }
+}
+
+::ng-deep .inner-content .select2-search__field{
+    width: 100% !important;
+}
+
+.product-list-container{
+    .product-list{
+        margin-top: 10px;
+        .product-list-item{
+            padding: 10px;
+            border: 1px solid #4B5335;
+            border-radius: 6px;
+            background-color: #fff;
+            img{
+                display: block;
+                width: 60px;
+            }
+            span{
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+// ::ng-deep .image{
+//     img{
+//         width: 40px;
+//         border:1px solid #4B5335;
+//         border-radius: 6px;
+//     }
+// } 
+
+.budgetbarAlignment{
+    float:left; 
+}

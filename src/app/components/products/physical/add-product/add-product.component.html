@@ -1,0 +1,599 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 *ngIf="!isEdit">{{ "add_product" | translate }}</h5>
+          <h5 *ngIf="isEdit">{{ "edit_product" | translate }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="row product-adding">
+            <div class="col-xl-5">
+              <div class="add-product">
+                <div class="row" style="align-items: center">
+                  <div class="col-xl-9 xl-50 col-sm-6 col-9">
+                    <img
+                      [src]="url[0].img"
+                      alt=""
+                      class="img-fluid image_zoom_1"
+                    />
+                  </div>
+                  <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                    <ul class="file-upload-product">
+                      <li *ngFor="let item of url; let i = index">
+                        <div class="box-input-file">
+                          <input
+                            class="upload"
+                            type="file"
+                            (change)="readUrl($event, i)"
+                          />
+                          <img class="imgUpload" alt="" [src]="item.img" />
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- <div class="col-12">
+                                        <dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+                                    </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-7">
+              <form
+                class="needs-validation"
+                [formGroup]="productForm"
+                novalidate
+              >
+                <div class="add-product-form">
+                  <div class="form-group row">
+                    <label
+                      for="validationCustom01"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_name" | translate }}
+                    </label>
+                    <input
+                      class="form-control col-xl-8 col-sm-7"
+                      id="validationCustom01"
+                      type="text"
+                      [formControl]="productForm.controls['name']"
+                      required
+                    />
+                    <div
+                      *ngIf="
+                        productForm.controls.name.touched &&
+                        productForm.controls.name.errors?.required
+                      "
+                      class="text text-danger"
+                    >
+                      {{ "prod_name_req" | translate }}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="validationCustom02"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                    >
+                      {{ "prod_actual_price" | translate }}
+                    </label>
+                    <input
+                      class="form-control col-xl-8 col-sm-7"
+                      id="validationCustom02"
+                      type="number"
+                      [formControl]="productForm.controls['price']"
+                      required=""
+                    />
+                    <div
+                      *ngIf="
+                        productForm.controls.price.touched &&
+                        productForm.controls.price.errors?.required
+                      "
+                      class="text text-danger"
+                    >
+                      {{ "prod_actual_price_req" | translate }}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="validationCustom02"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_mark_price" | translate }}
+                    </label>
+                    <input
+                      class="form-control col-xl-8 col-sm-7"
+                      id="validationCustom02"
+                      type="number"
+                      [formControl]="productForm.controls['markdownPrice']"
+                    />
+                    <div
+                      *ngIf="
+                        productForm.controls.markdownPrice.touched &&
+                        productForm.controls.markdownPrice.errors?.required
+                      "
+                      class="text text-danger required"
+                    >
+                      {{ "prod_mark_price_req" | translate }}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="validationCustom02"
+                      class="col-xl-3 col-sm-4 mb-0"
+                      >{{ "prod_product_for" | translate }}
+                    </label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="inlineRadio1"
+                          [value]="true"
+                          formControlName="isInternationalShipping"
+                        />
+                        <label class="form-check-label" for="inlineRadio1">{{
+                          "prod_inter_shipping" | translate
+                        }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="inlineRadio2"
+                          [value]="false"
+                          formControlName="isInternationalShipping"
+                        />
+                        <label class="form-check-label" for="inlineRadio2">{{
+                          "prod_local_shipping" | translate
+                        }}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_category" | translate }}
+                    </label>
+                    <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['category']"
+                    >
+                      <option
+                        *ngFor="let cate of mainCategories"
+                        [value]="cate.id"
+                      >
+                        {{ cate.name | translate }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group row" *ngIf="main_category.value">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_sub_category" | translate }}
+                    </label>
+                    <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['sub_category']"
+                    >
+                      <option
+                        *ngFor="
+                          let subCate of subCategories[main_category.value]
+                        "
+                        [value]="subCate.id"
+                      >
+                        {{ subCate.name | translate }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group row" *ngIf="sub_category.value">
+                    <label for="ext-cate" class="col-xl-3 col-sm-4 mb-0"
+                      >{{ "cop_ex_sub_cate" | translate }}
+                    </label>
+                    <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="ext-cate"
+                      [formControl]="productForm.controls['extended_category']"
+                    >
+                      <option
+                        *ngFor="
+                          let extndCate of extendedCategories[
+                            sub_category.value
+                          ]
+                        "
+                        [value]="extndCate.id"
+                      >
+                        {{ extndCate.name | translate }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label for="discount" class="col-xl-3 col-sm-3 mb-0">{{
+                      "prod_discount" | translate
+                    }}</label>
+                    <label
+                      for="buy_x"
+                      class="col-xl-1 col-sm-1 mb-0"
+                      [ngClass]="{
+                        required: !disc_buy.value && disc_get.value
+                      }"
+                      >{{ "prod_buy" | translate }}</label
+                    >
+                    <input
+                      class="form-control col-xl-2 col-sm-2"
+                      id="buy_x"
+                      type="text"
+                      [formControl]="productForm.controls['discountBuy']"
+                      placeholder="XXX"
+                    />
+                    <label
+                      for="get_x"
+                      class="col-xl-1 col-sm-1 mb-0"
+                      [ngClass]="{
+                        required: disc_buy.value && !disc_get.value
+                      }"
+                      >{{ "prod_get" | translate }}</label
+                    >
+                    <input
+                      class="form-control col-xl-2 col-sm-2"
+                      id="get_x"
+                      type="text"
+                      [formControl]="productForm.controls['discountGet']"
+                      placeholder="XXX"
+                    />
+                  </div>
+                  <div class="form-group row">
+                    <label for="size" class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_size" | translate }}
+                    </label>
+                    <div class="col-xl-4 col-sm-5" style="padding-left: 0">
+                      <ng-select2
+                        [formControl]="productForm.controls['sizes']"
+                        [data]="sizeOptions"
+                        [options]="sizeConfig"
+                        [width]="300"
+                      >
+                      </ng-select2>
+                    </div>
+                    <div class="col-xl-3 col-sm-2">
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="customSwitch1"
+                          [formControl]="productForm.controls['customSize']"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customSwitch1"
+                          >{{ "prod_custom_size" | translate }}</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-4 mb-0"></div>
+                    <div
+                      class="col-xl-8 col-sm-7 form-inline"
+                      style="margin-top: 20px"
+                      *ngIf="custom_size.value"
+                    >
+                      <input
+                        class="form-control col-xl-4 col-sm-5"
+                        id="size"
+                        type="text"
+                        [formControl]="productForm.controls['customizeSize']"
+                        placeholder="{{ 'prod_custom_entersize' | translate }}"
+                      />
+                      <input
+                        class="upload col-xl-4 col-sm-2"
+                        style="padding-top: 10px"
+                        type="file"
+                        (change)="readCustomSizeImg($event)"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_labels" | translate }}
+                    </label>
+                    <div class="col-xl-8 col-sm-7" style="padding-left: 0">
+                      <ng-select2
+                        [formControl]="productForm.controls['labels']"
+                        [data]="labelOptions"
+                        [options]="labelConfig"
+                        [width]="300"
+                      >
+                      </ng-select2>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-sm-4 mb-0">{{
+                      "prod_stock_avail" | translate
+                    }}</label>
+                    <div class="qty-box1">
+                      <div class="input-group">
+                        <i
+                          class="fa fa-minus btnGtr1"
+                          (click)="decrement()"
+                        ></i>
+                        <input
+                          class="touchspin1 text-center"
+                          name="counter"
+                          [value]="counter"
+                          type="text"
+                          [pattern]="'/^[0-9]*$/'"
+                        />
+                        <i
+                          class="fa fa-plus btnLess1"
+                          (click)="increment()"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                                        <label class="col-xl-3 col-sm-4">Input Product Type</label>
+                                        <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                                            <ck-editor id="editor1" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
+                                        </div>
+                                    </div>-->
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-sm-4"
+                      >{{ "prod_custom_design" | translate }}
+                    </label>
+                    <div class="custom-control custom-switch col-xl-8 col-sm-7">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="cutomDesign"
+                        [formControl]="productForm.controls['customDesign']"
+                      />
+                      <label class="custom-control-label" for="cutomDesign">
+                      </label>
+                    </div>
+
+                    <!-- <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                                            <ck-editor id="editor2" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
+                                        </div> -->
+                    <div class="col-xl-3 col-sm-4 mb-0"></div>
+                    <div
+                      class="col-xl-8 col-sm-7 form-inline"
+                      style="margin-top: 20px"
+                      *ngIf="custom_design.value"
+                    >
+                      <!-- <label for="custom-image-type" class="col-xl-2 col-sm-3 mb-0">Photo Format</label> -->
+                      <select
+                        class="form-control digits col-xl-6 col-sm-12"
+                        id="custom-image-type"
+                        [formControl]="
+                          productForm.controls['customDesignFormat']
+                        "
+                      >
+                        <option disabled selected>Select Format</option>
+                        <option>JPEG/JFIF</option>
+                        <option>JPEG 2000</option>
+                        <option>Exif</option>
+                        <option>TIFF</option>
+                        <option>GIF</option>
+                        <option>BMP</option>
+                        <option>PNG</option>
+                        <option>PPM</option>
+                        <option>PGM</option>
+                        <option>PBM</option>
+                        <option>PNM</option>
+                      </select>
+                      <input
+                        class="upload col-xl-6 col-sm-12"
+                        style="padding-top: 10px"
+                        type="file"
+                        (change)="readCustomDesignImg($event)"
+                      />
+                      <input
+                        class="form-control col-xl-12 col-sm-12"
+                        id="size"
+                        type="text"
+                        [formControl]="
+                          productForm.controls['customDescription']
+                        "
+                        placeholder="{{
+                          'prod_custom_description' | translate
+                        }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0"
+                      >{{ "prod_select_color" | translate }}
+                    </label>
+                    <!-- <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['colorOption']"
+                    >
+                      <option
+                        *ngFor="let color of colorOptions"
+                        [value]="color.id"
+                      >
+                        {{ color.name | translate }}
+                      </option>
+                    </select> -->
+                    <div class="col-xl-8 col-sm-7" style="padding-left: 0">
+                      <ng-select2
+                        [formControl]="productForm.controls['colorOption']"
+                        [data]="colorOptions"
+                        [options]="colorConfig"
+                        [width]="300"
+                      >
+                      </ng-select2>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="validationCustom01"
+                      class="col-xl-3 col-sm-4 mb-0"
+                      >{{ "prod_custom_color" | translate }}
+                    </label>
+                    <input
+                      class="form-control col-xl-8 col-sm-7"
+                      id="validationCustom01"
+                      type="text"
+                      [formControl]="productForm.controls['custom_color']"
+                      required
+                    />
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-sm-4"
+                      >{{ "prod_custom_material" | translate }}
+                    </label>
+                    <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                      <input
+                        class="form-control col-xl-8 col-sm-7"
+                        id="validationCustom01"
+                        type="text"
+                        [formControl]="productForm.controls['customMaterial']"
+                        required
+                      />
+                      <!-- <ck-editor
+                        id="editor3"
+                        cols="30"
+                        rows="10"
+                        language="en"
+                        [fullPage]="true"
+                      ></ck-editor> -->
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-sm-4 required"
+                      >{{ "prod_desc" | translate }}
+                    </label>
+                    <div class="col-xl-8 col-sm-7 pl-0">
+                      <input
+                        class="form-control col-xl-8 col-sm-7"
+                        id="validationCustom01"
+                        type="text"
+                        [formControl]="productForm.controls['description']"
+                        required
+                      />
+                      <!-- <ck-editor
+                        id="editor3"
+                        cols="30"
+                        rows="10"
+                        language="en"
+                        [formControl]="productForm.controls['description']"
+                        [fullPage]="true"
+                      ></ck-editor> -->
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_pay_option" | translate }}
+                    </label>
+                    <div class="col-xl-8 col-sm-7" style="padding-left: 0">
+                      <ng-select2
+                        [formControl]="productForm.controls['paymentOptions']"
+                        [data]="paymentOptions"
+                        [options]="paymentConfig"
+                        [width]="300"
+                      >
+                      </ng-select2>
+                    </div>
+
+                    <!-- <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['paymentOption']"
+                    >
+                      <option
+                        *ngFor="let opt of paymentOptions"
+                        [value]="opt.id"
+                      >
+                        {{ opt.name }}
+                      </option>
+                    </select> -->
+                  </div>
+                </div>
+              </form>
+              
+              <div class="form-group row mb-0">
+                <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
+                  <button
+                    type="button"
+                    [disabled]="loading"
+                    class="btn btn-primary mr-1"
+                    (click)="onSubmit()"
+                  >
+                    {{ (isEdit ? "prod_update" : "prod_add") | translate }}
+                  </button>
+                  <button
+                    type="button"
+                    [disabled]="loading"
+                    class="btn btn-light"
+                    (click)="onDiscard()"
+                  >
+                    {{ "prod_discard" | translate }}
+                  </button>
+                  <!-- <button type="button" class="btn btn-primary mr-1">Request Label</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #keyWordModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add Label</h5>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="main-container" ngbAutofocus>
+        <div
+          style="display: flex; justify-content: flex-end; margin-right: 30px"
+        >
+          0.1 bid (HKD) / Label
+        </div>
+        <div class="form-group row" style="align-items: center">
+          <label for="label" class="col-xl-3 col-sm-4 mb-0">Label</label>
+          <input
+            class="form-control col-xl-8 col-sm-7"
+            id="label"
+            type="text"
+            [(ngModel)]="label"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-primary mr-1">Add</button>
+      <button type="button" class="btn btn-light">Discard</button> -->
+      <button type="button" class="btn btn-primary" (click)="onAddLabel()">
+        Add
+      </button>
+      <button
+        class="btn btn-light"
+        type="button"
+        data-dismiss="modal"
+        (click)="modal.dismiss('Cross click')"
+      >
+        Close
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Container-fluid Ends-->
