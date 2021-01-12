@@ -1,7 +1,7 @@
 {
-  "name": "seller-backend",
+  "name": "marketoo-admin",
   "version": "0.0.0",
-  "homepage": "https://hunnain.github.io/angularmarketoo/",
+  "homepage": "https://hunnain.github.io/marketoo-admin/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
