@@ -37,15 +37,11 @@ export class EmailChipInputComponent implements OnInit {
         event.code === 'Enter'
       ) {
         this.addTag();
-        // this.tag =""
-        // this.form.controls.tag.setValue('');
       }
     }
   }
 
   addTag(): void {
-    // console.log(this.tag);
-    // this.tag;
     if (
       this.tag[this.tag.length - 1] === ',' ||
       this.tag[this.tag.length - 1] === ' '

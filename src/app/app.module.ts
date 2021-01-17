@@ -31,18 +31,18 @@ import { SettingModule } from './components/setting/setting.module';
 import { ReportsModule } from './components/reports/reports.module';
 import { AuthModule } from './components/auth/auth.module';
 import { ReferComponent } from './components/refer/refer.component';
-import { EditorComponent } from './components/editor/editor.component';
+// import { EditorComponent } from './components/editor/editor.component';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { GlobalErrorHandler } from './shared/error-handler/error-handler';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
-
+// import { AngularEditorModule } from '@kolkov/angular-editor';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, ReferComponent, EditorComponent],
+  declarations: [AppComponent, ReferComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -51,6 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InvoiceModule,
     SettingModule,
     HttpClientModule,
+    // AngularEditorModule,
     ReportsModule,
     AuthModule,
     SharedModule,
@@ -84,9 +85,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

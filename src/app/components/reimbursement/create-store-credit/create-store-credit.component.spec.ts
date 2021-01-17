@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditorComponent } from './editor.component';
+import { CreateStoreCreditComponent } from './create-store-credit.component';
 
-describe('EditorComponent', () => {
-  let component: EditorComponent;
-  let fixture: ComponentFixture<EditorComponent>;
+describe('CreateStoreCreditComponent', () => {
+  let component: CreateStoreCreditComponent;
+  let fixture: ComponentFixture<CreateStoreCreditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditorComponent ]
+      declarations: [ CreateStoreCreditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditorComponent);
+    fixture = TestBed.createComponent(CreateStoreCreditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,219 @@
+<div class="row" style="margin-bottom: 20px">
+  <div class="col-sm-12 col-md-6">
+    <div class="card main-container" style="height: 100%">
+      <div class="card-header">
+        <div class="row">
+          <span
+            class="col-12 col-sm-8"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+            "
+          >
+            <h5>{{ "ads_topperformingads" | translate }}</h5>
+            <app-feather-icons
+              [icon]="'help-circle'"
+              class="font-primary"
+              style="color: #000 !important; margin-left: 5px"
+            ></app-feather-icons>
+          </span>
+          <span class="col-12 col-sm-4" style="text-align: right">
+            <select class="form-control digits" [(ngModel)]="prodSortFilter">
+              <option value="1">
+                {{ "ads_high_invest" | translate }}
+              </option>
+              <option value="2">
+                {{ "ads_best_seller" | translate }}
+              </option>
+              <option value="2">
+                {{ "ads_high_clicks" | translate }}
+              </option>
+            </select>
+          </span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="market-chart">
+          <x-chartist
+            class="board-chart ct-golden-section"
+            [data]="chart3.data"
+            [type]="chart3.type"
+            [options]="chart3.options"
+            [events]="chart3.events"
+          >
+          </x-chartist>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="card main-container" style="height: 100%">
+      <div class="card-header">
+        <div class="row">
+          <span
+            class="col-12 col-sm-8"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+            "
+          >
+            <h5>{{ "ads_toptrendinggroup" | translate }}</h5>
+            <app-feather-icons
+              [icon]="'help-circle'"
+              class="font-primary"
+              style="color: #000 !important; margin-left: 5px"
+            ></app-feather-icons>
+          </span>
+          <span class="col-12 col-sm-4" style="text-align: right">
+            <select class="form-control digits" [(ngModel)]="prodSortFilter">
+              <option value="1">
+                {{ "ads_cat" | translate }}
+              </option>
+              <option value="2">
+                {{ "ads_sub_cat" | translate }}
+              </option>
+              <option value="2">
+                {{ "ads_ex_sub_cat" | translate }}
+              </option>
+            </select>
+          </span>
+        </div>
+      </div>
+      <div class="card-body">
+        <ngb-tabset class="tab-coupon mb-0">
+          <ngb-tab>
+            <ng-template ngbTabTitle
+              ><i class="icon-stats-down mr-2"></i
+              >{{ "Boosting_result_trendingdown" | translate }}</ng-template
+            >
+            <ng-template ngbTabContent>
+              <div class="market-chart">
+                <x-chartist
+                  class="board-chart ct-golden-section"
+                  [data]="chart3.data"
+                  [type]="chart3.type"
+                  [options]="chart3.options"
+                  [events]="chart3.events"
+                >
+                </x-chartist>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle
+              ><i class="icon-stats-up mr-2"></i
+              >{{ "Boosting_result_trendingup" | translate }}
+              <ng-template ngbTabContent>
+                <div class="market-chart">
+                  <x-chartist
+                    class="board-chart ct-golden-section"
+                    [data]="chart3.data"
+                    [type]="chart3.type"
+                    [options]="chart3.options"
+                    [events]="chart3.events"
+                  >
+                  </x-chartist>
+                </div>
+              </ng-template>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header" style="text-align: center">
+        <h5>{{ "ads_heading" | translate }}</h5>
+      </div>
+      <div class="card-body">
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
+          <app-loader [loading]="loading"></app-loader>
+        </div>
+        <div class="custom-datatable" *ngIf="!loading">
+          <input
+            type="text"
+            class="filter-ngx form-control"
+            placeholder="Search..."
+            (keyup)="updateFilter($event)"
+          />
+          <ngx-datatable
+            class="bootstrap"
+            [rows]="reimbursrments"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+          >
+            <!-- [externalPaging]="true"
+            [count]="pagination.TotalCount"
+            [offset]="pagination.CurrentPage"
+            [limit]="pagination.PageSize"
+            (page)="setPage($event)" -->
+            <ngx-datatable-column
+              name="{{ 'ads_profile' | translate }}"
+              prop="image"
+            ></ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'ads_name' | translate }}"
+              prop="name"
+            >
+              <!-- <ng-template
+                let-row="row"
+                let-value="value"
+                ngx-datatable-cell-template
+              >
+                {{ getProductsName(value) }}
+              </ng-template> -->
+            </ngx-datatable-column>
+            <!-- <ngx-datatable-column
+              name="{{ 'ads_email' | translate }}"
+              prop="email"
+            ></ngx-datatable-column> -->
+            <!-- <ngx-datatable-column name="{{ 'r_upload_trans' | translate }}">
+              <ng-template
+                let-row="row"
+                let-value="value"
+                ngx-datatable-cell-template
+              >
+                <span style="color: #f88379; cursor: pointer">
+                  <i class="fa fa-upload" (click)="onSelectRow(value)"></i>
+                </span>
+              </ng-template>
+            </ngx-datatable-column> -->
+            <ngx-datatable-column
+              name="{{ 'ads_reg_date' | translate }}"
+              prop="join_date"
+            ></ngx-datatable-column>
+
+            <ngx-datatable-footer>
+              <ng-template ngx-datatable-footer-template>
+                <div
+                  class="pagination"
+                  *ngIf="!loading"
+                  style="margin-bottom: 10px; width: -webkit-fill-available"
+                >
+                  <mat-paginator
+                    style="width: -webkit-fill-available"
+                    [pageIndex]="pagination.CurrentPage - 1"
+                    [length]="pagination.TotalCount"
+                    [pageSize]="pagination.PageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent($event)"
+                  >
+                  </mat-paginator>
+                </div>
+              </ng-template>
+            </ngx-datatable-footer>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

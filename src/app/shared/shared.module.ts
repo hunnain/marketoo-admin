@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgSelect2Module } from 'ng-select2';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FeatherIconsComponent } from './components/feather-icons/feather-icons.component';
@@ -19,6 +21,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MaterialModule } from '../material.module';
 import { EmailChipInputComponent } from './components/email-chip-input/email-chip-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextEditorComponent } from './components/text-editor/text-editor.component';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -31,11 +34,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RightSidebarComponent,
     LoaderComponent,
     EmailChipInputComponent,
+    TextEditorComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     NgSelect2Module,
+    AngularEditorModule,
+    HttpClientModule,
     MatPaginatorModule,
     NgbModule,
     TranslateModule,
@@ -51,9 +57,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ToggleFullscreenDirective,
     RightSidebarComponent,
     TranslateModule,
+    // AngularEditorModule,
+    // HttpClientModule,
     MatPaginatorModule,
     LoaderComponent,
     EmailChipInputComponent,
+    TextEditorComponent,
   ],
 })
 export class SharedModule {}

@@ -44,49 +44,21 @@ export class NavService {
       active: false,
     },
     {
-      title: 'sidebar_My_Account',
+      path: '/sellers-customers',
+      title: 'sidebar_Seller_Customer',
       icon: 'user',
-      type: 'sub',
-      children: [
-        { path: '/settings/profile', title: 'sidebar_Profile', type: 'link' },
-      ],
-    },
-    {
-      title: 'sidebar_Product_Management',
-      icon: 'box',
-      type: 'sub',
+      type: 'link',
+      badgeType: 'primary',
       active: false,
-      children: [
-        {
-          path: '/products/physical/product-list',
-          title: 'sidebar_Product_List',
-          type: 'link',
-        },
-        {
-          path: '/products/physical/add-product',
-          title: 'sidebar_Add_Product',
-          type: 'link',
-        },
-        // 	title: 'Physical', type: 'sub', children: [
-        // 		{ path: '/products/physical/category', title: 'Category', type: 'link' },
-        // 		{ path: '/products/physical/sub-category', title: 'Sub Category', type: 'link' },
-        // 		{ path: '/products/physical/product-list', title: 'Product List', type: 'link' },
-        // 		{ path: '/products/physical/product-detail', title: 'Product Detail', type: 'link' },
-        // 		{ path: '/products/physical/add-product', title: 'Add Product', type: 'link' },
-        // 	]
-        // },
-        // {
-        // 	title: 'digital', type: 'sub', children: [
-        // 		{ path: '/products/digital/digital-category', title: 'Category', type: 'link' },
-        // 		{ path: '/products/digital/digital-sub-category', title: 'Sub Category', type: 'link' },
-        // 		{ path: '/products/digital/digital-product-list', title: 'Product List', type: 'link' },
-        // 		{ path: '/products/digital/digital-add-product', title: 'Add Product', type: 'link' },
-        // 	]
-        // },
-      ],
+      // title: 'sidebar_Seller_Customer',
+      // icon: 'user',
+      // type: 'sub',
+      // children: [
+      //   { path: '/settings/profile', title: 'sidebar_Profile', type: 'link' },
+      // ],
     },
     {
-      title: 'sidebar_Order_Management',
+      title: 'sidebar_All_Orders',
       icon: 'dollar-sign',
       type: 'sub',
       active: false,
@@ -96,7 +68,48 @@ export class NavService {
       ],
     },
     {
-      title: 'sidebar_Coupons',
+      path: '/reimbursement',
+      title: 'sidebar_Reimbursement',
+      icon: 'user',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
+      // title: 'sidebar_Reimbursement',
+      // icon: 'box',
+      // type: 'sub',
+      // active: false,
+      // children: [
+      //   {
+      //     path: '/reimbursement/list-reimbursements',
+      //     title: 'sidebar_Product_List',
+      //     type: 'link',
+      //   },
+      //   {
+      //     path: '/products/physical/add-product',
+      //     title: 'sidebar_Add_Product',
+      //     type: 'link',
+      //   },
+      //   // 	title: 'Physical', type: 'sub', children: [
+      //   // 		{ path: '/products/physical/category', title: 'Category', type: 'link' },
+      //   // 		{ path: '/products/physical/sub-category', title: 'Sub Category', type: 'link' },
+      //   // 		{ path: '/products/physical/product-list', title: 'Product List', type: 'link' },
+      //   // 		{ path: '/products/physical/product-detail', title: 'Product Detail', type: 'link' },
+      //   // 		{ path: '/products/physical/add-product', title: 'Add Product', type: 'link' },
+      //   // 	]
+      //   // },
+      //   // {
+      //   // 	title: 'digital', type: 'sub', children: [
+      //   // 		{ path: '/products/digital/digital-category', title: 'Category', type: 'link' },
+      //   // 		{ path: '/products/digital/digital-sub-category', title: 'Sub Category', type: 'link' },
+      //   // 		{ path: '/products/digital/digital-product-list', title: 'Product List', type: 'link' },
+      //   // 		{ path: '/products/digital/digital-add-product', title: 'Add Product', type: 'link' },
+      //   // 	]
+      //   // },
+      // ],
+    },
+
+    {
+      title: 'sidebar_Coupons_Store_Credit',
       icon: 'tag',
       type: 'sub',
       active: false,
@@ -127,15 +140,19 @@ export class NavService {
       active: false,
     },
     {
-      title: 'sidebar_Boosting',
+      title: 'sidebar_Ads_Revenue_Trend',
       icon: 'trending-up',
       type: 'sub',
       active: false,
       children: [
-        { path: '/boosting', title: 'sidebar_Boost_My_Product', type: 'link' },
         {
-          path: '/boosting/my-ads-performance',
-          title: 'sidebar_My_Ads_Performance',
+          path: '/ads/ads-revenue',
+          title: 'sidebar_Adds_Revenue',
+          type: 'link',
+        },
+        {
+          path: '/ads/ads-trend',
+          title: 'sidebar_Adds_Trends',
           type: 'link',
         },
       ],
@@ -149,8 +166,24 @@ export class NavService {
       active: false,
     },
     {
-      path: '/refer-seller',
-      title: 'sidebar_Refer_a_Seller',
+      path: '/magazine',
+      title: 'sidebar_Magazine',
+      icon: 'package',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
+    },
+    {
+      path: '/weekend-markets',
+      title: 'sidebar_Weekend_Markets',
+      icon: 'package',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
+    },
+    {
+      path: '/about-us',
+      title: 'sidebar_About_Us',
       icon: 'package',
       type: 'link',
       badgeType: 'primary',

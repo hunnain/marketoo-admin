@@ -9,13 +9,32 @@ export const content: Routes = [
       ),
   },
   {
-    path: 'products',
+    path: 'sellers-customers',
     loadChildren: () =>
-      import('../../components/products/products.module').then(
-        (m) => m.ProductsModule
+      import('../../components/seller-customer/seller-customer.module').then(
+        (m) => m.SellerCustomerModule
       ),
     data: {
-      breadcrumb: 'Products',
+      breadcrumb: 'Sellers & Customers',
+    },
+
+    // path: 'products',
+    // loadChildren: () =>
+    //   import('../../components/products/products.module').then(
+    //     (m) => m.ProductsModule
+    //   ),
+    // data: {
+    //   breadcrumb: 'Products',
+    // },
+  },
+  {
+    path: 'reimbursement',
+    loadChildren: () =>
+      import('../../components/reimbursement/reimbursement.module').then(
+        (m) => m.ReimbursementsModule
+      ),
+    data: {
+      breadcrumb: 'Reimbursement',
     },
   },
   {
@@ -120,6 +139,36 @@ export const content: Routes = [
       ),
     data: {
       breadcrumb: 'My Messages',
+    },
+  },
+  {
+    path: 'ads',
+    loadChildren: () =>
+      import(
+        '../../components/adds-revenue-trends/ads-revenue-trend.module'
+      ).then((m) => m.AddsRevenueTrendModule),
+    data: {
+      breadcrumb: 'Ads',
+    },
+  },
+  {
+    path: 'magazine',
+    loadChildren: () =>
+      import('../../components/magazine/magazine.module').then(
+        (m) => m.MagazineModule
+      ),
+    data: {
+      breadcrumb: 'Reimbursement',
+    },
+  },
+  {
+    path: 'about-us',
+    loadChildren: () =>
+      import('../../components/about-us/about-us.module').then(
+        (m) => m.AboutUsModule
+      ),
+    data: {
+      breadcrumb: 'Reimbursement',
     },
   },
   {
