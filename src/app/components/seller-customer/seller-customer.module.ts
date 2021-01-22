@@ -10,9 +10,11 @@ import { SellerCustomerComponent } from './seller-customer/seller-customer.compo
 import { ViewDetailComponent } from './view-detail/view-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SellerComponent } from './seller/seller.component';
+import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
-  declarations: [SellerCustomerComponent, ViewDetailComponent],
+  declarations: [SellerCustomerComponent, ViewDetailComponent, SellerComponent, CustomerComponent],
   imports: [
     CommonModule,
     NgbModule,

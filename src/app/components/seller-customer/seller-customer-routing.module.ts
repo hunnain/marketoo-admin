@@ -2,33 +2,43 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewDetailComponent } from './view-detail/view-detail.component';
 import { SellerCustomerComponent } from './seller-customer/seller-customer.component';
+import { SellerComponent } from './seller/seller.component';
+import { CustomerComponent } from './customer/customer.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: '',
-        component: SellerCustomerComponent,
+        path: 'seller',
+        component: SellerComponent,
         data: {
-          title: "Sellers & Customers",
-          breadcrumb: "Sellers & Customers"
-        }
+          title: 'Sellers',
+          breadcrumb: 'Sellers',
+        },
       },
       {
-        path: 'view-detail/:id',
+        path: 'customer',
+        component: CustomerComponent,
+        data: {
+          title: 'Customers',
+          breadcrumb: 'Customers',
+        },
+      },
+      {
+        path: 'seller/view-detail/:id',
         component: ViewDetailComponent,
         data: {
-          title: "View Detail",
-          breadcrumb: "View Detail"
-        }
-      }
-    ]
-  }
+          title: 'View Detail',
+          breadcrumb: 'View Detail',
+        },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SellerCustomerRoutingModule { }
+export class SellerCustomerRoutingModule {}

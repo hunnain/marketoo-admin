@@ -5,23 +5,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
-import { AboutUsRoutingModule } from './about-us-routing.module';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { PromotionRoutingModule } from './promotion-routing.module';
+import { PromotionComponent } from './list-promotion/promotion.component';
 // import { CreateReimbursementComponent } from './create-reimbursement/create-reimbursement.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { BannersComponent } from './banners/banners.component';
 // import { CreateStoreCreditComponent } from './create-store-credit/create-store-credit.component';
 
 @NgModule({
   declarations: [
-    AboutUsComponent,
-    BannersComponent,
+    PromotionComponent,
     // CreateReimbursementComponent,
     // CreateStoreCreditComponent,
   ],
   imports: [
     CommonModule,
-    AboutUsRoutingModule,
+    PromotionRoutingModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
@@ -29,4 +27,4 @@ import { BannersComponent } from './banners/banners.component';
     SharedModule,
   ],
 })
-export class AboutUsModule {}
+export class PromotionModule {}

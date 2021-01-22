@@ -1,0 +1,19 @@
+.chat-side-bar {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 9px rgba(191, 191, 191, 0.36);
+  right: 0 !important;
+  top: 0 !important;
+  position: unset !important;
+}
+
+.editor-box {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 9px rgba(191, 191, 191, 0.36);
+  padding: 15px;
+}
+
+.image-upload > input {
+  display: none;
+}

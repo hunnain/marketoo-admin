@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MagazineComponent } from './magazine.component';
+import { CampaignComponent } from './campaign.component';
 // import { CreateReimbursementComponent } from './create-reimbursement/create-reimbursement.component';
 // import { CreateStoreCreditComponent } from './create-store-credit/create-store-credit.component';
 
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MagazineComponent,
+        component: CampaignComponent,
         data: {
           title: 'Magazine',
           breadcrumb: 'Magazine',
@@ -48,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MagazineRoutingModule {}
+export class CampaignRoutingModule {}

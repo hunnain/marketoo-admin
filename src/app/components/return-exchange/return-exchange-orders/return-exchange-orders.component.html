@@ -7,6 +7,8 @@
           <h5>{{ "re_return_exchange" | translate }}</h5>
         </div>
         <div class="card-body">
+          <div><a href="" style="font-size: large">Update Policy</a></div>
+          <br />
           <div class="custom-datatable">
             <ngx-datatable
               class="bootstrap"
@@ -48,9 +50,22 @@
                   let-value="value"
                   ngx-datatable-cell-template
                 >
-                  <span style="color: #f88379; cursor: pointer">
+                  <!-- <span style="color: #f88379; cursor: pointer">
                     <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
                   </span>
+                  <span style="color: #f88379; cursor: pointer">
+                    <i class="fa fa-bell" (click)="onNotify(value)"></i>
+                  </span> -->
+                  <div>
+                    <span style="color: #f88379; cursor: pointer">
+                      <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
+                    </span>
+                    <span
+                      style="color: #f88379; cursor: pointer; margin-left: 10px"
+                    >
+                      <i class="fa fa-bell-o" (click)="onNotify(value)"></i>
+                    </span>
+                  </div>
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-footer>

@@ -1,174 +1,82 @@
 <div class="container-fluid">
   <div class="card">
-    <div class="row product-page-main card-body">
-      <div class="col-xl-8">
-        <div class="product-page-details product-right mb-0">
-          <div class="row">
-            <h2 class="col-12 col-md-12">
-              {{ "re_return_details" | translate }}
-            </h2>
-          </div>
-          <hr />
-          <div class="container-gap">
-            <span
-              (click)="showDetail(Document)"
-              style="cursor: pointer; color: tomato"
-              >Read more about Returned and Exchange Policy
-            </span>
-            <!-- <p class="mb-0">{{ "re_desc" | translate }}</p> -->
-
-            <div style="margin-top: 30px">
-              <div>
-                <div style="display: grid; grid-template-columns: 4fr 1fr 1fr">
-                  <span
-                    ><b>{{ "re_product" | translate }}</b></span
-                  >
-                  <span
-                    ><b>{{ "re_qty" | translate }}</b></span
-                  >
-                  <span
-                    ><b>{{ "re_price" | translate }}</b></span
-                  >
-                </div>
-                <hr />
-                <ul>
-                  <li
-                    style="margin-bottom: 10px"
-                    *ngFor="let prod of dummyData.products"
-                  >
-                    <div
-                      style="
-                        display: grid;
-                        grid-template-columns: 4fr 1fr 1fr;
-                        align-items: center;
-                      "
-                    >
-                      <div>
-                        <figure style="margin: 0px">
-                          <img [src]="prod.img" class="img-50" />
-                          <figcaption>{{ prod.name }}</figcaption>
-                        </figure>
-                      </div>
-                      <div>
-                        <span>{{ prod.qty }}</span>
-                      </div>
-                      <div>
-                        <span>${{ prod.price }}HKD</span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div style="margin-top: 30px">
-              <h4 class="product-title">{{ "re_refund_rej" | translate }}</h4>
-              <hr />
-              <div style="margin-top: 20px">
-                <div>
-                  <label for="refund_reason">{{
-                    "re_refunf_reason" | translate
-                  }}</label>
-                  <select
-                    class="form-control"
-                    id="refund_reason"
-                    [(ngModel)]="refund_reason"
-                    name="refund_reason"
-                  >
-                    <option value="faulty">{{'Mismatched items' | translate}}</option>
-                    <option value="faulty">{{'Faulty items' | translate}}</option>
-                    <option value="faulty">{{'Wrong size' | translate}}</option>
-                  </select>
-                </div>
-                <div class="font-size-13">
-                  <p>{{ "re_refund_reason_detail" | translate }}</p>
-                </div>
-                <div style="margin-top: 10px">
-                  <label for="reject_reason">{{
-                    "re_rej_reason" | translate
-                  }}</label>
-                  <input type="text" class="form-control" id="reject_reason" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="detail-header">
+      <div class="sub-header-1">
+        <h3 style="margin-bottom: 0px">
+          {{ "sd_seller_detail" | translate }}
+        </h3>
       </div>
-      <div class="col-xl-4">
-        <div class="order-summary">
-          <div class="container-gap">
-            <div style="display: flex; align-items: center">
-              <app-feather-icons
-                [icon]="'package'"
-                class="font-primary"
-                style="margin-right: 5px; color: #000 !important"
-              ></app-feather-icons>
-              <h4>Courier</h4>
-            </div>
-            <div style="margin-top: 20px">
-              <div class="input-group mb-2">
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div style="margin-top: 20px">
-              <div>
-                <label for="tracking_no">{{ "re_track_no" | translate }}</label>
-                <input type="number" id="tracking_no" class="form-control" />
-              </div>
-            </div>
-            <hr />
-            <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "re_req_on" | translate }}</strong
-              >: {{ dummyData.requested_on }}
-            </div>
-            <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "re_type" | translate }}</strong
-              >:
-              <span class="badge badge-success">{{ dummyData.type }}</span>
-            </div>
-            <div style="margin-top: 20px" class="font-size-13">
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
-                </div>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="inlineFormInputGroup"
-                  [value]="dummyData.total"
-                />
-              </div>
-              <!-- <strong>Total</strong>: <h5 class="d-inline">${{dummyData.total}}</h5> 
-                            <span class="change-btn" data-toggle="modal" (click)="changeTotal(Total)">Change</span> -->
-            </div>
-            <div class="row" style="margin-top: 30px">
-              <div class="col-12 col-sm-12" style="text-align: center">
-                <button class="btn btn-primary" type="button">
-                  {{ "re_refund" | translate }} ${{ dummyData.total }}
-                </button>
-              </div>
-              <div class="col-12 col-sm-12" style="margin-top: 10px">
-                <p style="margin-bottom: 5px">
-                  {{ "re_refund_item" | translate }}
-                </p>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1">{{
-                    "re_send_not" | translate
-                  }}</label>
-                </div>
-              </div>
-            </div>
+      <div class="sub-header-2">
+        <button type="button" class="btn btn-primary">Deny</button>
+        <div style="margin-left: 10px">
+          <button type="button" class="btn btn-primary">Approved</button>
+          <div class="checkbox checkbox-primary">
+            <input
+              id="checkbox-primary-1"
+              type="checkbox"
+              data-original-title=""
+              title=""
+            />
+            <label for="checkbox-primary-1" style="margin: 5px">
+              Blast Email
+            </label>
           </div>
         </div>
       </div>
     </div>
+    <hr />
+
+    <div class="row product-page-main card-body">
+      <div class="col-xl-8">
+        <div class="title-style">
+          {{ "sd_transaction_management_fee" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_online_payment_fee" | translate }} :
+        </div>
+        <div class="title-style">{{ "sd_shipment_cost" | translate }} :</div>
+        <div class="title-style">{{ "sd_discounted_c" | translate }} :</div>
+        <div class="title-style">{{ "sd_discounted_sc" | translate }} :</div>
+        <div class="title-style">{{ "sd_discounted_md" | translate }} :</div>
+        <div class="title-style">{{ "sd_discounted_or" | translate }} :</div>
+        <div class="title-style">
+          {{ "sd_referred_sellers_amount" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_referred_customers_amount" | translate }} :
+        </div>
+        <div class="title-style">{{ "sd_total_orders" | translate }} :</div>
+        <div class="title-style">
+          {{ "sd_total_return_orders" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_total_exchange_orders" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_total_cancelled_orders" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_total_subscriptions" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_total_active_products" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_total_amount_of_transaction" | translate }} :
+        </div>
+        <div class="title-style">{{ "sd_top_50_sellers" | translate }} :</div>
+        <div class="title-style">
+          {{ "sd_new_signups_customer" | translate }} :
+        </div>
+        <div class="title-style">
+          {{ "sd_new_signups_sellers" | translate }} :
+        </div>
+      </div>
+      <div class="col-xl-4"></div>
+    </div>
   </div>
 </div>
-
+<!-- 
 <ng-template #Total let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
@@ -226,8 +134,8 @@
       </button>
     </div>
   </div>
-</ng-template>
-
+</ng-template> -->
+<!-- 
 <ng-template #Status let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
@@ -485,7 +393,6 @@
           >所有退貨會以積分形式退款或退回原本付款方式.</span
         >
       </p>
-      <!--  -->
       <p class="modal-text-style-2">
         <span class="modal-text-style-1">&nbsp;</span>
       </p>
@@ -517,7 +424,7 @@
           物時系統會自動扣減錢包內的積分, 並用以付款。
         </span>
       </p>
-      <!--  -->
+     
       <p class="modal-text-style-2">
         <span class="modal-text-style-1">&nbsp;</span>
       </p>
@@ -535,7 +442,7 @@
       </p>
     </div>
   </div>
-  <!-- <div class="action">
+   <div class="action">
           <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
-      </div> -->
-</ng-template>
+      </div> 
+</ng-template> -->

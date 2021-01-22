@@ -2,16 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
-import { returnDB } from '../../../shared/tables/return-list';
+import { sellerCustomerDB } from '../../../shared/tables/seller-customerDB';
 @Component({
-  selector: 'app-return-exchange-orders',
-  templateUrl: './return-exchange-orders.component.html',
-  styleUrls: ['./return-exchange-orders.component.scss'],
+  selector: 'app-seller',
+  templateUrl: './seller.component.html',
+  styleUrls: ['./seller.component.scss'],
 })
-export class ReturnExchanngeOrderComponent implements OnInit {
+export class SellerComponent implements OnInit {
   public order = [];
   public temp = [];
   public loading = false;
+  public filterOptions = [
+    'seller_filter_country',
+    'seller_filter_date',
+    'seller_filter_fname',
+    'seller_filter_lname',
+    'seller_filter_seller_url',
+    'seller_filter_seller_name',
+    'seller_filter_seller_code',
+  ];
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   public pagination: Paginate = {
@@ -24,18 +33,15 @@ export class ReturnExchanngeOrderComponent implements OnInit {
   };
   pageSizeOptions: number[] = [5, 10, 25, 50];
   constructor(private router: Router) {
-    this.order = returnDB.list_return;
+    this.order = sellerCustomerDB.list_return;
   }
 
   ngOnInit() {}
 
   onSelectRow(row) {
-    let route = `/return-exchange/view-detail/${row.replace(/#/g, '')}`;
-    this.router.navigate([route]);
-  }
-
-  onNotify(row) {
     console.log(row);
+    let route = `/sellers-customers/seller/view-detail/${23}`;
+    this.router.navigate([route]);
   }
 
   pageEvent(data) {

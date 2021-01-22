@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutUsComponent } from './about-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { BannersComponent } from './banners/banners.component';
 // import { CreateReimbursementComponent } from './create-reimbursement/create-reimbursement.component';
 // import { CreateStoreCreditComponent } from './create-store-credit/create-store-credit.component';
 
@@ -9,11 +10,19 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: '',
+        path: 'about-us',
         component: AboutUsComponent,
         data: {
           title: 'About Us',
           breadcrumb: 'About Us',
+        },
+      },
+      {
+        path: 'banner',
+        component: BannersComponent,
+        data: {
+          title: 'Banners',
+          breadcrumb: 'Banners',
         },
       },
       // {

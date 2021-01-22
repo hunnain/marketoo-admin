@@ -3,8 +3,18 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div class="card-header">
-          <h5>{{ "Reimbursement" | translate }}</h5>
+        <div
+          class="card-header"
+          style="display: flex; justify-content: space-between"
+        >
+          <h5>{{ "Notification" | translate }}</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addNotification()"
+          >
+            {{ "n_create_notification" | translate }}
+          </button>
         </div>
         <div class="card-body">
           <div
@@ -28,10 +38,10 @@
               [rowHeight]="'auto'"
             >
               <!-- [externalPaging]="true"
-              [count]="pagination.TotalCount"
-              [offset]="pagination.CurrentPage"
-              [limit]="pagination.PageSize"
-              (page)="setPage($event)" -->
+                [count]="pagination.TotalCount"
+                [offset]="pagination.CurrentPage"
+                [limit]="pagination.PageSize"
+                (page)="setPage($event)" -->
               <ngx-datatable-column
                 name="{{ 'r_profile' | translate }}"
                 prop="image"
@@ -41,12 +51,12 @@
                 prop="name"
               >
                 <!-- <ng-template
-                  let-row="row"
-                  let-value="value"
-                  ngx-datatable-cell-template
-                >
-                  {{ getProductsName(value) }}
-                </ng-template> -->
+                    let-row="row"
+                    let-value="value"
+                    ngx-datatable-cell-template
+                  >
+                    {{ getProductsName(value) }}
+                  </ng-template> -->
               </ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'r_email' | translate }}"

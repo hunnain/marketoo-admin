@@ -142,6 +142,16 @@ export const content: Routes = [
     },
   },
   {
+    path: 'notifications',
+    loadChildren: () =>
+      import('../../components/notification/notification.module').then(
+        (m) => m.NotificationModule
+      ),
+    data: {
+      breadcrumb: 'Notifications',
+    },
+  },
+  {
     path: 'ads',
     loadChildren: () =>
       import(
@@ -152,13 +162,23 @@ export const content: Routes = [
     },
   },
   {
-    path: 'magazine',
+    path: 'campiagn',
     loadChildren: () =>
-      import('../../components/magazine/magazine.module').then(
-        (m) => m.MagazineModule
+      import('../../components/campaign/campaign.module').then(
+        (m) => m.CampaignModule
       ),
     data: {
-      breadcrumb: 'Reimbursement',
+      breadcrumb: 'Campiagn',
+    },
+  },
+  {
+    path: 'promotion',
+    loadChildren: () =>
+      import('../../components/promotion/promotion.module').then(
+        (m) => m.PromotionModule
+      ),
+    data: {
+      breadcrumb: 'Promotion',
     },
   },
   {
@@ -168,7 +188,7 @@ export const content: Routes = [
         (m) => m.AboutUsModule
       ),
     data: {
-      breadcrumb: 'Reimbursement',
+      breadcrumb: 'About Us',
     },
   },
   {

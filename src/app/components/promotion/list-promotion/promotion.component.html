@@ -3,8 +3,19 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div class="card-header">
-          <h5>{{ "Reimbursement" | translate }}</h5>
+        <div
+          class="card-header"
+          style="display: flex; justify-content: space-between"
+        >
+          <h5>{{ "Promotions" | translate }}</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            (click)="addPromotion(AddPromotion)"
+          >
+            {{ "pro_add_promotion" | translate }}
+          </button>
         </div>
         <div class="card-body">
           <div
@@ -16,7 +27,7 @@
             <input
               type="text"
               class="filter-ngx form-control"
-              placeholder="{{ 'r_search' | translate }}..."
+              placeholder="{{ 'pro_search' | translate }}..."
               (keyup)="updateFilter($event)"
             />
             <ngx-datatable
@@ -28,10 +39,10 @@
               [rowHeight]="'auto'"
             >
               <!-- [externalPaging]="true"
-              [count]="pagination.TotalCount"
-              [offset]="pagination.CurrentPage"
-              [limit]="pagination.PageSize"
-              (page)="setPage($event)" -->
+                [count]="pagination.TotalCount"
+                [offset]="pagination.CurrentPage"
+                [limit]="pagination.PageSize"
+                (page)="setPage($event)" -->
               <ngx-datatable-column
                 name="{{ 'r_profile' | translate }}"
                 prop="image"
@@ -41,12 +52,12 @@
                 prop="name"
               >
                 <!-- <ng-template
-                  let-row="row"
-                  let-value="value"
-                  ngx-datatable-cell-template
-                >
-                  {{ getProductsName(value) }}
-                </ng-template> -->
+                    let-row="row"
+                    let-value="value"
+                    ngx-datatable-cell-template
+                  >
+                    {{ getProductsName(value) }}
+                  </ng-template> -->
               </ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'r_email' | translate }}"
@@ -95,3 +106,38 @@
   </div>
   <!-- Container-fluid Ends-->
 </div>
+<ng-template #AddPromotion let-modal class="modal-md">
+  <div class="modal-header" style="background: #f88379">
+    <h5 class="modal-title" id="exampleModalLabel" style="color: white">
+      {{ "pro_add_promotion" | translate }}
+    </h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-container" style="padding: 10px 30px">
+      <div class="form-group row">
+        <label for="validationCustom01" class="required"
+          >{{ "pro_title" | translate }}
+        </label>
+        <input
+          class="form-control"
+          id="validationCustom01"
+          type="text"
+          [(ngModel)]="title"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="action" style="padding: 15px 30px">
+    <button class="btn btn-primary" type="button" (click)="onSubmit()">
+      {{ "pro_create" | translate }}
+    </button>
+  </div>
+</ng-template>

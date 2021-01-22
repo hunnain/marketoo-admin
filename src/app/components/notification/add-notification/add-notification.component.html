@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-4" style="margin-bottom: 20px">
+      <div class="right-sidebar chat-side-bar">
+        <app-right-sidebar (selectUser)="openChat($event)"></app-right-sidebar>
+      </div>
+    </div>
+    <div class="col-12 col-md-8" style="margin-bottom: 20px">
+      <div class="card editor-box">
+        <div class="image-upload">
+          <label for="file-input">
+            <app-feather-icons
+              [icon]="'upload'"
+              class="font-warning"
+            ></app-feather-icons>
+            <!-- <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg"/> -->
+          </label>
+
+          <input id="file-input" type="file" (change)="readUrl($event)" />
+        </div>
+
+        <app-text-editor></app-text-editor>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+          "
+        >
+          <button type="button" class="btn btn-primary">
+            {{ "not_all_sellers" | translate }}
+          </button>
+          <button type="button" class="btn btn-primary">
+            {{ "not_all_customers" | translate }}</button
+          ><button type="button" class="btn btn-primary">
+            {{ "not_spread_all" | translate }}
+          </button>
+        </div>
+      </div>
+      <!-- <div class="no-chat-msg" *ngIf="!openChatScreen">
+          Click on user to start chat
+        </div>
+        <app-chat-box
+          *ngIf="openChatScreen"
+          [user]="selectedUser"
+          [messages]="dummyMessages"
+        ></app-chat-box> -->
+    </div>
+  </div>
+</div>

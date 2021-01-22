@@ -142,3 +142,23 @@
     }
   }
 }
+
+.title-style {
+  font-weight: 500;
+}
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 0 10px;
+}
+.sub-header-1 {
+  margin: 10px 0 10px 20px;
+  display: flex;
+  align-items: center;
+}
+.sub-header-2 {
+  margin: 0px 10px;
+  display: flex;
+  align-items: flex-start;
+}
