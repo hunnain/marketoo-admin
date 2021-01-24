@@ -699,6 +699,12 @@
   "ab_ads_policies": "Ads Policies",
   "ab_terms_conditions": "Terms & Conditions",
 
+  "ban_banners": "Banners",
+  "ban_add_banner": "Add Banner",
+  "close":"Close",
+  
+
+
   "pro_add_promotion": "Add Promotion",
   "pro_create": "Create",
   "pro_title": "Title",

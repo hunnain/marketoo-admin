@@ -1,0 +1,16 @@
+<input type="file" accept="image/*" (change)="fileChangeEvent($event)" />
+
+<image-cropper
+  [imageChangedEvent]="imageChangedEvent"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="aspectRatio"
+  format="png"
+  [autoCrop]="true"
+  [roundCropper]="roundCropper"
+  (imageCropped)="imageCropped($event)"
+  (imageLoaded)="imageLoaded()"
+  (cropperReady)="cropperReady()"
+  (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+
+<!-- <img [src]="croppedImage" /> -->

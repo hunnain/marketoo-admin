@@ -22,6 +22,8 @@ import { MaterialModule } from '../material.module';
 import { EmailChipInputComponent } from './components/email-chip-input/email-chip-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
+import { CropperComponent } from './components/cropper/cropper.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -35,6 +37,7 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
     LoaderComponent,
     EmailChipInputComponent,
     TextEditorComponent,
+    CropperComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule,
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
@@ -63,6 +67,8 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
     LoaderComponent,
     EmailChipInputComponent,
     TextEditorComponent,
+    CropperComponent,
+    ImageCropperModule,
   ],
 })
 export class SharedModule {}

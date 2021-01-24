@@ -1,1 +1,80 @@
-<p>banners works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div
+          class="card-header"
+          style="display: flex; justify-content: space-between"
+        >
+          <h5>{{ "ban_banners" | translate }}</h5>
+          <button
+            type="button"
+            [disabled]="loading"
+            class="btn btn-primary"
+            (click)="openAddModal()"
+          >
+            {{ "ban_add_banner" | translate }}
+            <!-- {{ "prod_discard" | translate }} -->
+          </button>
+        </div>
+        <div class="card-body">
+          <div><h4>No Banners Availble</h4></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->
+</div>
+
+<!-- Cropper Modal -->
+<ng-template #addBannerModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">
+      {{ "ban_add_banner" | translate }}
+    </h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-container" ngbAutofocus>
+      <div>
+        <app-cropper
+          [aspectRatio]="7 / 3"
+          (getImage)="getCroppedImage($event)"
+        ></app-cropper>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <!-- <app-button
+      [loading]="submittingPic"
+      [disabled]="!tempProfileImage"
+      [btnText]="'save_announcement'"
+      (onSubmit)="saveProfilePic()"
+    ></app-button> -->
+    <button
+      type="button"
+      [disabled]="loading"
+      class="btn btn-primary"
+      (click)="saveBanner()"
+    >
+      {{ "ban_add_banner" | translate }}
+      <!-- {{ "prod_discard" | translate }} -->
+    </button>
+    <button
+      class="btn btn-light"
+      type="button"
+      data-dismiss="modal"
+      (click)="modal.dismiss('Cross click')"
+    >
+      {{ "close" | translate }}
+    </button>
+  </div>
+</ng-template>
+<!-- Cropper Modal End -->
