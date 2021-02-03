@@ -19,7 +19,7 @@ export class OrderDetailComponent implements OnInit {
   public status: string;
   public reason: string;
   public reasonDesc: string;
-
+  public payment_status;
   public total: number;
   public img: string = 'assets/images/user.png';
   public order: Order;
@@ -86,7 +86,7 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   fetchOrderById(id) {
     this.fetching = true;

@@ -31,6 +31,14 @@
         </div>
         <div class="action-footer">
           <form class="needs-validation">
+            <div>
+              <img
+                *ngFor="let img of imgs"
+                style="width: 50px; border-radius: 5px"
+                [src]="img"
+                alt="image"
+              />
+            </div>
             <div
               style="
                 display: grid;
@@ -40,11 +48,24 @@
             >
               <div class="icon-btn">
                 <span>
-                  <app-feather-icons
+                  <div class="box-input-file">
+                    <input
+                      class="upload"
+                      type="file"
+                      (change)="readUrl($event)"
+                    />
+                    <app-feather-icons
+                      [icon]="'paperclip'"
+                      class="font-primary"
+                      style="color: #fff !important"
+                    ></app-feather-icons>
+                    <!-- <img class="imgUpload" alt="" src="assets/images/add_icons.png" /> -->
+                  </div>
+                  <!-- <app-feather-icons
                     [icon]="'paperclip'"
                     class="font-primary"
                     style="color: #fff !important"
-                  ></app-feather-icons>
+                  ></app-feather-icons> -->
                 </span>
               </div>
               <div>

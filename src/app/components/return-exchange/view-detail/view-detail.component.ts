@@ -53,6 +53,22 @@ export class ViewDetailComponent implements OnInit {
     },
   };
   public selectedLang: string = 'en';
+
+  public images = [
+    {
+      img: 'assets/images/digital-product/product-2.png',
+    },
+    {
+      img: 'assets/images/digital-product/product-1.png',
+    },
+    {
+      img: 'assets/images/digital-product/product-1.png',
+    },
+    {
+      img: 'assets/images/digital-product/product-1.png',
+    },
+  ];
+
   constructor(
     private modalService: NgbModal,
     private translate: TranslateService

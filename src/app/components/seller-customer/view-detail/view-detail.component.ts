@@ -3,6 +3,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Image } from '@ks89/angular-modal-gallery';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderService } from 'src/app/shared/service/order-service/order.service';
+import { CommonService } from 'src/app/shared/service/common.service';
+import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 
 @Component({
   selector: 'app-view-detail',
@@ -52,15 +56,29 @@ export class ViewDetailComponent implements OnInit {
       address: '17601 N Thomas Hill Rd, Sturgeon, MO, 65284',
     },
   };
+  public id = '';
+  public prefix = '';
+  details = {};
   public selectedLang: string = 'en';
   constructor(
     private modalService: NgbModal,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private sellerCustomerService: SellerCustomerService,
+    private cs: CommonService
   ) {
     this.selectedLang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((res) => {
       this.selectedLang = res.lang;
     });
+    console.log(this.activeRoute.url['value'][0].path);
+
+    if (this.activeRoute.params['value'].id) {
+      this.prefix = this.activeRoute.url['value'][0].path;
+      this.id = this.activeRoute.params['value'].id;
+      this.fetchById(this.id);
+    }
   }
 
   open(content) {
@@ -87,6 +105,19 @@ export class ViewDetailComponent implements OnInit {
 
   ngOnInit() {}
 
+  fetchById(id) {
+    // this.loading = true;
+    this.sellerCustomerService.getById(this.prefix, id).subscribe((res) => {
+      console.log(res);
+      if (res) {
+        console.log('fetch res---', res.body);
+        this.details = res.body;
+        this.cs.isLoading.next(false);
+        // this.fetching = false;
+      }
+    });
+  }
+
   changeTotal(content) {
     // this.total = Number(this.dummyData.total);
     this.open(content);
@@ -101,9 +132,9 @@ export class ViewDetailComponent implements OnInit {
     this.open(content);
   }
 
-  updateStatus() {
-    // this.dummyData.order_status = this.status
-    this.modalService.dismissAll('save button clicked');
+  updateStatus(status) {
+    this.approveReject(status);
+    // this.modalService.dismissAll('save button clicked');
   }
 
   changeShipmentMethod(content) {
@@ -132,5 +163,13 @@ export class ViewDetailComponent implements OnInit {
 
   showDetail(content) {
     this.open(content);
+  }
+
+  approveReject(status) {
+    this.sellerCustomerService
+      .approveReject(this.prefix, this.id, status)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }

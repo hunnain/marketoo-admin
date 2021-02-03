@@ -37,7 +37,7 @@
                 prop="orderId"
               ></ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'ordersmanagement_product' | translate }}"
+                name="{{ 'ordersmanagement_orderby' | translate }}"
                 prop="orderedProductDetails"
               >
                 <ng-template
@@ -48,10 +48,10 @@
                   {{ getProductsName(value) }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column
+              <!-- <ngx-datatable-column
                 name="{{ 'ordersmanagement_paymentstatus' | translate }}"
                 prop="paymentStatus"
-              ></ngx-datatable-column>
+              ></ngx-datatable-column> -->
               <ngx-datatable-column
                 name="{{ 'ordersmanagement_paymentmethod' | translate }}"
                 prop="paymentService"
@@ -74,7 +74,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'ordersmanagement_total' | translate }}"
-                name="total"
+                prop="total"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'ordersmanagement_action' | translate }}"

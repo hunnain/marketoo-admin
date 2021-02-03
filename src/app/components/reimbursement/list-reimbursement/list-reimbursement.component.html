@@ -33,7 +33,7 @@
               [limit]="pagination.PageSize"
               (page)="setPage($event)" -->
               <ngx-datatable-column
-                name="{{ 'r_profile' | translate }}"
+                name="{{ 'r_seller_icon' | translate }}"
                 prop="image"
               ></ngx-datatable-column>
               <ngx-datatable-column
@@ -49,8 +49,12 @@
                 </ng-template> -->
               </ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'r_email' | translate }}"
-                prop="email"
+                name="{{ 'r_shop_url' | translate }}"
+                prop="url"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'r_seller_code' | translate }}"
+                prop="code"
               ></ngx-datatable-column>
               <ngx-datatable-column name="{{ 'r_upload_trans' | translate }}">
                 <ng-template
@@ -63,6 +67,10 @@
                   </span>
                 </ng-template>
               </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'r_amount' | translate }}"
+                prop="amount"
+              ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'r_join_date' | translate }}"
                 prop="join_date"

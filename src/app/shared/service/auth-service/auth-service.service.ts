@@ -13,7 +13,7 @@ export class AuthServiceService {
   }
 
   login(data) {
-    return this.commonService.post('seller/login', data);
+    return this.commonService.post('admin/login', data);
   }
   signUp(data) {
     return this.commonService.post('seller/signUp', data);

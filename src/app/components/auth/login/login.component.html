@@ -180,8 +180,8 @@
                           </div>
                           <div
                             *ngIf="
-                            loginForm.controls.email.touched &&
-                            loginForm.controls.email.errors?.pattern
+                              loginForm.controls.email.touched &&
+                              loginForm.controls.email.errors?.pattern
                             "
                             class="text text-danger"
                           >
@@ -238,11 +238,11 @@
                         </div>
                         <!-- [routerLink]="'/dashboard/default'" -->
 
-                        <a
+                        <!-- <a
                           style="display: block; padding-top: 10px"
                           [routerLink]="'/sign-up'"
                           >{{ "create_an_account" | translate }}</a
-                        >
+                        > -->
                         <!-- <div class="form-footer">
                                                     <span>Or Login up with social platforms</span>
                                                     <ul class="social">
