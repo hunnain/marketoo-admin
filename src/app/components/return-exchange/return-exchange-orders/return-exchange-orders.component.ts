@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
+import { CommonService } from 'src/app/shared/service/common.service';
+import { ReturnExchangeService } from 'src/app/shared/service/return-exchange/return-exchange.service';
 import { returnDB } from '../../../shared/tables/return-list';
 @Component({
   selector: 'app-return-exchange-orders',
@@ -9,7 +11,7 @@ import { returnDB } from '../../../shared/tables/return-list';
   styleUrls: ['./return-exchange-orders.component.scss'],
 })
 export class ReturnExchanngeOrderComponent implements OnInit {
-  public order = [];
+  public returnExchange = [];
   public temp = [];
   public loading = false;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
@@ -23,8 +25,12 @@ export class ReturnExchanngeOrderComponent implements OnInit {
     TotalPages: 1,
   };
   pageSizeOptions: number[] = [5, 10, 25, 50];
-  constructor(private router: Router) {
-    this.order = returnDB.list_return;
+  constructor(
+    private router: Router,
+    private rxService: ReturnExchangeService,
+    private cs: CommonService
+  ) {
+    this.fetchOrders();
   }
 
   ngOnInit() {}
@@ -42,6 +48,28 @@ export class ReturnExchanngeOrderComponent implements OnInit {
     console.log(data);
     this.pagination.PageSize = data.pageSize;
     this.pagination.CurrentPage = data.pageIndex + 1;
-    // this.fetchOrders();
+    this.fetchOrders();
+  }
+
+  fetchOrders() {
+    const { PageSize, CurrentPage } = this.pagination;
+    this.loading = true;
+    let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+    this.rxService.getReturnExchange(query).subscribe(
+      (res) => {
+        if (res) {
+          this.cs.isLoading.next(false);
+          this.loading = false;
+          this.returnExchange = res.body;
+          let data = JSON.parse(res.headers.get('X-Pagination'));
+          if (data) {
+            this.pagination = data;
+          }
+        }
+      }
+      //  ,err => {
+      //   this.loading = false;
+      //  }
+    );
   }
 }

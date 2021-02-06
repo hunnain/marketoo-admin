@@ -620,6 +620,8 @@
   "bid_days": "Days",
 
   "sc_users": "Users",
+  "sc_sellers": "Sellers",
+  "sc_customers": "Customers",
   "sc_heading": "Sellers & Customers",
   "sc_profile": "Profile Picture",
   "sc_username": "USERNAME",
@@ -639,8 +641,15 @@
   "seller_filter_seller_code": "Seller Code",
 
   "sd_seller_detail": "Seller Details",
-  "sd_transaction_management_fee": "Transaction Management Fee",
   "sd_online_payment_fee": "Online Payment Fee",
+  "sd_transaction_management_fee": "Transaction Management Fee",
+  "sd_shipment_used": "Shipment Used",
+  "sd_refund_amount": "Refund Amount",
+  "sd_return_orders": "Return Orders",
+  "sd_exchange_orders": "Exchange Orders",
+  "sd_cancelled_orders": "Cancelled Orders",
+  "sd_delivered_orders": "Delivered Orders",
+  "sd_performance": "Performance",
   "sd_shipment_cost": "Shipment Cost (Via Marketoo Account)",
   "sd_discounted_c": "Discounted (Coupons)",
   "sd_discounted_sc": "Discounted (Store Credits)",
@@ -696,7 +705,7 @@
   "ads_paid_keyword": "Pain Keyword",
   "ads_product_quality": "Product Quality",
   "ads_action": "Action",
-  
+
   "ads_high_invest": "highest investment",
   "ads_best_seller": "best sellers",
   "ads_high_ads_score": "highest Ads Score",

@@ -12,7 +12,11 @@ export class OrderService {
   }
 
   getOrderById(uuid) {
-    return this.commonService.get(`order/getorderbyid/${uuid}`);
+    return this.commonService.get(`admin/order/GetOrderById/${uuid}`);
+  }
+  // update order status
+  updateOrderStatus(order_id, status) {
+    return this.commonService.get(`admin/update-status/${order_id}-${status}`);
   }
 
   updateOrder(id, data) {

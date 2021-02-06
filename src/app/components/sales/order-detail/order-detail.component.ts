@@ -7,6 +7,7 @@ import { OrderService } from 'src/app/shared/service/order-service/order.service
 import { CommonService } from 'src/app/shared/service/common.service';
 import { Order } from 'src/app/shared/interfaces/order';
 import * as moment from 'moment';
+import { OrderStatusEnum } from 'src/app/enums/order-status';
 
 @Component({
   selector: 'app-order-detail',
@@ -45,9 +46,11 @@ export class OrderDetailComponent implements OnInit {
     date: 'Dec 10,18',
     total: 54671,
   };
-
+  public statusEnums;
   public orderId: string;
   public fetching: boolean = false;
+  public blast_notification: boolean = false;
+  public seller_id: string = '';
   constructor(
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute,
@@ -55,6 +58,7 @@ export class OrderDetailComponent implements OnInit {
     private orderService: OrderService,
     private cs: CommonService
   ) {
+    this.statusEnums = OrderStatusEnum;
     this.status = this.dummyData.order_status;
     if (this.activeRoute.params['value'].id) {
       this.orderId = this.activeRoute.params['value'].id;
@@ -116,6 +120,11 @@ export class OrderDetailComponent implements OnInit {
 
   updateStatus() {
     this.dummyData.order_status = this.status;
+    this.orderService
+      .updateOrderStatus(this.orderId, this.status)
+      .subscribe((res) => {
+        console.log(res);
+      });
     this.modalService.dismissAll('save button clicked');
   }
 
@@ -145,7 +154,8 @@ export class OrderDetailComponent implements OnInit {
     this.open(content);
   }
 
-  formatDate(date) {
-    return moment(date).format('MMM DD,YY');
+  formatDate(date = '') {
+    if (date) return moment(date).format('MMM DD,YY');
+    else return '---';
   }
 }

@@ -134,6 +134,8 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts() {
+    console.log('aSD');
+
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     this.product_list = [];

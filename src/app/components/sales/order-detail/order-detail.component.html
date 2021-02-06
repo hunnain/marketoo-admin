@@ -283,7 +283,8 @@
               <strong>{{
                 "ordermanagement_ordercustomersummarydate" | translate
               }}</strong
-              >: {{ formatDate(order.creationDate) }}
+              >:---
+              <!-- {{ formatDate(order.creationDate) }} -->
             </div>
             <div style="margin-top: 20px" class="font-size-13">
               <strong>{{
@@ -447,12 +448,14 @@
         [(ngModel)]="status"
         name="status"
       >
-        <option value="confirmingOrder">Confirming Order</option>
-        <option value="orderConfirmed">Order Confirmed</option>
+        <option *ngFor="let opt of statusEnums" value="opt.value">
+          {{ opt.key | translate }}
+        </option>
+        <!-- <option value="orderConfirmed">Order Confirmed</option>
         <option value="shipped">Shipped</option>
         <option value="delivered">Delivered</option>
         <option value="processingRefund">Processing Refund</option>
-        <option value="refunded">Refunded</option>
+        <option value="refunded">Refunded</option> -->
       </select>
     </div>
     <div class="action">

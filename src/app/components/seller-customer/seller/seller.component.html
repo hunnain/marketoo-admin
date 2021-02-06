@@ -12,17 +12,17 @@
               [icon]="'users'"
               class="font-danger"
             ></app-feather-icons
-            >&nbsp; 127 {{ "sc_users" | translate }}
+            >&nbsp; {{ sellers.length }} {{ "sc_sellers" | translate }}
           </h4>
           <div>
-            <button type="button" class="btn btn-custom mr-1">
+            <!-- <button type="button" class="btn btn-custom mr-1">
               <app-feather-icons
                 [icon]="'download'"
                 class="font-danger"
               ></app-feather-icons>
-            </button>
+            </button> -->
             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-              <!-- <button
+              <button
                 class="btn btn-custom mr-2"
                 id="dropdownManual"
                 style="
@@ -37,7 +37,7 @@
                   [icon]="'eye'"
                   class="font-danger"
                 ></app-feather-icons>
-              </button> -->
+              </button>
               <div ngbDropdownMenu aria-labelledby="dropdownManual">
                 <button
                   *ngFor="let opt of filterOptions; let i = index"
@@ -49,12 +49,11 @@
               </div>
             </div>
             <!-- <button type="button" class="btn btn-custom mr-1">
-                <app-feather-icons
-                  [icon]="'eye'"
-                  class="font-danger"
-                ></app-feather-icons>
-                </button
-              > -->
+              <app-feather-icons
+                [icon]="'eye'"
+                class="font-danger"
+              ></app-feather-icons>
+            </button> -->
             <button type="button" class="btn btn-custom mr-1">
               <app-feather-icons [icon]="'globe'" class="font-danger">
               </app-feather-icons>

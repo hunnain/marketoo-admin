@@ -14,9 +14,10 @@ export class SellerCustomerService {
   getById(prefix, uuid) {
     return this.commonService.get(`admin/get-${prefix}-by-id/${uuid}`);
   }
-  approveReject(prefix, uuid, status) {
+
+  approveReject(prefix, uuid, status, notification = false) {
     return this.commonService.get(
-      `admin/approve-reject-${prefix}/${uuid}/${status}`
+      `admin/approve-reject-${prefix}/${uuid}/${status}-${notification}`
     );
   }
 

@@ -28,6 +28,7 @@
               type="checkbox"
               data-original-title=""
               title=""
+              [(ngModel)]="blast_notification"
             />
             <label for="checkbox-primary-1" style="margin: 5px">
               Blast Email
@@ -41,50 +42,24 @@
     <div class="row product-page-main card-body">
       <div class="col-xl-8">
         <div class="title-style">
-          {{ "sd_transaction_management_fee" | translate }} :
-        </div>
-        <div class="title-style">
           {{ "sd_online_payment_fee" | translate }} :
         </div>
-        <div class="title-style">{{ "sd_shipment_cost" | translate }} :</div>
-        <div class="title-style">{{ "sd_discounted_c" | translate }} :</div>
-        <div class="title-style">{{ "sd_discounted_sc" | translate }} :</div>
-        <div class="title-style">{{ "sd_discounted_md" | translate }} :</div>
-        <div class="title-style">{{ "sd_discounted_or" | translate }} :</div>
         <div class="title-style">
-          {{ "sd_referred_sellers_amount" | translate }} :
+          {{ "sd_transaction_management_fee" | translate }} :
         </div>
-        <div class="title-style">
-          {{ "sd_referred_customers_amount" | translate }} :
-        </div>
+        <div class="title-style">{{ "sd_shipment_used" | translate }} :</div>
+        <div class="title-style">{{ "sd_refund_amount" | translate }} :</div>
+        <div class="title-style">{{ "sd_return_orders" | translate }} :</div>
+        <div class="title-style">{{ "sd_exchange_orders" | translate }} :</div>
+        <div class="title-style">{{ "sd_cancelled_orders" | translate }} :</div>
         <div class="title-style">{{ "sd_total_orders" | translate }} :</div>
-        <div class="title-style">
-          {{ "sd_total_return_orders" | translate }} :
-        </div>
-        <div class="title-style">
-          {{ "sd_total_exchange_orders" | translate }} :
-        </div>
-        <div class="title-style">
-          {{ "sd_total_cancelled_orders" | translate }} :
-        </div>
-        <div class="title-style">
-          {{ "sd_total_subscriptions" | translate }} :
-        </div>
-        <div class="title-style">
-          {{ "sd_total_active_products" | translate }} :
-        </div>
-        <div class="title-style">
-          {{ "sd_total_amount_of_transaction" | translate }} :
-        </div>
-        <div class="title-style">{{ "sd_top_50_sellers" | translate }} :</div>
-        <div class="title-style">
-          {{ "sd_new_signups_customer" | translate }} :
-        </div>
-        <div class="title-style">
-          {{ "sd_new_signups_sellers" | translate }} :
-        </div>
+        <div class="title-style">{{ "sd_delivered_orders" | translate }} :</div>
+        <div class="title-style">{{ "sd_performance" | translate }} :</div>
       </div>
       <div class="col-xl-4"></div>
+      <button type="button" class="btn btn-primary" (click)="gotoProducts()">
+        Products
+      </button>
     </div>
   </div>
 </div>

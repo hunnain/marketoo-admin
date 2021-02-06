@@ -23,7 +23,7 @@ export class ViewDetailComponent implements OnInit {
 
   public total: number;
   public img: string = 'assets/images/user.png';
-
+  public blast_notification: boolean = false;
   public dummyData = {
     'order id': '#51240',
     products: [
@@ -77,7 +77,7 @@ export class ViewDetailComponent implements OnInit {
     if (this.activeRoute.params['value'].id) {
       this.prefix = this.activeRoute.url['value'][0].path;
       this.id = this.activeRoute.params['value'].id;
-      this.fetchById(this.id);
+      // this.fetchById(this.id);
     }
   }
 
@@ -165,9 +165,14 @@ export class ViewDetailComponent implements OnInit {
     this.open(content);
   }
 
+  gotoProducts() {
+    let route = `/sellers-customers/seller/${this.id}/product-list`;
+    this.router.navigate([route]);
+  }
+
   approveReject(status) {
     this.sellerCustomerService
-      .approveReject(this.prefix, this.id, status)
+      .approveReject(this.prefix, this.id, status, this.blast_notification)
       .subscribe((res) => {
         console.log(res);
       });
