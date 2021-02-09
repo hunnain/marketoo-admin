@@ -46,21 +46,21 @@
                   <strong>{{
                     "ordermanagement_ordercustomername" | translate
                   }}</strong
-                  >: {{ dummyData?.user_info?.name }}
+                  >: {{ order?.customer?.username }}
                 </div>
                 <div class="font-size-13">
                   <strong>{{
                     "ordermanagement_ordercustomercontactno" | translate
                   }}</strong
                   >:
-                  {{ dummyData?.user_info?.contact }}
+                  {{ order?.customer?.phoneNumber || "---" }}
                 </div>
               </div>
               <div style="margin-top: 20px" class="font-size-13">
                 <strong>{{
                   "ordermanagement_ordercustomeraddress" | translate
                 }}</strong
-                >: {{ dummyData?.user_info?.address }}
+                >: {{ order?.customer?.address || "---" }}
               </div>
             </div>
           </div>
@@ -101,14 +101,14 @@
                 <strong>{{
                   "ordermanagement_ordercustomerinvoiceno" | translate
                 }}</strong
-                >: {{ dummyData.invoice_no }}
+                >: {{ order?.invoice?.invoiceNo || "---" }}
               </div>
               <div class="font-size-13">
                 <strong>{{
                   "ordermanagement_ordercustomershippingmethod" | translate
                 }}</strong
                 >:
-                {{ dummyData.shipment_method }}
+                {{ order?.shipmentMethod }}
                 <span
                   class="change-btn"
                   data-toggle="modal"
@@ -448,8 +448,8 @@
         [(ngModel)]="status"
         name="status"
       >
-        <option *ngFor="let opt of statusEnums" value="opt.value">
-          {{ opt.key | translate }}
+        <option *ngFor="let opt of statusEnums; let i = index" [value]="i">
+          {{ opt | translate }}
         </option>
         <!-- <option value="orderConfirmed">Order Confirmed</option>
         <option value="shipped">Shipped</option>
@@ -564,13 +564,17 @@
       </div>
       <div class="content">
         <div class="content-right">
-          <p>Invoice No.: 123123123123</p>
-          <p>Date: 28,Mar 2020</p>
+          <p>Invoice No.: {{ order?.invoice?.invoiceNo }}</p>
+
+          <p>Date: {{ order?.invoice?.creationDate }}</p>
         </div>
         <div class="content-left">
-          <p>Dear Mr John Doe,</p>
+          <p>Dear {{ order?.invoice?.customerName }},</p>
           <p>This order is deliver to</p>
-          <p>17601 N Thomas Hill Rd, Sturgeon, MO, 65284</p>
+          <p>
+            {{ order?.invoice?.address }}, {{ order?.invoice?.city }},
+            {{ order?.invoice?.state }}, {{ order?.invoice?.postalCode }}
+          </p>
         </div>
       </div>
       <div class="table-section">
@@ -584,13 +588,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">Item product one example</th>
-              <td>2</td>
-              <td>$20</td>
-              <td>$40</td>
+            <tr *ngFor="let dt of order?.invoice?.invoiceProductDetails">
+              <th scope="row">{{ dt.productName }}</th>
+              <td>{{ dt.qty }}</td>
+              <td>${{ dt.price }}</td>
+              <td>${{ dt.total }}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <th scope="row">Item product two example</th>
               <td>3</td>
               <td>$10</td>
@@ -601,12 +605,12 @@
               <td>1</td>
               <td>$30</td>
               <td>$30</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
       <div class="footer-right">
-        <p>Total (HKD): $100</p>
+        <p>Total (HKD): ${{ order?.invoice?.grandTotal }}</p>
         <p>Payments: Stripe</p>
       </div>
       <div class="footer-desc">

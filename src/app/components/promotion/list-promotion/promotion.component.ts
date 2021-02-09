@@ -7,17 +7,19 @@ import { ReimbursementService } from 'src/app/shared/service/reimbursement/reimb
 import { TranslateService } from '@ngx-translate/core';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { PromotionService } from 'src/app/shared/service/promotions/promotion.service';
 @Component({
   selector: 'app-promotion',
   templateUrl: './promotion.component.html',
   styleUrls: ['./promotion.component.scss'],
 })
 export class PromotionComponent implements OnInit {
-  public reimbursrments = [];
+  public promotions = [];
   public selected = [];
   public loading: boolean = false;
   public closeResult: string;
   public title: string = '';
+  reimbursrments = [];
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   public pagination: Paginate = {
     CurrentPage: 1,
@@ -30,12 +32,11 @@ export class PromotionComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 50];
   constructor(
     private router: Router,
-    private reimbursementService: ReimbursementService,
+    private promotionService: PromotionService,
     public translate: TranslateService,
     private cs: CommonService,
     private modalService: NgbModal
   ) {
-    this.reimbursrments = reimbursementDB.list_return;
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;
     });
@@ -78,40 +79,38 @@ export class PromotionComponent implements OnInit {
     const val = event.target.value.toLowerCase();
 
     // filter our data
-    const temp = this.reimbursrments.filter(function (d) {
+    const temp = this.promotions.filter(function (d) {
       return d.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
 
     // update the rows
-    this.reimbursrments = temp;
+    this.promotions = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
   }
 
   ngOnInit() {
-    // this.fetchReimbursements();
+    this.fetchPromotions();
   }
 
   pageEvent(data) {
     console.log(data);
     this.pagination.PageSize = data.pageSize;
     this.pagination.CurrentPage = data.pageIndex + 1;
-    this.fetchReimbursements();
+    this.fetchPromotions();
   }
 
-  fetchReimbursements() {
+  fetchPromotions() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
-    this.reimbursementService.getReimbursement(query).subscribe(
+    this.promotionService.getPromotion(query).subscribe(
       (res) => {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.reimbursrments = res.body;
-          console.log('reimbursement-res', res.headers.get('x-pagination'));
+          this.promotions = res.body;
           this.pagination = JSON.parse(res.headers.get('X-Pagination'));
-          console.log('pagination', this.pagination);
         }
       }
       //  ,err => {

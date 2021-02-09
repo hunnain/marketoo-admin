@@ -234,11 +234,11 @@ export class NavService {
           title: 'sidebar_About_Us',
           type: 'link',
         },
-        {
-          path: '/about-us/banner',
-          title: 'sidebar_About_Us_banner',
-          type: 'link',
-        },
+        // {
+        //   path: '/about-us/banner',
+        //   title: 'sidebar_About_Us_banner',
+        //   type: 'link',
+        // },
       ],
     },
     // {

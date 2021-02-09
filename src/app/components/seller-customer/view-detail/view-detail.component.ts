@@ -20,7 +20,7 @@ export class ViewDetailComponent implements OnInit {
   public refund_reason: string;
   public reason: string;
   public reasonDesc: string;
-
+  public loading: boolean = false;
   public total: number;
   public img: string = 'assets/images/user.png';
   public blast_notification: boolean = false;
@@ -72,12 +72,15 @@ export class ViewDetailComponent implements OnInit {
     this.translate.onLangChange.subscribe((res) => {
       this.selectedLang = res.lang;
     });
-    console.log(this.activeRoute.url['value'][0].path);
+    this.cs.isLoading.subscribe((loading) => {
+      this.loading = loading;
+    });
+    // console.log(this.activeRoute.url['value'][0].path);
 
     if (this.activeRoute.params['value'].id) {
       this.prefix = this.activeRoute.url['value'][0].path;
       this.id = this.activeRoute.params['value'].id;
-      // this.fetchById(this.id);
+      this.fetchById(this.id);
     }
   }
 
@@ -108,7 +111,7 @@ export class ViewDetailComponent implements OnInit {
   fetchById(id) {
     // this.loading = true;
     this.sellerCustomerService.getById(this.prefix, id).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       if (res) {
         console.log('fetch res---', res.body);
         this.details = res.body;
@@ -171,9 +174,12 @@ export class ViewDetailComponent implements OnInit {
   }
 
   approveReject(status) {
+    this.loading = true;
     this.sellerCustomerService
       .approveReject(this.prefix, this.id, status, this.blast_notification)
       .subscribe((res) => {
+        this.loading = false;
+        this.cs.isLoading.next(false);
         console.log(res);
       });
   }

@@ -7,21 +7,31 @@
         </h3>
       </div>
       <div class="sub-header-2">
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="updateStatus(false)"
-        >
+        <app-button
+          [btnType]="'submit'"
+          [loading]="loading"
+          [disabled]="loading"
+          [btnText]="'Deny'"
+          (onSubmit)="updateStatus(1)"
+        ></app-button>
+        <!-- <button type="button" class="btn btn-primary" (click)="updateStatus(1)">
           Deny
-        </button>
+        </button> -->
         <div style="margin-left: 10px">
-          <button
+          <app-button
+            [btnType]="'submit'"
+            [loading]="loading"
+            [disabled]="loading"
+            [btnText]="'Approved'"
+            (onSubmit)="updateStatus(2)"
+          ></app-button>
+          <!-- <button
             type="button"
             class="btn btn-primary"
-            (click)="updateStatus(true)"
+            (click)="updateStatus('2')"
           >
             Approved
-          </button>
+          </button> -->
           <div class="checkbox checkbox-primary">
             <input
               id="checkbox-primary-1"

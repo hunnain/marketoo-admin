@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
@@ -7,9 +15,20 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./text-editor.component.scss'],
 })
 export class TextEditorComponent implements OnInit {
-  constructor() {}
+  @Input() text;
+  @Output() textEmit = new EventEmitter<any>();
+  htmlContent;
+  control;
+  constructor() {
+    this.htmlContent = this.text;
+    this.control = new FormControl(this.text);
+  }
 
-  htmlContent = '';
+  onModelChange(event) {
+    // console.log(event, 'asd');
+    this.textEmit.emit(event);
+    // changes.prop contains the old and the new value...
+  }
 
   // toolbarHiddenButtons: [
   //   [
@@ -85,5 +104,7 @@ export class TextEditorComponent implements OnInit {
     ],
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.htmlContent = this.text;
+  }
 }

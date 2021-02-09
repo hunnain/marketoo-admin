@@ -1,1 +1,5 @@
-<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+<angular-editor
+  [(ngModel)]="htmlContent"
+  (ngModelChange)="onModelChange($event)"
+  [config]="config"
+></angular-editor>

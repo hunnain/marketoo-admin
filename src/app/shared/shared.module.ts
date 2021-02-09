@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { CropperComponent } from './components/cropper/cropper.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ButtonComponent } from './components/button/button.component';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -38,6 +39,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     EmailChipInputComponent,
     TextEditorComponent,
     CropperComponent,
+    ButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +70,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     EmailChipInputComponent,
     TextEditorComponent,
     CropperComponent,
+    ButtonComponent,
     ImageCropperModule,
   ],
 })

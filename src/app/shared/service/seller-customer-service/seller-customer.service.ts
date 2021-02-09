@@ -16,9 +16,11 @@ export class SellerCustomerService {
   }
 
   approveReject(prefix, uuid, status, notification = false) {
-    return this.commonService.get(
-      `admin/approve-reject-${prefix}/${uuid}/${status}-${notification}`
-    );
+    return this.commonService.post(`admin/approve-reject-${prefix}`, {
+      SellerId: uuid,
+      Status: status,
+      blastEmail: notification,
+    });
   }
 
   updateOrder(id, data) {

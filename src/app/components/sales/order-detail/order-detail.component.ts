@@ -123,6 +123,7 @@ export class OrderDetailComponent implements OnInit {
     this.orderService
       .updateOrderStatus(this.orderId, this.status)
       .subscribe((res) => {
+        this.fetchOrderById(this.orderId);
         console.log(res);
       });
     this.modalService.dismissAll('save button clicked');

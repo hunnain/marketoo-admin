@@ -3,45 +3,122 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div class="card-header">
+        <div
+          class="card-header"
+          style="display: flex; justify-content: space-between"
+        >
           <h5>{{ "ab_about_us" | translate }}</h5>
+          <div>
+            <app-button
+              [btnType]="'submit'"
+              [loading]="false"
+              [disabled]="loading"
+              [btnText]="editable ? 'Cancel' : 'Edit'"
+              (onSubmit)="onEditClick()"
+            ></app-button>
+            <!-- <button
+              type="button"
+              [disabled]="loading"
+              class="btn btn-primary"
+              (click)="onEditClick()"
+              style="margin-right: 10px"
+            >
+              {{ editable ? "Cancel" : "Edit" }}
+              
+            </button> -->
+            <app-button
+              style="margin-left: 10px"
+              *ngIf="editable"
+              [btnType]="'submit'"
+              [loading]="loading"
+              [disabled]="loading"
+              [btnText]="'Update'"
+              (onSubmit)="onUpdate()"
+            ></app-button>
+            <!-- <button
+              *ngIf="editable"
+              type="button"
+              [disabled]="loading"
+              class="btn btn-primary"
+              (click)="onUpdate()"
+            >
+              Update
+            </button> -->
+          </div>
         </div>
         <div class="card-body">
-          <h3>{{ "ab_privacy_policies" | translate }}</h3>
-          <div style="background: white">
-            <app-text-editor></app-text-editor>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <app-loader [loading]="loading"></app-loader>
           </div>
-          <hr />
-          <br />
-          <h3>{{ "ab_contact_info" | translate }}</h3>
-          <div style="background: white">
-            <app-text-editor></app-text-editor>
+          <div *ngIf="!loading">
+            <h3>{{ "ab_privacy_policies" | translate }}</h3>
+            <div style="background: white">
+              <div [innerHTML]="privacyPolicies" *ngIf="!editable"></div>
+              <app-text-editor
+                *ngIf="editable"
+                [(text)]="privacyPolicies"
+                (textEmit)="handleChange($event, 'PrivacyPolicies')"
+              ></app-text-editor>
+            </div>
+            <hr />
+            <br />
+            <h3>{{ "ab_contact_info" | translate }}</h3>
+            <div style="background: white">
+              <div [innerHTML]="contactInfo" *ngIf="!editable"></div>
+              <app-text-editor
+                *ngIf="editable"
+                [(text)]="contactInfo"
+                (textEmit)="handleChange($event, 'ContactInfo')"
+              ></app-text-editor>
+            </div>
+            <hr />
+            <br />
+            <h3>{{ "ab_faq" | translate }}</h3>
+            <div style="background: white">
+              <div [innerHTML]="faqs" *ngIf="!editable"></div>
+              <app-text-editor
+                *ngIf="editable"
+                [(text)]="faqs"
+                (textEmit)="handleChange($event, 'Faqs')"
+              ></app-text-editor>
+            </div>
+            <hr />
+            <br />
+            <h3>{{ "ab_about_shop" | translate }}</h3>
+            <div style="background: white">
+              <div [innerHTML]="aboutShop" *ngIf="!editable"></div>
+              <app-text-editor
+                *ngIf="editable"
+                [(text)]="aboutShop"
+                (textEmit)="handleChange($event, 'AboutShop')"
+              ></app-text-editor>
+            </div>
+            <hr />
+            <br />
+            <h3>{{ "ab_ads_policies" | translate }}</h3>
+            <div style="background: white">
+              <div [innerHTML]="adsPolicies" *ngIf="!editable"></div>
+              <app-text-editor
+                *ngIf="editable"
+                [(text)]="adsPolicies"
+                (textEmit)="handleChange($event, 'AdsPolicies')"
+              ></app-text-editor>
+            </div>
+            <hr />
+            <br />
+            <h3>{{ "ab_terms_conditions" | translate }}</h3>
+            <div style="background: white">
+              <div [innerHTML]="termsAndConditions" *ngIf="!editable"></div>
+              <app-text-editor
+                *ngIf="editable"
+                [(text)]="termsAndConditions"
+                (textEmit)="handleChange($event, 'TermsAndConditions')"
+              ></app-text-editor>
+            </div>
+            <hr />
           </div>
-          <hr />
-          <br />
-          <h3>{{ "ab_faq" | translate }}</h3>
-          <div style="background: white">
-            <app-text-editor></app-text-editor>
-          </div>
-          <hr />
-          <br />
-          <h3>{{ "ab_about_shop" | translate }}</h3>
-          <div style="background: white">
-            <app-text-editor></app-text-editor>
-          </div>
-          <hr />
-          <br />
-          <h3>{{ "ab_ads_policies" | translate }}</h3>
-          <div style="background: white">
-            <app-text-editor></app-text-editor>
-          </div>
-          <hr />
-          <br />
-          <h3>{{ "ab_terms_conditions" | translate }}</h3>
-          <div style="background: white">
-            <app-text-editor></app-text-editor>
-          </div>
-          <hr />
           <br />
         </div>
       </div>
@@ -49,4 +126,3 @@
   </div>
   <!-- Container-fluid Ends-->
 </div>
-
