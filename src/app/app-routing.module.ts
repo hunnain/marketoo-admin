@@ -18,12 +18,12 @@ const routes: Routes = [
     redirectTo: 'auth/login',
     pathMatch: 'full',
   },
-  
+
   {
     path: '',
     component: ContentLayoutComponent,
     children: content,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   // {
   //   path: 'auth/login',
