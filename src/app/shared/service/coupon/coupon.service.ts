@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { CommonService } from '../common.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CouponService {
-
-  constructor(private commonService: CommonService) { }
+  constructor(private commonService: CommonService) {}
 
   getCoupon(query) {
     return this.commonService.get(`coupon/GetCouponBySeller?${query}`);
@@ -26,5 +25,9 @@ export class CouponService {
 
   deleteCoupon(id) {
     return this.commonService.delete(`coupon/${id}`);
+  }
+
+  createStoreCredit(data) {
+    return this.commonService.post('admin/create-storecredit', data);
   }
 }

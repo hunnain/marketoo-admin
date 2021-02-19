@@ -52,72 +52,45 @@
           >
             <app-loader [loading]="loading"></app-loader>
           </div>
-          <div *ngIf="!loading">
-            <h3>{{ "ab_privacy_policies" | translate }}</h3>
-            <div style="background: white">
-              <div [innerHTML]="privacyPolicies" *ngIf="!editable"></div>
-              <app-text-editor
-                *ngIf="editable"
-                [(text)]="privacyPolicies"
-                (textEmit)="handleChange($event, 'PrivacyPolicies')"
-              ></app-text-editor>
-            </div>
-            <hr />
-            <br />
-            <h3>{{ "ab_contact_info" | translate }}</h3>
-            <div style="background: white">
-              <div [innerHTML]="contactInfo" *ngIf="!editable"></div>
-              <app-text-editor
-                *ngIf="editable"
-                [(text)]="contactInfo"
-                (textEmit)="handleChange($event, 'ContactInfo')"
-              ></app-text-editor>
-            </div>
-            <hr />
-            <br />
-            <h3>{{ "ab_faq" | translate }}</h3>
-            <div style="background: white">
-              <div [innerHTML]="faqs" *ngIf="!editable"></div>
-              <app-text-editor
-                *ngIf="editable"
-                [(text)]="faqs"
-                (textEmit)="handleChange($event, 'Faqs')"
-              ></app-text-editor>
-            </div>
-            <hr />
-            <br />
-            <h3>{{ "ab_about_shop" | translate }}</h3>
-            <div style="background: white">
-              <div [innerHTML]="aboutShop" *ngIf="!editable"></div>
-              <app-text-editor
-                *ngIf="editable"
-                [(text)]="aboutShop"
-                (textEmit)="handleChange($event, 'AboutShop')"
-              ></app-text-editor>
-            </div>
-            <hr />
-            <br />
-            <h3>{{ "ab_ads_policies" | translate }}</h3>
-            <div style="background: white">
-              <div [innerHTML]="adsPolicies" *ngIf="!editable"></div>
-              <app-text-editor
-                *ngIf="editable"
-                [(text)]="adsPolicies"
-                (textEmit)="handleChange($event, 'AdsPolicies')"
-              ></app-text-editor>
-            </div>
-            <hr />
-            <br />
-            <h3>{{ "ab_terms_conditions" | translate }}</h3>
-            <div style="background: white">
-              <div [innerHTML]="termsAndConditions" *ngIf="!editable"></div>
-              <app-text-editor
-                *ngIf="editable"
-                [(text)]="termsAndConditions"
-                (textEmit)="handleChange($event, 'TermsAndConditions')"
-              ></app-text-editor>
-            </div>
-            <hr />
+          <div class="about-us-class" *ngIf="!loading">
+            <ngb-accordion
+              [closeOthers]="true"
+              (panelChange)="changeTab($event)"
+            >
+              <ngb-panel [id]="ind" *ngFor="let key of keys; let ind = index">
+                <ng-template ngbPanelTitle>
+                  <div
+                    class="header-title"
+                    style="display: flex; justify-content: space-between"
+                  >
+                    <span>{{ key | translate }}</span>
+                    <app-feather-icons
+                      *ngIf="tabId !== ind"
+                      [icon]="'chevron-down'"
+                      class="font-primary"
+                    ></app-feather-icons>
+                    <app-feather-icons
+                      *ngIf="tabId === ind"
+                      [icon]="'chevron-up'"
+                      class="font-primary"
+                    ></app-feather-icons>
+                  </div>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div [innerHTML]="this[key]" *ngIf="!editable"></div>
+                  <app-text-editor
+                    *ngIf="editable"
+                    [(text)]="this[key]"
+                    (textEmit)="handleChange($event, key)"
+                  ></app-text-editor>
+                </ng-template>
+                <br />
+                <hr />
+                <br />
+              </ngb-panel>
+
+              <br />
+            </ngb-accordion>
           </div>
           <br />
         </div>

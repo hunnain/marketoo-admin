@@ -7,11 +7,11 @@ import { CommonService } from '../common.service';
 export class PromotionService {
   constructor(private commonService: CommonService) {}
   getPromotion(query = '') {
-    return this.commonService.get(`admin/get-promotion?${query}`);
+    return this.commonService.get(`common/get-promotion${query}`);
   }
 
   // update returnExchange status
   updatePromotion(data) {
-    return this.commonService.post(`admin/update-promotion`, data);
+    return this.commonService.post(`common/update-promotion`, data);
   }
 }

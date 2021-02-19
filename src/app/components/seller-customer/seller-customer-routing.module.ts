@@ -4,7 +4,9 @@ import { ViewDetailComponent } from './view-detail/view-detail.component';
 import { SellerCustomerComponent } from './seller-customer/seller-customer.component';
 import { SellerComponent } from './seller/seller.component';
 import { CustomerComponent } from './customer/customer.component';
-import { ProductListComponent } from '../products/physical/product-list/product-list.component';
+// import { ProductListComponent } from '../products/physical/product-list/product-list.component';
+import { SellerProductsComponent } from './seller-products/seller-products.component';
+import { ApplicantsComponent } from './applicants/applicants.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,14 @@ const routes: Routes = [
         },
       },
       {
+        path: 'seller/new-applicants',
+        component: ApplicantsComponent,
+        data: {
+          title: 'View Detail',
+          breadcrumb: 'View Detail',
+        },
+      },
+      {
         path: 'seller/view-detail/:id',
         component: ViewDetailComponent,
         data: {
@@ -36,7 +46,7 @@ const routes: Routes = [
       },
       {
         path: 'seller/:id/product-list',
-        component: ProductListComponent,
+        component: SellerProductsComponent,
         data: {
           title: 'Products',
           breadcrumb: 'Products',

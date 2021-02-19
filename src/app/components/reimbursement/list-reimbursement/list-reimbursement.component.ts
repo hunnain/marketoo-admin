@@ -38,6 +38,10 @@ export class ListReimbursementComponent implements OnInit {
     });
   }
 
+  onViewDetail(data) {
+    console.log(data);
+  }
+
   onSelect({ selected }) {
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);

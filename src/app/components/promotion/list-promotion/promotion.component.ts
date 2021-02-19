@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { PromotionService } from 'src/app/shared/service/promotions/promotion.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 @Component({
   selector: 'app-promotion',
   templateUrl: './promotion.component.html',
@@ -20,6 +21,9 @@ export class PromotionComponent implements OnInit {
   public closeResult: string;
   public title: string = '';
   reimbursrments = [];
+  tempPromotion: '';
+  promotionText = '';
+  editable: boolean = false;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   public pagination: Paginate = {
     CurrentPage: 1,
@@ -30,6 +34,43 @@ export class PromotionComponent implements OnInit {
     TotalPages: 1,
   };
   pageSizeOptions: number[] = [5, 10, 25, 50];
+  config1: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'bold',
+        'insertImage',
+        'insertVideo',
+        'link',
+        'unlink',
+        'toggleEditorMode',
+        'textColor',
+        'backgroundColor',
+      ],
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText',
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+  };
   constructor(
     private router: Router,
     private promotionService: PromotionService,
@@ -92,24 +133,31 @@ export class PromotionComponent implements OnInit {
   ngOnInit() {
     this.fetchPromotions();
   }
-
-  pageEvent(data) {
-    console.log(data);
-    this.pagination.PageSize = data.pageSize;
-    this.pagination.CurrentPage = data.pageIndex + 1;
-    this.fetchPromotions();
+  handleChange(data, key) {
+    // console.log(data, key);
+    this.tempPromotion = data;
+    // console.log(this.updateObj);
   }
+
+  // pageEvent(data) {
+  //   console.log(data);
+  //   this.pagination.PageSize = data.pageSize;
+  //   this.pagination.CurrentPage = data.pageIndex + 1;
+  //   this.fetchPromotions();
+  // }
 
   fetchPromotions() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
-    let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
-    this.promotionService.getPromotion(query).subscribe(
+    // let query = `?PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+    this.promotionService.getPromotion().subscribe(
       (res) => {
         if (res) {
+          console.log(res);
+
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.promotions = res.body;
+          this.promotionText = res.body.Promotions;
           this.pagination = JSON.parse(res.headers.get('X-Pagination'));
         }
       }
@@ -138,5 +186,23 @@ export class PromotionComponent implements OnInit {
 
   onSubmit() {
     console.log('Submit');
+  }
+  onEditClick() {
+    this.editable = !this.editable;
+  }
+  onUpdate() {
+    // console.log(this.privacyPolicies, '55555');
+    // this.loading = true;
+    // this.aboutUsService.updateAboutUs({ ...this.updateObj }).subscribe(
+    //   (res) => {
+    //     this.setData(res);
+    //     this.editable = false;
+    //     this.cs.isLoading.next(false);
+    //     this.loading = false;
+    //   },
+    //   (err) => {
+    //     this.loading = false;
+    //   }
+    // );
   }
 }

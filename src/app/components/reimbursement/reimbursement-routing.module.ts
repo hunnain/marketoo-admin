@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListReimbursementComponent } from './list-reimbursement/list-reimbursement.component';
+import { ViewDetailComponent } from './view-detail/view-detail.component';
 // import { CreateReimbursementComponent } from './create-reimbursement/create-reimbursement.component';
 import { CreateStoreCreditComponent } from './create-store-credit/create-store-credit.component';
 
@@ -16,14 +17,14 @@ const routes: Routes = [
           breadcrumb: 'Reimbursement',
         },
       },
-      // {
-      //   path: 'create-reimbursements',
-      //   component: CreateReimbursementComponent,
-      //   data: {
-      //     title: 'Create Reimbursement',
-      //     breadcrumb: 'Create Reimbursements',
-      //   },
-      // },
+      {
+        path: 'reimbursment/view-detail/:id',
+        component: ViewDetailComponent,
+        data: {
+          title: 'View Detail',
+          breadcrumb: 'View Detail',
+        },
+      },
       // {
       //   path: 'edit-reimbursement/:id',
       //   component: CreateReimbursementComponent,

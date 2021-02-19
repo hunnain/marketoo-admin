@@ -8,14 +8,15 @@
           style="display: flex; justify-content: space-between"
         >
           <h5>{{ "Promotions" | translate }}</h5>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            (click)="addPromotion(AddPromotion)"
-          >
-            {{ "pro_add_promotion" | translate }}
-          </button>
+          <!-- *ngIf="editable" -->
+          <app-button
+            style="margin-left: 10px"
+            [btnType]="'submit'"
+            [loading]="loading"
+            [disabled]="loading"
+            [btnText]="editable ? 'Update' : 'Edit'"
+            (onSubmit)="!editable ? onEditClick() : onUpdate()"
+          ></app-button>
         </div>
         <div class="card-body">
           <div
@@ -24,120 +25,22 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <input
-              type="text"
-              class="filter-ngx form-control"
-              placeholder="{{ 'pro_search' | translate }}..."
-              (keyup)="updateFilter($event)"
-            />
-            <ngx-datatable
-              class="bootstrap"
-              [rows]="reimbursrments"
-              [columnMode]="'force'"
-              [headerHeight]="50"
-              [footerHeight]="50"
-              [rowHeight]="'auto'"
-            >
-              <!-- [externalPaging]="true"
-                [count]="pagination.TotalCount"
-                [offset]="pagination.CurrentPage"
-                [limit]="pagination.PageSize"
-                (page)="setPage($event)" -->
-              <ngx-datatable-column
-                name="{{ 'r_profile' | translate }}"
-                prop="image"
-              ></ngx-datatable-column>
-              <ngx-datatable-column
-                name="{{ 'r_name' | translate }}"
-                prop="name"
-              >
-                <!-- <ng-template
-                    let-row="row"
-                    let-value="value"
-                    ngx-datatable-cell-template
-                  >
-                    {{ getProductsName(value) }}
-                  </ng-template> -->
-              </ngx-datatable-column>
-              <ngx-datatable-column
-                name="{{ 'r_email' | translate }}"
-                prop="email"
-              ></ngx-datatable-column>
-              <ngx-datatable-column name="{{ 'r_upload_trans' | translate }}">
-                <ng-template
-                  let-row="row"
-                  let-value="value"
-                  ngx-datatable-cell-template
-                >
-                  <span style="color: #f88379; cursor: pointer">
-                    <i class="fa fa-upload" (click)="onSelectRow(value)"></i>
-                  </span>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column
-                name="{{ 'r_join_date' | translate }}"
-                prop="join_date"
-              ></ngx-datatable-column>
-
-              <ngx-datatable-footer>
-                <ng-template ngx-datatable-footer-template>
-                  <div
-                    class="pagination"
-                    *ngIf="!loading"
-                    style="margin-bottom: 10px; width: -webkit-fill-available"
-                  >
-                    <mat-paginator
-                      style="width: -webkit-fill-available"
-                      [pageIndex]="pagination.CurrentPage - 1"
-                      [length]="pagination.TotalCount"
-                      [pageSize]="pagination.PageSize"
-                      [pageSizeOptions]="pageSizeOptions"
-                      (page)="pageEvent($event)"
-                    >
-                    </mat-paginator>
-                  </div>
-                </ng-template>
-              </ngx-datatable-footer>
-            </ngx-datatable>
+            <div>
+              <!-- <h3>{{ "ab_privacy_policies" | translate }}</h3> -->
+              <div style="background: white">
+                <div [innerHTML]="promotionText" *ngIf="!editable"></div>
+                <app-text-editor
+                  *ngIf="editable"
+                  [(text)]="promotionText"
+                  (textEmit)="handleChange($event, 'promotionText')"
+                ></app-text-editor>
+              </div>
+              <hr />
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Container-fluid Ends-->
   </div>
-  <!-- Container-fluid Ends-->
 </div>
-<ng-template #AddPromotion let-modal class="modal-md">
-  <div class="modal-header" style="background: #f88379">
-    <h5 class="modal-title" id="exampleModalLabel" style="color: white">
-      {{ "pro_add_promotion" | translate }}
-    </h5>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="main-container" style="padding: 10px 30px">
-      <div class="form-group row">
-        <label for="validationCustom01" class="required"
-          >{{ "pro_title" | translate }}
-        </label>
-        <input
-          class="form-control"
-          id="validationCustom01"
-          type="text"
-          [(ngModel)]="title"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="action" style="padding: 15px 30px">
-    <button class="btn btn-primary" type="button" (click)="onSubmit()">
-      {{ "pro_create" | translate }}
-    </button>
-  </div>
-</ng-template>

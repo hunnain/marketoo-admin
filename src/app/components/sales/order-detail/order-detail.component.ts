@@ -59,7 +59,7 @@ export class OrderDetailComponent implements OnInit {
     private cs: CommonService
   ) {
     this.statusEnums = OrderStatusEnum;
-    this.status = this.dummyData.order_status;
+    // this.status = this.dummyData.order_status;
     if (this.activeRoute.params['value'].id) {
       this.orderId = this.activeRoute.params['value'].id;
       this.fetchOrderById(this.orderId);
@@ -110,7 +110,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   updateTotal() {
-    this.dummyData.total = this.dummyData.total + this.total;
+    // this.dummyData.total = this.dummyData.total + this.total;
     this.modalService.dismissAll('save button clicked');
   }
 
@@ -119,7 +119,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   updateStatus() {
-    this.dummyData.order_status = this.status;
+    // this.dummyData.order_status = this.status;
     this.orderService
       .updateOrderStatus(this.orderId, this.status)
       .subscribe((res) => {

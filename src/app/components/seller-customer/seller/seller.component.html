@@ -7,13 +7,23 @@
           class="card-header"
           style="display: flex; justify-content: space-between"
         >
-          <h4 style="display: flex; align-items: center; font-weight: 600">
-            <app-feather-icons
-              [icon]="'users'"
-              class="font-danger"
-            ></app-feather-icons
-            >&nbsp; {{ sellers.length }} {{ "sc_sellers" | translate }}
-          </h4>
+          <div>
+            <h4 style="display: flex; align-items: center; font-weight: 600">
+              <app-feather-icons
+                [icon]="'users'"
+                class="font-danger"
+              ></app-feather-icons
+              >&nbsp; {{ sellers.length }} {{ "sc_sellers" | translate }}
+            </h4>
+            <app-button
+              [btnType]="'submit'"
+              [loading]="false"
+              [disabled]="loading"
+              [btnText]="'New Applicants'"
+              (onSubmit)="onApplicantScreen()"
+            ></app-button>
+          </div>
+
           <div>
             <!-- <button type="button" class="btn btn-custom mr-1">
               <app-feather-icons
@@ -55,11 +65,12 @@
               ></app-feather-icons>
             </button> -->
             <button type="button" class="btn btn-custom mr-1">
-              <app-feather-icons [icon]="'globe'" class="font-danger">
+              <app-feather-icons [icon]="'download'" class="font-danger">
               </app-feather-icons>
             </button>
           </div>
         </div>
+
         <div class="card-body">
           <div
             style="display: flex; align-items: center; justify-content: center"
@@ -74,7 +85,6 @@
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
-              [limit]="5"
             >
               <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
 
@@ -83,17 +93,17 @@
                 prop="image"
               >
               </ngx-datatable-column>
-              <ngx-datatable-column
+              <!-- <ngx-datatable-column
                 name="{{ 'sc_username' | translate }}"
                 prop="username"
               >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <span style="color: #f88379; cursor: pointer">
                     {{ row.username + row.name }}
-                    <!-- <i class="fa fa-eye" (click)="onSelectRow(value)"></i> -->
+                    <!-- <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
                   </span>
                 </ng-template>
-              </ngx-datatable-column>
+              </ngx-datatable-column> -->
               <ngx-datatable-column
                 name="{{ 'sc_name' | translate }}"
                 prop="englishFname"

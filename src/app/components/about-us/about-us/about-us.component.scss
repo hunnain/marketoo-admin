@@ -1,0 +1,12 @@
+::ng-deep .about-us-class .accordion {
+  .card {
+    margin: 0 !important;
+    .card-header {
+      padding: 0 !important;
+      button {
+        width: 100%;
+        color: #4b5335;
+      }
+    }
+  }
+}

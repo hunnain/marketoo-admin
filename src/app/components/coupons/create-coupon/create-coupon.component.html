@@ -52,6 +52,7 @@
                   formControlName="couponCode"
                   id="validationCustom1"
                   type="text"
+                  placeholder="e.g. MT202IAI"
                   required
                 />
                 <div
@@ -165,7 +166,7 @@
                   {{ "qty_invalid" | translate }}
                 </div>
               </div>
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label class="col-xl-3 col-md-4 required">{{
                   "cop_disc_type" | translate
                 }}</label>
@@ -178,7 +179,7 @@
                   <option value="1">Percent</option>
                   <option value="2">Fixed</option>
                 </select>
-              </div>
+              </div> -->
               <div class="form-group row">
                 <label class="col-xl-3 col-md-4 required">{{
                   "cop_amount_percent" | translate
@@ -220,7 +221,7 @@
           class="needs-validation"
           novalidate=""
         >
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-xl-3 col-md-4 required">{{
               "cop_cate" | translate
             }}</label>
@@ -261,7 +262,7 @@
                 {{ extndCate.name }}
               </option>
             </select>
-          </div>
+          </div> -->
           <div class="form-group row">
             <label for="validationCustom4" class="col-xl-3 col-md-4">{{
               "cop_min_spend" | translate
@@ -273,7 +274,7 @@
               type="number"
             />
           </div>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label for="validationCustom5" class="col-xl-3 col-md-4">{{
               "cop_max_spend" | translate
             }}</label>
@@ -283,11 +284,11 @@
               id="validationCustom5"
               type="number"
             />
-          </div>
+          </div> -->
           <h5>{{ "cop_usage_limit" | translate }}</h5>
           <div class="form-group row">
             <label for="validationCustom6" class="col-xl-3 col-md-4">{{
-              "cop_can_be_used_only" | translate
+              "cop_can_be_used_time" | translate
             }}</label>
             <input
               class="form-control col-md-7"

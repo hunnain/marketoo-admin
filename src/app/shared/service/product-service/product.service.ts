@@ -8,7 +8,7 @@ export class ProductService {
   constructor(private commonService: CommonService) {}
 
   getProduct(query) {
-    return this.commonService.get(`product/seller?${query}`);
+    return this.commonService.get(`product?${query}`);
   }
 
   getProductById(uuid) {
@@ -25,5 +25,10 @@ export class ProductService {
 
   deleteProduct(id) {
     return this.commonService.delete(`product/${id}`);
+  }
+
+  // generic Service
+  getCustomData(query) {
+    return this.commonService.get(query);
   }
 }

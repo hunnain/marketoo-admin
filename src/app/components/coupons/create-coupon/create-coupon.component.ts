@@ -149,7 +149,7 @@ export class CreateCouponComponent implements OnInit {
       endDate: [{}, Validators.required],
       allowFreeShipping: [false],
       quantity: [1, [Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
-      discountType: ['', Validators.required],
+      // discountType: ['', Validators.required],
       percentageDiscount: [
         '',
         [Validators.required, Validators.pattern('^[1-9][0-9]*$')],
@@ -159,11 +159,11 @@ export class CreateCouponComponent implements OnInit {
 
   createRestrictionForm() {
     this.restrictionForm = this.formBuilder.group({
-      category: ['', Validators.required],
-      subCategory: ['', Validators.required],
-      extendedSubCategory: [''],
+      // category: ['', Validators.required],
+      // subCategory: ['', Validators.required],
+      // extendedSubCategory: [''],
       minSpend: [''],
-      maxSpend: [''],
+      // maxSpend: [''],
       perLimit: [''],
       perCustomer: [''],
       sendTo: [''],

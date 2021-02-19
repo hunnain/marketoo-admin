@@ -192,7 +192,7 @@ export class NavService {
       active: false,
     },
     {
-      path: '/campiagn',
+      path: '/campaign',
       title: 'sidebar_Campaign',
       icon: 'package',
       type: 'link',
@@ -240,6 +240,14 @@ export class NavService {
         //   type: 'link',
         // },
       ],
+    },
+    {
+      path: '/editor-choice',
+      title: 'sidebar_Editor_Choice',
+      icon: 'package',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
     },
     // {
     // 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [

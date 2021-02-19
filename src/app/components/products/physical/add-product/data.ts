@@ -18,8 +18,8 @@ export const SendToOptions = (lang = 'en') => [
 export const OfferToOptions = (lang = 'en') => [
   { id: 'all_cust', name: lang == 'en' ? 'All Customers' : 'All Customers' },
   {
-    id: 'input_email',
-    name: lang == 'en' ? 'Input Email' : 'Input Email',
+    id: 'customer_code',
+    name: lang == 'en' ? 'Select Customers Code' : 'Select Customers Code',
   },
   // { id: 'both', name: lang == 'en' ? 'Both' : '兩類群組' },
 ];

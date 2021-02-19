@@ -162,13 +162,13 @@ export const content: Routes = [
     },
   },
   {
-    path: 'campiagn',
+    path: 'campaign',
     loadChildren: () =>
       import('../../components/campaign/campaign.module').then(
         (m) => m.CampaignModule
       ),
     data: {
-      breadcrumb: 'Campiagn',
+      breadcrumb: 'campaign',
     },
   },
   {
@@ -217,6 +217,16 @@ export const content: Routes = [
       import('../../components/refer/refer.module').then((m) => m.ReferModule),
     data: {
       breadcrumb: 'Refer',
+    },
+  },
+  {
+    path: 'editor-choice',
+    loadChildren: () =>
+      import('../../components/editor-choice/editor-choice.module').then(
+        (m) => m.EditorChoiceModule
+      ),
+    data: {
+      breadcrumb: 'Editor Choice',
     },
   },
 ];

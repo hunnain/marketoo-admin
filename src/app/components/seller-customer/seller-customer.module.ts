@@ -12,9 +12,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SellerComponent } from './seller/seller.component';
 import { CustomerComponent } from './customer/customer.component';
+import { SellerProductsComponent } from './seller-products/seller-products.component';
+import { ApplicantsComponent } from './applicants/applicants.component';
 
 @NgModule({
-  declarations: [SellerCustomerComponent, ViewDetailComponent, SellerComponent, CustomerComponent],
+  declarations: [
+    SellerCustomerComponent,
+    ViewDetailComponent,
+    SellerComponent,
+    CustomerComponent,
+    SellerProductsComponent,
+    ApplicantsComponent,
+  ],
   imports: [
     CommonModule,
     NgbModule,

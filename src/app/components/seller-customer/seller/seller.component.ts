@@ -60,7 +60,7 @@ export class SellerComponent implements OnInit {
             return {
               ...item,
               image: `<img src='${
-                item.image || 'assets/images/user.png'
+                item.imageUrl || 'assets/images/user.png'
               }' class='img-30 mr-2'>`,
               memberSince: item.memberSince
                 ? moment(item.memberSince).format('YYYY-MM-DD')
@@ -95,5 +95,10 @@ export class SellerComponent implements OnInit {
     console.log(data);
     this.pagination.PageSize = data.pageSize;
     this.pagination.CurrentPage = data.pageIndex + 1;
+    this.fetchSellers();
+  }
+
+  onApplicantScreen() {
+    this.router.navigate(['/sellers-customers/seller/new-applicants']);
   }
 }

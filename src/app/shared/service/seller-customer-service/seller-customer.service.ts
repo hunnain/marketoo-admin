@@ -10,17 +10,24 @@ export class SellerCustomerService {
   getSellerOrCustomer(prefix, query) {
     return this.commonService.get(`admin/get-all-${prefix}?${query}`);
   }
+  getFilteredSeller(prefix, query) {
+    return this.commonService.get(`admin/get-filtered-${prefix}?${query}`);
+  }
 
   getById(prefix, uuid) {
     return this.commonService.get(`admin/get-${prefix}-by-id/${uuid}`);
   }
 
-  approveReject(prefix, uuid, status, notification = false) {
+  approveRejectSeller(prefix, data) {
     return this.commonService.post(`admin/approve-reject-${prefix}`, {
-      SellerId: uuid,
-      Status: status,
-      blastEmail: notification,
+      SellerId: data.uuid,
+      Status: data.status,
+      blastEmail: data.notification,
     });
+  }
+
+  approveRejectSellerProduct(data) {
+    return this.commonService.post(`admin/approve-reject-products`, data);
   }
 
   updateOrder(id, data) {

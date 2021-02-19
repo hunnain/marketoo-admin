@@ -11,7 +11,7 @@
 // ];
 export const OrderStatusEnum = [
   'None',
-  ' Created',
+  // ' Created',
   ' Shipped',
   ' Delivered',
   ' ProcessingRefund',

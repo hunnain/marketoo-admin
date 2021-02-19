@@ -1,0 +1,119 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <h3>Add New Post</h3>
+  <div class="row">
+    <div class="col-xl-8" style="padding-right: 0%">
+      <div
+        style="display: grid; grid-template-columns: 1fr 180px; grid-gap: 10px"
+      >
+        <input
+          class="form-control field-margin"
+          [(ngModel)]="name"
+          placeholder="{{ 'mag_name' | translate }}"
+          id="name"
+          name="name"
+          type="text"
+          required=""
+        /><app-button
+          [btnType]="'submit'"
+          [loading]="false"
+          [disabled]="loading"
+          [btnText]="'Add Campaign'"
+          (onSubmit)="onAddCampaign()"
+        ></app-button>
+      </div>
+      <br />
+      <div style="background: white">
+        <app-text-editor
+          [(text)]="template"
+          (textEmit)="handleChange($event, 'template')"
+        ></app-text-editor>
+      </div>
+      <br />
+    </div>
+    <div class="col-xl-4" style="padding-left: 0%">
+      <div style="display: flex; align-items: center; justify-content: center">
+        <app-loader [loading]="loading"></app-loader>
+      </div>
+      <div *ngIf="!loading" style="display: grid; grid-gap: 10px">
+        <div *ngFor="let camp of campaigns">
+          <div
+            style="
+              background: white;
+              margin: 0px 10px;
+              border-radius: 10px 10px 0px 0px;
+              padding: 10px;
+              border: solid lightgrey 1px;
+              border-bottom: none;
+            "
+          >
+            <div style="align-items: center">
+              <h3>{{ camp.name }}</h3>
+            </div>
+            <hr />
+            <div>
+              <div style="justify-content: space-between; display: flex">
+                <button type="button" class="btn btn-primary">
+                  Save Draft
+                </button>
+                <button type="button" class="btn btn-primary">preview</button>
+              </div>
+              <br />
+              <div style="align-items: center; display: flex">
+                <app-feather-icons
+                  [icon]="'key'"
+                  class="font-warning"
+                ></app-feather-icons
+                >&nbsp; <span>Status :</span>&nbsp;
+                <strong>{{ camp.status }}</strong
+                >&nbsp;
+                <a href="">Edit</a>
+              </div>
+              <br />
+              <div style="align-items: center; display: flex">
+                <app-feather-icons
+                  [icon]="'calendar'"
+                  class="font-warning"
+                ></app-feather-icons
+                >&nbsp; <span>Publish :</span>&nbsp;
+                <strong>{{ camp.publish }}</strong
+                >&nbsp;
+                <a href="">Edit</a>
+              </div>
+            </div>
+            <br />
+          </div>
+          <hr style="margin: 0px 10px" />
+          <div
+            style="
+              margin: 0px 10px;
+              border-radius: 0px 0px 10px 10px;
+              padding: 10px;
+              justify-content: space-between;
+              display: flex;
+              background: #f4f4f4;
+              border: solid lightgrey 1px;
+              border-top: none;
+            "
+          >
+            <div
+              style="
+                color: #f88379;
+                align-items: center;
+                display: flex;
+                font-weight: 500;
+                cursor: pointer;
+                padding: 0px 10px;
+              "
+              (click)="goBack()"
+            >
+              Go Back
+            </div>
+            <button type="button" class="btn btn-primary">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->
+</div>

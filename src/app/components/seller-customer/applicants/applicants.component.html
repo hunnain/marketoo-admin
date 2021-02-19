@@ -1,0 +1,268 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div
+          class="card-header"
+          style="display: flex; justify-content: space-between"
+        >
+          <h4 style="display: flex; align-items: center; font-weight: 600">
+            <app-feather-icons
+              [icon]="'users'"
+              class="font-danger"
+            ></app-feather-icons
+            >&nbsp; {{ sellers.length }} {{ "ap_applicants" | translate }}
+          </h4>
+          <!-- <app-button
+            [btnType]="'submit'"
+            [loading]="false"
+            [disabled]="loading"
+            [btnText]="'New Applicants'"
+            (onSubmit)="onApplicantScreen()"
+          ></app-button> -->
+          <div>
+            <!-- <button type="button" class="btn btn-custom mr-1">
+                <app-feather-icons
+                  [icon]="'download'"
+                  class="font-danger"
+                ></app-feather-icons>
+              </button> -->
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+              <button
+                class="btn btn-custom mr-2"
+                id="dropdownManual"
+                style="
+                  color: #f88379;
+                  display: inline-flex;
+                  align-items: center;
+                "
+                ngbDropdownAnchor
+                (focus)="myDrop.open()"
+              >
+                <app-feather-icons
+                  [icon]="'eye'"
+                  class="font-danger"
+                ></app-feather-icons>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <button
+                  *ngFor="let opt of filterOptions; let i = index"
+                  class="btn-custom drop"
+                  ngbDropdownItem
+                >
+                  {{ opt | translate }}
+                </button>
+              </div>
+            </div>
+            <!-- <button type="button" class="btn btn-custom mr-1">
+                <app-feather-icons
+                  [icon]="'eye'"
+                  class="font-danger"
+                ></app-feather-icons>
+              </button> -->
+            <button type="button" class="btn btn-custom mr-1">
+              <app-feather-icons [icon]="'download'" class="font-danger">
+              </app-feather-icons>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <app-loader [loading]="loading"></app-loader>
+          </div>
+          <div class="custom-datatable" *ngIf="!loading">
+            <ngx-datatable
+              class="bootstrap"
+              [rows]="sellers"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+            >
+              <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
+
+              <ngx-datatable-column
+                name="{{ 'sc_profile' | translate }}"
+                prop="image"
+              >
+              </ngx-datatable-column>
+              <!-- <ngx-datatable-column
+                  name="{{ 'sc_username' | translate }}"
+                  prop="username"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span style="color: #f88379; cursor: pointer">
+                      {{ row.username + row.name }}
+                      <!-- <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
+                    </span>
+                  </ng-template>
+                </ngx-datatable-column> -->
+              <ngx-datatable-column
+                name="{{ 'sc_name' | translate }}"
+                prop="englishFname"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'sc_member_since' | translate }}"
+                prop="memberSince"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'sc_shop_url' | translate }}"
+                prop="member_since"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'sc_seller_code' | translate }}"
+                prop="sellerId"
+              ></ngx-datatable-column>
+              <!-- <ngx-datatable-column
+                  name="{{ 'sc_membership' | translate }}"
+                  prop="member_ship"
+                ></ngx-datatable-column> -->
+              <ngx-datatable-column
+                name="{{ 'sc_country' | translate }}"
+                prop="country"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ap_action' | translate }}"
+                sortable="false"
+                prop="order id"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <span style="color: #f88379; cursor: pointer">
+                    <i
+                      class="fa fa-eye fa-lg"
+                      (click)="openFormModal(row, SellerFormModal)"
+                    ></i> </span></ng-template
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ap_action' | translate }}"
+                sortable="false"
+                prop="order id"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <span
+                    style="color: #f88379; cursor: pointer; margin: 0px 8px"
+                  >
+                    <i
+                      class="fa fa-thumbs-o-up fa-lg"
+                      (click)="onApproveSeller(row)"
+                    ></i>
+                  </span>
+                  <span
+                    style="color: #f88379; cursor: pointer; margin: 0px 8px"
+                  >
+                    <i
+                      class="fa fa-thumbs-o-down fa-lg"
+                      (click)="onConfirmModal(row, ReasonModal)"
+                    ></i>
+                  </span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->
+</div>
+<ng-template #ReasonModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <label for="price">Reason</label>
+        <input
+          type="text"
+          [(ngModel)]="reason"
+          class="form-control"
+          id="reason"
+          aria-describedby="reason"
+          placeholder="Enter Reason"
+        />
+      </div>
+    </div>
+    <div class="action">
+      <button class="btn btn-primary" type="button" (click)="onRejectSeller()">
+        Reject
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #SellerFormModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Seller Form Data</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <label for="price">Reason</label>
+        <input
+          type="text"
+          [(ngModel)]="reason"
+          class="form-control"
+          id="reason"
+          aria-describedby="reason"
+          placeholder="Enter Reason"
+        />
+      </div>
+    </div>
+    <div class="action">
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="modal.dismiss('Cross click')"
+      >
+        Reject
+      </button>
+    </div>
+  </div>
+</ng-template>

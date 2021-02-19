@@ -1,0 +1,315 @@
+<div class="card tab2-card">
+  <div class="card-body">
+    <ngb-tabset class="tab-coupon profile-tabs" (tabChange)="changeTab($event)">
+      <ngb-tab *ngFor="let tab of tabsStructure; let ind = index">
+        <ng-template ngbTabTitle>
+          <app-feather-icons [icon]="tab.tabIcon"></app-feather-icons> &nbsp;
+          {{ tab.tab | translate }}
+        </ng-template>
+
+        <ng-template ngbTabContent>
+          <div
+            *ngIf="tab.buttons"
+            style="
+              text-align: end;
+              display: flex;
+              justify-content: flex-end;
+              margin-bottom: 10px;
+            "
+          >
+            <div
+              *ngFor="let button of tab.buttons; let btnInd = index"
+              style="margin: 0px 5px"
+            >
+              <app-button
+                *ngIf="button"
+                [btnType]="'submit'"
+                [loading]="loading"
+                [disabled]="checkDisabled(ind)"
+                [btnText]="button"
+                (onSubmit)="sendIdsToParent(btnInd)"
+              ></app-button>
+            </div>
+          </div>
+
+          <div
+            class="tab-pane fade show active"
+            id="top-profile"
+            role="tabpanel"
+            aria-labelledby="top-profile-tab"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <app-loader [loading]="loading"></app-loader>
+            </div>
+
+            <div class="row products-admin ratio_asos">
+              <div
+                class="col-xl-3 col-sm-6"
+                *ngFor="let product of this[getStateName(ind)]"
+              >
+                <div class="card">
+                  <div class="card-body product-box">
+                    <!-- <div class="checkbox checkbox-primary">
+                      <input
+                        id="checkbox-primary-1"
+                        type="checkbox"
+                        data-original-title=""
+                        [checked]="getChecked(product.productId)"
+                        [name]="product.productId"
+                        (change)="selectDeselectProd($event)"
+                      />
+                    </div> -->
+                    <div class="img-wrapper">
+                      <div class="lable-block">
+                        <span class="lable3" *ngIf="product.tag == 'new'"
+                          >new</span
+                        >
+                        <span class="lable4" *ngIf="product.sale == 'on sale'"
+                          >on sale</span
+                        >
+                      </div>
+                      <div class="front" style="text-align: center">
+                        <a href="javascript:void(0)"
+                          ><img
+                            [src]="[product.image]"
+                            class="img-fluid blur-up lazyload bg-img"
+                            style="max-height: 100px; height: 100px"
+                            alt=""
+                        /></a>
+                        <!-- <div class="product-hover">
+                          <ul>
+                            <li>
+                              <button
+                                class="btn"
+                                type="button"
+                                data-original-title=""
+                                title=""
+                              >
+                                <i class="icon-pencil-alt"></i>
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                class="btn"
+                                type="button"
+                                data-toggle="modal"
+                                data-target="#exampleModalCenter"
+                                data-original-title=""
+                                title=""
+                              >
+                                <i class="icon-trash"></i>
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                class="btn"
+                                type="button"
+                                data-toggle="modal"
+                                data-target="#exampleModalCenter"
+                                data-original-title=""
+                                title=""
+                              >
+                                <i class="icon-trash"></i>
+                              </button>
+                            </li>
+                          </ul>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="product-detail">
+                      <div class="rating">
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                      <a href="javascript:void(0)">
+                        <h6>{{ product.name }}</h6>
+                      </a>
+                      <h4>
+                        {{ product.discount }} <del>{{ product.price }}</del>
+                      </h4>
+                      <!-- <ul class="color-variant">
+                                    <li class="bg-light0"></li>
+                                    <li class="bg-light1"></li>
+                                    <li class="bg-light2"></li>
+                                </ul> -->
+                    </div>
+                  </div>
+                  <hr style="margin: 0px" />
+                  <div class="pro-card-footer">
+                    <button
+                      class="btn"
+                      type="button"
+                      title=""
+                      (click)="onEdit(product.productId)"
+                    >
+                      <i class="fa fa-pencil-square-o fa-lg"></i>
+                    </button>
+                    <button
+                      class="btn"
+                      type="button"
+                      title=""
+                      (click)="onApprove(product.productId)"
+                    >
+                      <i class="fa fa-thumbs-o-up fa-lg"></i>
+                    </button>
+                    <button
+                      class="btn"
+                      type="button"
+                      title=""
+                      (click)="openConfirm(product.productId, ReasonModal)"
+                    >
+                      <i class="fa fa-thumbs-o-down fa-lg"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <!-- ====================================================== -->
+
+      <!-- <ngb-tab>
+        <ng-template ngbTabTitle>
+          <app-feather-icons [icon]="tab2Icon"></app-feather-icons>
+
+          {{ tabsHeading[1] | translate }}</ng-template
+        >
+        <ng-template ngbTabContent>
+          <div style="text-align: end; margin-bottom: 10px">
+            <app-button
+              [btnType]="'submit'"
+              [loading]="loading"
+              [disabled]="!tab2Selectedprods.length || loading"
+              [btnText]="tab2ButtonLabel"
+              (onSubmit)="sendIdsToParent()"
+            ></app-button>
+          </div>
+          <div
+            class="tab-pane fade show active"
+            id="top-profile"
+            role="tabpanel"
+            aria-labelledby="top-profile-tab"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <app-loader [loading]="loading"></app-loader>
+            </div>
+
+            <div class="row products-admin ratio_asos">
+              <div
+                class="col-xl-3 col-sm-6"
+                *ngFor="let product of tab2_list; let ind = index"
+              >
+                <div class="card">
+                  <div class="card-body product-box">
+                    <div class="checkbox checkbox-primary">
+                      <input
+                        id="checkbox-primary-1"
+                        type="checkbox"
+                        data-original-title=""
+                        [checked]="getChecked(product.productId)"
+                        [name]="product.productId"
+                        (change)="selectDeselectProd($event)"
+                      />
+                    </div>
+                    <div class="img-wrapper">
+                      <div class="lable-block">
+                        <span class="lable3" *ngIf="product.tag == 'new'"
+                          >new</span
+                        >
+                        <span class="lable4" *ngIf="product.sale == 'on sale'"
+                          >on sale</span
+                        >
+                      </div>
+                      <div class="front">
+                        <a href="javascript:void(0)"
+                          ><img
+                            [src]="[product.image]"
+                            class="img-fluid blur-up lazyload bg-img"
+                            alt=""
+                        /></a>
+                      </div>
+                    </div>
+                    <div class="product-detail">
+                      <div class="rating">
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                      <a href="javascript:void(0)">
+                        <h6>{{ product.name }}</h6>
+                      </a>
+                      <h4>
+                        {{ product.discount }} <del>{{ product.price }}</del>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab> -->
+    </ngb-tabset>
+    <!-- Pagination -->
+    <div class="pagination" style="margin-bottom: 10px">
+      <mat-paginator
+        style="width: -webkit-fill-available"
+        [pageIndex]="pagination.CurrentPage - 1"
+        [length]="pagination.TotalCount"
+        [pageSize]="pagination.PageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #ReasonModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <label for="price">Reason</label>
+        <input
+          type="text"
+          [(ngModel)]="reason"
+          class="form-control"
+          id="reason"
+          aria-describedby="reason"
+          placeholder="Enter Reason"
+        />
+      </div>
+    </div>
+    <div class="action">
+      <button class="btn btn-primary" type="button" (click)="onReject()">
+        Reject
+      </button>
+    </div>
+  </div>
+</ng-template>

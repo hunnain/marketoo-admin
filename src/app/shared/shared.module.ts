@@ -25,6 +25,7 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
 import { CropperComponent } from './components/cropper/cropper.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ButtonComponent } from './components/button/button.component';
+import { ProductTabViewComponent } from './components/product-tab-view/product-tab-view.component';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -40,6 +41,7 @@ import { ButtonComponent } from './components/button/button.component';
     TextEditorComponent,
     CropperComponent,
     ButtonComponent,
+    ProductTabViewComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +73,7 @@ import { ButtonComponent } from './components/button/button.component';
     TextEditorComponent,
     CropperComponent,
     ButtonComponent,
+    ProductTabViewComponent,
     ImageCropperModule,
   ],
 })

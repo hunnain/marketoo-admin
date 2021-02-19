@@ -10,7 +10,16 @@ import { CommonService } from 'src/app/shared/service/common.service';
 export class AboutUsComponent implements OnInit {
   editable: boolean = false;
   loading: boolean = false;
+  keys = [
+    'privacyPolicies',
+    'contactInfo',
+    'faqs',
+    'aboutShop',
+    'adsPolicies',
+    'termsAndConditions',
+  ];
   aboutUs = {};
+  public tabId;
   privacyPolicies: string = '';
   contactInfo: string = '';
   faqs: string = '';
@@ -113,17 +122,18 @@ export class AboutUsComponent implements OnInit {
     this.aboutUsService.getAboutUs().subscribe(
       (res) => {
         if (res) {
+          let noDataMsg = 'No Data Available';
           // this.cs.isLoading.next(false);
           this.loading = false;
           let data = res.body;
           this.setData(data);
           this.updateObj = {
-            Faqs: data.faqs,
-            AboutShop: data.aboutShop,
-            AdsPolicies: data.adsPolicies,
-            ContactInfo: data.contactInfo,
-            PrivacyPolicies: data.privacyPolicies,
-            TermsAndConditions: data.termsAndConditions,
+            Faqs: data.faqs || noDataMsg,
+            AboutShop: data.aboutShop || noDataMsg,
+            AdsPolicies: data.adsPolicies || noDataMsg,
+            ContactInfo: data.contactInfo || noDataMsg,
+            PrivacyPolicies: data.privacyPolicies || noDataMsg,
+            TermsAndConditions: data.termsAndConditions || noDataMsg,
           };
         }
       },
@@ -163,9 +173,19 @@ export class AboutUsComponent implements OnInit {
   }
 
   handleChange(data, key) {
-    // console.log(data, key);
+    console.log(data, key);
     let obj = { ...this.updateObj, [key]: data };
     this.updateObj = obj;
     console.log(this.updateObj);
+  }
+
+  changeTab(tab) {
+    console.log('tab--', tab);
+    // this.tabId = tab.panelId
+    if (!this.tabId || this.tabId !== tab.panelId) {
+      this.tabId = tab.panelId;
+    } else {
+      this.tabId = undefined;
+    }
   }
 }

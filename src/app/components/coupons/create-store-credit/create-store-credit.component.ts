@@ -52,11 +52,11 @@ export class CreateStoreCreditComponent implements OnInit {
     // this.createGeneralForm();
     this.createStoreCreditForm();
 
-    if (this.activeRoute.params['value'].id) {
-      this.selectedId = this.activeRoute.params['value'].id;
-      this.isEdit = true;
-      this.fetchCouponByCode(this.selectedId);
-    }
+    // if (this.activeRoute.params['value'].id) {
+    //   this.selectedId = this.activeRoute.params['value'].id;
+    //   this.isEdit = true;
+    //   this.fetchCouponByCode(this.selectedId);
+    // }
 
     this.cs.isLoading.subscribe((loading) => {
       console.log(loading);
@@ -137,14 +137,14 @@ export class CreateStoreCreditComponent implements OnInit {
     this.storeCreditForm = this.formBuilder.group({
       sendAmount: ['', Validators.required],
       reason: ['', Validators.required],
-      // recivers: ['', Validators.required],
+      receivers: ['', Validators.required],
       notifyRecivers: [false],
     });
   }
 
   ngOnInit() {}
 
-  createCoupon() {
+  createStoreCredit() {
     // console.log('general form', this.generalForm.value);
     // console.log('storeCreditForm', this.storeCreditForm.value)
     let data = {
@@ -155,7 +155,7 @@ export class CreateStoreCreditComponent implements OnInit {
     };
     this.loading = true;
     console.log(data);
-    this.storeCreditService.addCoupon(data).subscribe((res) => {
+    this.storeCreditService.createStoreCredit(data).subscribe((res) => {
       if (res) {
         this.cs.isLoading.next(false);
         this.loading = false;
@@ -164,7 +164,14 @@ export class CreateStoreCreditComponent implements OnInit {
     });
   }
 
-  editCoupon() {
+  sendEmails(data) {
+    console.log(data);
+    this.storeCreditForm.patchValue({
+      receivers: data,
+    });
+  }
+
+  editStoreCredit() {
     // console.log('general form', this.generalForm.value)
     // console.log('storeCreditForm', this.storeCreditForm.value)
     let data = {
@@ -173,17 +180,17 @@ export class CreateStoreCreditComponent implements OnInit {
       // endDate: this.formatDate(this.generalForm.value.endDate),
       ...this.storeCreditForm.value,
     };
-    this.loading = true;
+    // this.loading = true;
     console.log(data);
-    this.storeCreditService
-      .updateCoupon(this.selectedId, data)
-      .subscribe((res) => {
-        if (res) {
-          this.cs.isLoading.next(false);
-          this.loading = false;
-          this.router.navigate(['/coupons/list-coupons']);
-        }
-      });
+    // this.storeCreditService
+    //   .updateCoupon(this.selectedId, data)
+    //   .subscribe((res) => {
+    //     if (res) {
+    //       this.cs.isLoading.next(false);
+    //       this.loading = false;
+    //       this.router.navigate(['/coupons/list-coupons']);
+    //     }
+    //   });
   }
 
   formatDate(date, inverse = false) {

@@ -7,7 +7,7 @@ import { CommonService } from '../common.service';
 export class AboutUsService {
   constructor(private commonService: CommonService) {}
   getAboutUs(query = '') {
-    return this.commonService.get(`admin/get-about-us${query}`);
+    return this.commonService.get(`common/get-about-us${query}`);
   }
 
   // update returnExchange status

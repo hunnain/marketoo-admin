@@ -1,0 +1,12 @@
+
+<app-product-tab-view
+  [tabsStructure]="tabsStructure"
+  (sendSelected)="getData($event)"
+  (onEditCard)="onEdit($event)"
+  (onApproveCard)="onApprove($event)"
+  (onRejectCard)="onReject($event)"
+  (onPendingCard)="onPending($event)"
+  [tabUrls]="urls"
+></app-product-tab-view>
+
+<!-- [tab1Icon]="" [tab2Icon]=""[ tab1Url]="" [ tab2Url]="" -->
