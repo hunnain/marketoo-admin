@@ -10,7 +10,8 @@ export class SellerCustomerService {
   getSellerOrCustomer(prefix, query) {
     return this.commonService.get(`admin/get-all-${prefix}?${query}`);
   }
-  getFilteredSeller(prefix, query) {
+
+  getFilteredSellerCustomer(prefix, query) {
     return this.commonService.get(`admin/get-filtered-${prefix}?${query}`);
   }
 

@@ -50,7 +50,6 @@ export class ApplicantsComponent implements OnInit {
 
   open(content) {
     console.log(content);
-
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -101,7 +100,7 @@ export class ApplicantsComponent implements OnInit {
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}&accountStatus=0`;
     this.sellerService
-      .getFilteredSeller('sellers', query)
+      .getFilteredSellerCustomer('sellers', query)
       .map((dt) => {
         return {
           ...dt,

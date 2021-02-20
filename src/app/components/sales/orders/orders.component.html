@@ -3,22 +3,62 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div class="card-header">
+        <div
+          class="card-header"
+          style="display: flex; justify-content: space-between"
+        >
           <h5>{{ "manage_order" | translate }}</h5>
+          <div>
+            <button type="button" class="btn btn-custom mr-1">
+              <app-feather-icons
+                [icon]="'download'"
+                class="font-danger"
+              ></app-feather-icons>
+            </button>
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+              <button
+                class="btn btn-custom mr-2"
+                id="dropdownManual"
+                style="
+                  color: #f88379;
+                  display: inline-flex;
+                  align-items: center;
+                "
+                ngbDropdownAnchor
+                (focus)="myDrop.open()"
+              >
+                <app-feather-icons
+                  [icon]="'eye'"
+                  class="font-danger"
+                ></app-feather-icons>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <button
+                  *ngFor="let opt of filterOptions; let i = index"
+                  (click)="onSelectFilter(i)"
+                  class="btn-custom drop"
+                  ngbDropdownItem
+                >
+                  {{ opt | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="card-body">
+          <input
+            style="width: auto; margin: 20px 0px"
+            type="text"
+            class="filter-ngx form-control"
+            placeholder="Search..."
+            (keyup)="updateFilter($event)"
+          />
           <div
             style="display: flex; align-items: center; justify-content: center"
           >
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <input
-              type="text"
-              class="filter-ngx form-control"
-              placeholder="Search..."
-              (keyup)="updateFilter($event)"
-            />
             <ngx-datatable
               class="bootstrap"
               [rows]="orders"
@@ -36,8 +76,9 @@
                 name="{{ 'ordersmanagement_orderid' | translate }}"
                 prop="orderId"
               ></ngx-datatable-column>
+
               <ngx-datatable-column
-                name="{{ 'ordersmanagement_orderby' | translate }}"
+                name="{{ 'ordersmanagement_invoice_no' | translate }}"
                 prop="orderedProductDetails"
               >
                 <ng-template
@@ -48,6 +89,10 @@
                   {{ getProductsName(value) }}
                 </ng-template>
               </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ordersmanagement_invoice_no' | translate }}"
+                prop="invoiceNo"
+              ></ngx-datatable-column>
               <!-- <ngx-datatable-column
                 name="{{ 'ordersmanagement_paymentstatus' | translate }}"
                 prop="paymentStatus"

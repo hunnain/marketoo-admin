@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CampaignService } from 'src/app/shared/service/campaign/campaign.service';
@@ -15,7 +16,8 @@ export class CampaignListComponent implements OnInit {
   public temp = [];
   public loading = false;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-
+  selectedRow;
+  public closeResult: string;
   public pagination: Paginate = {
     CurrentPage: 1,
     HasNext: false,
@@ -28,9 +30,35 @@ export class CampaignListComponent implements OnInit {
   constructor(
     private router: Router,
     private campaignService: CampaignService,
-    private cs: CommonService
+    private cs: CommonService,
+    private modalService: NgbModal
   ) {
     this.getCampaigns();
+  }
+
+  open(content) {
+    console.log(content);
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+          this.selectedRow = null;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          this.selectedRow = null;
+        }
+      );
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   ngOnInit() {}
@@ -39,15 +67,15 @@ export class CampaignListComponent implements OnInit {
     let route = `/campaign/create-campaign`;
     this.router.navigate([route]);
   }
-  
-  onEdit(row) {
-    let route = `/campaign/edit-campaign/${row.replace(/#/g, '')}`;
-    this.router.navigate([route]);
-  }
+
+  // onEdit(row) {
+  //   let route = `/campaign/edit-campaign/${row.replace(/#/g, '')}`;
+  //   this.router.navigate([route]);
+  // }
 
   onDelete(row) {
     console.log(row, 'delete');
-    this.campaignService.removeCampaign(row).subscribe((res) => {
+    this.campaignService.removeCampaign(row.id).subscribe((res) => {
       console.log('deleted');
       this.getCampaigns();
     });
@@ -80,5 +108,20 @@ export class CampaignListComponent implements OnInit {
       //   this.loading = false;
       //  }
     );
+  }
+  onViewTemplate(row, content) {
+    this.selectedRow = row;
+    this.open(content);
+  }
+
+  onPublish() {
+    this.campaignService
+      .updateCampaignStatus(this.selectedRow.id, 1)
+      .subscribe((res) => {
+        if (res) {
+          this.cs.isLoading.next(false);
+          this.loading = false;
+        }
+      });
   }
 }

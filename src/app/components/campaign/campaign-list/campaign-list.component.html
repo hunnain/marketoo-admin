@@ -7,11 +7,10 @@
           class="card-header"
           style="display: flex; justify-content: space-between"
         >
-          <h5>{{ "re_return_exchange" | translate }}</h5>
+          <h5>{{ "Campiagns" | translate }}</h5>
           <app-button
             style="margin-left: 10px"
             [btnType]="'submit'"
-          
             [btnText]="'Add'"
             (onSubmit)="onAdd()"
           ></app-button>
@@ -19,7 +18,12 @@
         <div class="card-body">
           <!-- <div><a href="" style="font-size: large">Update Policy</a></div> -->
           <br />
-          <div class="custom-datatable">
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <app-loader [loading]="loading"></app-loader>
+          </div>
+          <div class="custom-datatable" *ngIf="!loading">
             <ngx-datatable
               class="bootstrap"
               [rows]="campaigns"
@@ -31,6 +35,10 @@
             >
               <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
               <ngx-datatable-column
+                name="{{ 'campaign_image' | translate }}"
+                prop="image"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
                 name="{{ 'campaign_name' | translate }}"
                 prop="name"
               ></ngx-datatable-column>
@@ -38,14 +46,11 @@
                 name="{{ 'campaign_status' | translate }}"
                 prop="status"
               ></ngx-datatable-column>
-              <ngx-datatable-column
-                name="{{ 'campaign_publish' | translate }}"
-                prop="publish"
-              ></ngx-datatable-column>
-              <ngx-datatable-column
+
+              <!-- <ngx-datatable-column
                 name="{{ 'campaign_text' | translate }}"
                 prop="text"
-              ></ngx-datatable-column>
+              ></ngx-datatable-column> -->
               <ngx-datatable-column
                 name="{{ 'campaign_action' | translate }}"
                 sortable="false"
@@ -64,12 +69,15 @@
                     </span> -->
                   <div>
                     <span style="color: #f88379; cursor: pointer">
-                      <i class="fa fa-eye" (click)="onEdit(value)"></i>
+                      <i
+                        class="fa fa-eye"
+                        (click)="onViewTemplate(row, TemplateModal)"
+                      ></i>
                     </span>
                     <span
                       style="color: #f88379; cursor: pointer; margin-left: 10px"
                     >
-                      <i class="fa fa-trash-o" (click)="onDelete(value)"></i>
+                      <i class="fa fa-trash-o" (click)="onDelete(row)"></i>
                     </span>
                   </div>
                 </ng-template>
@@ -101,3 +109,29 @@
   </div>
   <!-- Container-fluid Ends-->
 </div>
+
+<ng-template #TemplateModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Template</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div [innerHTML]="selectedRow.text"></div>
+    <div
+      class="action"
+      *ngIf="selectedRow.status != 'Published'"
+      style="text-align: end"
+    >
+      <button class="btn btn-primary" type="button" (click)="onPublish()">
+        Publish
+      </button>
+    </div>
+  </div>
+</ng-template>

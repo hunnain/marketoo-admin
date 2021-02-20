@@ -14,20 +14,8 @@
             ></app-feather-icons
             >&nbsp; {{ sellers.length }} {{ "ap_applicants" | translate }}
           </h4>
-          <!-- <app-button
-            [btnType]="'submit'"
-            [loading]="false"
-            [disabled]="loading"
-            [btnText]="'New Applicants'"
-            (onSubmit)="onApplicantScreen()"
-          ></app-button> -->
-          <div>
-            <!-- <button type="button" class="btn btn-custom mr-1">
-                <app-feather-icons
-                  [icon]="'download'"
-                  class="font-danger"
-                ></app-feather-icons>
-              </button> -->
+
+          <!-- <div>
             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
               <button
                 class="btn btn-custom mr-2"
@@ -55,17 +43,12 @@
                 </button>
               </div>
             </div>
-            <!-- <button type="button" class="btn btn-custom mr-1">
-                <app-feather-icons
-                  [icon]="'eye'"
-                  class="font-danger"
-                ></app-feather-icons>
-              </button> -->
+
             <button type="button" class="btn btn-custom mr-1">
               <app-feather-icons [icon]="'download'" class="font-danger">
               </app-feather-icons>
             </button>
-          </div>
+          </div> -->
         </div>
         <div class="card-body">
           <div
@@ -125,7 +108,7 @@
                 prop="country"
               ></ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'ap_action' | translate }}"
+                name="{{ 'ap_signup' | translate }}"
                 sortable="false"
                 prop="order id"
               >

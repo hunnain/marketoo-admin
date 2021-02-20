@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { OrderService } from 'src/app/shared/service/order-service/order.service';
+import { SharedService } from 'src/app/shared/service/shared.service';
 import { orderDB } from '../../../shared/tables/order-list';
 @Component({
   selector: 'app-orders',
@@ -15,6 +16,16 @@ import { orderDB } from '../../../shared/tables/order-list';
 export class OrdersComponent implements OnInit {
   public orders = [];
   public temp = [];
+
+  public filterOptions = [
+    'order_filter_none',
+    'order_filter_orderId',
+    'order_filter_customerId',
+    'order_filter_sellerId',
+    'order_filter_paymentStatus',
+  ];
+  selectedFilter = 'orderId';
+  searchTerm = '';
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
@@ -33,22 +44,35 @@ export class OrdersComponent implements OnInit {
     private router: Router,
     private orderService: OrderService,
     private cs: CommonService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private ss: SharedService
   ) {
     // this.orders = orderDB.list_order;
+  }
+  onSelectFilter(filter) {
+    this.selectedFilter = this.filterOptions[filter].split('_')[2];
   }
 
   fetchOrders() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
-    this.orderService.getOrders(query).subscribe(
+    query =
+      query +
+      '&' +
+      this.ss.generateUrl({
+        [this.selectedFilter]: this.searchTerm,
+      });
+    this.orderService.getFilteredOrders(query).subscribe(
       (res) => {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
           this.orders = res.body;
-          this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          let paginate = JSON.parse(res.headers.get('X-Pagination'));
+          if (paginate) {
+            this.pagination = paginate;
+          }
         }
       }
       //  ,err => {
@@ -59,16 +83,8 @@ export class OrdersComponent implements OnInit {
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
-
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    // update the rows
-    this.orders = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
+    this.searchTerm = val || '';
+    this.fetchOrders();
   }
 
   ngOnInit() {

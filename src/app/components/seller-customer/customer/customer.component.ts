@@ -6,6 +6,7 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 import { sellerCustomerDB } from '../../../shared/tables/seller-customerDB';
+import { SharedService } from 'src/app/shared/service/shared.service';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -16,11 +17,13 @@ export class CustomerComponent implements OnInit {
   public temp = [];
   public loading = false;
   public filterOptions = [
-    'customer_filter_country',
-    'customer_filter_date',
-    'customer_filter_fname',
-    'customer_filter_lname',
+    'customer_filter_none',
+    'customer_filter_username',
+    'customer_filter_customerId',
+    'customer_filter_email',
   ];
+  selectedFilter = '';
+  searchTerm = '';
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   public pagination: Paginate = {
@@ -36,7 +39,8 @@ export class CustomerComponent implements OnInit {
   constructor(
     private router: Router,
     private customerService: SellerCustomerService,
-    private cs: CommonService
+    private cs: CommonService,
+    private ss: SharedService
   ) {
     // this.customers = ;
   }
@@ -44,13 +48,29 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.fetchSellers();
   }
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    this.searchTerm = val || '';
+  }
+
+  onSelectFilter(filter) {
+    this.selectedFilter = this.filterOptions[filter].split('_')[2];
+  }
 
   fetchSellers() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+
+    query =
+      query +
+      '&' +
+      this.ss.generateUrl({
+        [this.selectedFilter]: this.searchTerm,
+      });
     this.customerService
-      .getSellerOrCustomer('customers', query)
+      .getFilteredSellerCustomer('customers', query)
       .map((dt) => {
         return {
           ...dt,
@@ -75,7 +95,10 @@ export class CustomerComponent implements OnInit {
             this.cs.isLoading.next(false);
             this.loading = false;
             this.customers = res.body;
-            this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+            let paginate = JSON.parse(res.headers.get('X-Pagination'));
+            if (paginate) {
+              this.pagination = paginate;
+            }
           }
         }
         //  ,err => {

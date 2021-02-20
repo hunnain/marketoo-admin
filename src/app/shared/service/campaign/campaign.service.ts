@@ -7,10 +7,15 @@ import { CommonService } from '../common.service';
 export class CampaignService {
   constructor(private commonService: CommonService) {}
   getAllCampaigns(query = '') {
-    return this.commonService.get(`common/get-all-campaigns${query}`);
+    return this.commonService.get(`admin/get-all-campaigns${query}`);
   }
   getRandomCampaigns(query = '') {
     return this.commonService.get(`admin/get-random-campaigns${query}`);
+  }
+  updateCampaignStatus(id, status) {
+    return this.commonService.get(
+      `admin/campaign-status-update/${id}-${status}`
+    );
   }
 
   // update returnExchange status

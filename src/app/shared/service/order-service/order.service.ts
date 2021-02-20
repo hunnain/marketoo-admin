@@ -11,6 +11,10 @@ export class OrderService {
     return this.commonService.get(`admin/get-all-orders?${query}`);
   }
 
+  getFilteredOrders(query) {
+    return this.commonService.get(`admin/get-filtered-orders?${query}`);
+  }
+
   getOrderById(uuid) {
     return this.commonService.get(`order/GetOrderById/${uuid}`);
   }

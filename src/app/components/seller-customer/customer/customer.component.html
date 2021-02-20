@@ -41,6 +41,7 @@
               <div ngbDropdownMenu aria-labelledby="dropdownManual">
                 <button
                   *ngFor="let opt of filterOptions; let i = index"
+                  (click)="onSelectFilter(i)"
                   class="btn-custom drop"
                   ngbDropdownItem
                 >
@@ -57,6 +58,13 @@
           </div>
         </div>
         <div class="card-body">
+          <input
+          style="width: auto; margin: 20px 0px"
+            type="text"
+            class="filter-ngx form-control"
+            placeholder="Search..."
+            (keyup)="updateFilter($event)"
+          />
           <div
             style="display: flex; align-items: center; justify-content: center"
           >
