@@ -18,12 +18,15 @@ import { OrderStatusEnum } from 'src/app/enums/order-status';
 export class OrderDetailComponent implements OnInit {
   public closeResult: string;
   public status: string;
+  public loading: boolean = false;
   public reason: string;
   public reasonDesc: string;
   public payment_status;
   public total: number;
   public img: string = 'assets/images/user.png';
   public order: Order;
+  textMessage = '';
+  payStatus = '';
   public dummyData = {
     'order id': '#51240',
     products: [
@@ -93,28 +96,31 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit() {}
 
   fetchOrderById(id) {
-    this.fetching = true;
+    this.loading = true;
     this.orderService.getOrderById(id).subscribe((res) => {
       if (res) {
         console.log('fetch res---', res.body);
         this.order = res.body;
         this.cs.isLoading.next(false);
-        this.fetching = false;
+        this.loading = false;
       }
     });
   }
 
-  changeTotal(content) {
-    // this.total = Number(this.dummyData.total);
-    this.open(content);
-  }
+  // changeTotal(content) {
+  //   // this.total = Number(this.dummyData.total);
+  //   this.open(content);
+  // }
 
   updateTotal() {
     // this.dummyData.total = this.dummyData.total + this.total;
     this.modalService.dismissAll('save button clicked');
   }
 
-  changeStatus(content) {
+  onMessageSend() {
+    console.log(this.textMessage, 'message sent');
+  }
+  openModal(content) {
     this.open(content);
   }
 
@@ -158,5 +164,13 @@ export class OrderDetailComponent implements OnInit {
   formatDate(date = '') {
     if (date) return moment(date).format('MMM DD,YY');
     else return '---';
+  }
+
+  onSendMessage(): void {
+    console.log(this.textMessage, 'Msg Sent');
+  }
+
+  onUpdatePaymentStatus() {
+    console.log(this.payStatus, 'Payment Status');
   }
 }

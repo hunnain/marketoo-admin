@@ -1,13 +1,24 @@
 <div class="card tab2-card">
   <div class="card-body">
-    <ngb-tabset class="tab-coupon profile-tabs" (tabChange)="changeTab($event)">
-      <ngb-tab *ngFor="let tab of tabsStructure; let ind = index">
-        <ng-template ngbTabTitle>
+    <!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>One</a>
+        <ng-template ngbNavContent></ng-template>
+      </li>
+    </ul> -->
+    <ul
+      ngbNav
+      #nav="ngbNav"
+      [activeId]="selectedTab"
+      class="nav-tabs"
+      (activeIdChange)="changeTab($event)"
+    >
+      <li [ngbNavItem]="ind" *ngFor="let tab of tabsStructure; let ind = index">
+        <a ngbNavLink>
           <app-feather-icons [icon]="tab.tabIcon"></app-feather-icons> &nbsp;
           {{ tab.tab | translate }}
-        </ng-template>
-
-        <ng-template ngbTabContent>
+        </a>
+        <ng-template ngbNavContent>
           <div
             *ngIf="tab.buttons"
             style="
@@ -32,12 +43,7 @@
             </div>
           </div>
 
-          <div
-            class="tab-pane fade show active"
-            id="top-profile"
-            role="tabpanel"
-            aria-labelledby="top-profile-tab"
-          >
+          <div>
             <div
               style="
                 display: flex;
@@ -49,6 +55,12 @@
             </div>
 
             <div class="row products-admin ratio_asos">
+              <div
+                *ngIf="!this[getStateName(ind)].length && !loading"
+                style="text-align: center; width: -webkit-fill-available"
+              >
+                <h4>No Products Available</h4>
+              </div>
               <div
                 class="col-xl-3 col-sm-6"
                 *ngFor="let product of this[getStateName(ind)]"
@@ -142,8 +154,9 @@
                     </div>
                   </div>
                   <hr style="margin: 0px" />
-                  <div class="pro-card-footer">
+                  <div class="pro-card-footer" *ngIf="tab.cardButtons">
                     <button
+                      *ngIf="tab.cardButtons[0]"
                       class="btn"
                       type="button"
                       title=""
@@ -152,6 +165,7 @@
                       <i class="fa fa-pencil-square-o fa-lg"></i>
                     </button>
                     <button
+                      *ngIf="tab.cardButtons[1]"
                       class="btn"
                       type="button"
                       title=""
@@ -160,10 +174,17 @@
                       <i class="fa fa-thumbs-o-up fa-lg"></i>
                     </button>
                     <button
+                      *ngIf="tab.cardButtons[2]"
                       class="btn"
                       type="button"
                       title=""
-                      (click)="openConfirm(product.productId, ReasonModal)"
+                      (click)="
+                        openConfirm(
+                          product.productId,
+                          ReasonModal,
+                          tab.rejectModal
+                        )
+                      "
                     >
                       <i class="fa fa-thumbs-o-down fa-lg"></i>
                     </button>
@@ -173,98 +194,9 @@
             </div>
           </div>
         </ng-template>
-      </ngb-tab>
-
-      <!-- ====================================================== -->
-
-      <!-- <ngb-tab>
-        <ng-template ngbTabTitle>
-          <app-feather-icons [icon]="tab2Icon"></app-feather-icons>
-
-          {{ tabsHeading[1] | translate }}</ng-template
-        >
-        <ng-template ngbTabContent>
-          <div style="text-align: end; margin-bottom: 10px">
-            <app-button
-              [btnType]="'submit'"
-              [loading]="loading"
-              [disabled]="!tab2Selectedprods.length || loading"
-              [btnText]="tab2ButtonLabel"
-              (onSubmit)="sendIdsToParent()"
-            ></app-button>
-          </div>
-          <div
-            class="tab-pane fade show active"
-            id="top-profile"
-            role="tabpanel"
-            aria-labelledby="top-profile-tab"
-          >
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <app-loader [loading]="loading"></app-loader>
-            </div>
-
-            <div class="row products-admin ratio_asos">
-              <div
-                class="col-xl-3 col-sm-6"
-                *ngFor="let product of tab2_list; let ind = index"
-              >
-                <div class="card">
-                  <div class="card-body product-box">
-                    <div class="checkbox checkbox-primary">
-                      <input
-                        id="checkbox-primary-1"
-                        type="checkbox"
-                        data-original-title=""
-                        [checked]="getChecked(product.productId)"
-                        [name]="product.productId"
-                        (change)="selectDeselectProd($event)"
-                      />
-                    </div>
-                    <div class="img-wrapper">
-                      <div class="lable-block">
-                        <span class="lable3" *ngIf="product.tag == 'new'"
-                          >new</span
-                        >
-                        <span class="lable4" *ngIf="product.sale == 'on sale'"
-                          >on sale</span
-                        >
-                      </div>
-                      <div class="front">
-                        <a href="javascript:void(0)"
-                          ><img
-                            [src]="[product.image]"
-                            class="img-fluid blur-up lazyload bg-img"
-                            alt=""
-                        /></a>
-                      </div>
-                    </div>
-                    <div class="product-detail">
-                      <div class="rating">
-                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="javascript:void(0)">
-                        <h6>{{ product.name }}</h6>
-                      </a>
-                      <h4>
-                        {{ product.discount }} <del>{{ product.price }}</del>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </ngb-tab> -->
-    </ngb-tabset>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
     <!-- Pagination -->
     <div class="pagination" style="margin-bottom: 10px">
       <mat-paginator
@@ -298,6 +230,7 @@
         <label for="price">Reason</label>
         <input
           type="text"
+          ngbAutofocus
           [(ngModel)]="reason"
           class="form-control"
           id="reason"

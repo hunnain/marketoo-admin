@@ -105,7 +105,7 @@ export class CreateCouponComponent implements OnInit {
           allowFreeShipping,
           quantity,
           discountType,
-          percentageDiscount,
+          amtOrPercentage,
           couponId,
           seller,
           sellerId,
@@ -117,7 +117,7 @@ export class CreateCouponComponent implements OnInit {
           allowFreeShipping,
           quantity,
           discountType,
-          percentageDiscount,
+          amtOrPercentage,
           startDate: this.formatDate(startDate, true),
           endDate: this.formatDate(endDate, true),
         };
@@ -150,7 +150,7 @@ export class CreateCouponComponent implements OnInit {
       allowFreeShipping: [false],
       quantity: [1, [Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
       // discountType: ['', Validators.required],
-      percentageDiscount: [
+      amtOrPercentage: [
         '',
         [Validators.required, Validators.pattern('^[1-9][0-9]*$')],
       ],
@@ -166,8 +166,8 @@ export class CreateCouponComponent implements OnInit {
       // maxSpend: [''],
       perLimit: [''],
       perCustomer: [''],
-      sendTo: [''],
-      canBeUsed: [''],
+      sendTo: ['', Validators.required],
+      usageLimit: ['1'],
       notifyRecivers: [false],
     });
   }
@@ -182,7 +182,18 @@ export class CreateCouponComponent implements OnInit {
       startDate: this.formatDate(this.generalForm.value.startDate),
       endDate: this.formatDate(this.generalForm.value.endDate),
       ...this.restrictionForm.value,
+      discountType: 'Percent',
     };
+    if (!data.minSpend) {
+      delete data['minSpend'];
+    }
+    if (!data.usageLimit) {
+      delete data['usageLimit'];
+    }
+    if (data.sendTo == 'all_cust') {
+      data['sendTo'] = 'AllCustomers';
+    }
+
     this.loading = true;
     console.log(data);
     this.couponService.addCoupon(data).subscribe((res) => {
@@ -229,5 +240,9 @@ export class CreateCouponComponent implements OnInit {
       newDate = new Date(year, month - 1, day, 0, 0, 0, 0);
       return newDate;
     }
+  }
+
+  gotoCreateCoupon() {
+    this.router.navigate(['/coupons/list-coupons']);
   }
 }

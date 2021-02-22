@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { OrderService } from 'src/app/shared/service/order-service/order.service';
-import { SharedService } from 'src/app/shared/service/shared.service';
+import { generateUrl } from 'src/app/shared/utilities';
 import { orderDB } from '../../../shared/tables/order-list';
 @Component({
   selector: 'app-orders',
@@ -44,8 +44,7 @@ export class OrdersComponent implements OnInit {
     private router: Router,
     private orderService: OrderService,
     private cs: CommonService,
-    public translate: TranslateService,
-    private ss: SharedService
+    public translate: TranslateService
   ) {
     // this.orders = orderDB.list_order;
   }
@@ -60,7 +59,7 @@ export class OrdersComponent implements OnInit {
     query =
       query +
       '&' +
-      this.ss.generateUrl({
+      generateUrl({
         [this.selectedFilter]: this.searchTerm,
       });
     this.orderService.getFilteredOrders(query).subscribe(

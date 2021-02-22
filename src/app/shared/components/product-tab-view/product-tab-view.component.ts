@@ -22,8 +22,18 @@ export class ProductTabViewComponent implements OnInit {
       tab: 'Tab 1',
       tabIcon: 'user',
       buttons: ['button 1', 'button 2'],
+      cardButtons: [true, true, true],
+      url: 'product',
+      rejectModal: true,
     },
-    { tab: 'Tab 2', tabIcon: 'settings', buttons: ['button 1'] },
+    {
+      tab: 'Tab 2',
+      tabIcon: 'settings',
+      buttons: ['button 1'],
+      cardButtons: [true, false, true],
+      url: 'product/get-editors-pick',
+      rejectModal: true,
+    },
   ];
   @Input() tabIcons: string[] = ['user', 'settings', 'settings'];
   @Input() tabUrls: string[] = [
@@ -52,7 +62,7 @@ export class ProductTabViewComponent implements OnInit {
 
   pageSizeOptions: number[] = [5, 10, 25, 50];
   public selectedLang: string = 'en';
-  selectedTab: string = 'ngb-tab-0';
+  selectedTab = 0;
 
   constructor(
     private modalService: NgbModal,
@@ -64,8 +74,8 @@ export class ProductTabViewComponent implements OnInit {
       this.loading = loading;
     });
     for (let index = 0; index < this.tabsStructure.length; index++) {
-      this[`tab_list_${index + 1}`] = [];
-      this[`selected_tab_${index + 1}`] = [];
+      this[`tab_list_${index}`] = [];
+      this[`selected_tab_${index}`] = [];
     }
     this.selectedLang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((res) => {
@@ -106,29 +116,29 @@ export class ProductTabViewComponent implements OnInit {
   selectDeselectProd(data) {
     let id = data.target.name;
     let selected = [];
-    selected = [...this[`selected_tab_${this.getTabIndex() + 1}`]];
+    selected = [...this[`selected_tab_${this.getTabIndex()}`]];
     if (selected.includes(id)) {
       let index = selected.indexOf(id);
       if (index != -1) selected.splice(index, 1);
     } else {
       selected.push(id);
     }
-    this[`selected_tab_${this.getTabIndex() + 1}`] = selected;
+    this[`selected_tab_${this.getTabIndex()}`] = selected;
   }
 
   getChecked(id) {
-    return this[`selected_tab_${this.getTabIndex() + 1}`].includes(id);
+    return this[`selected_tab_${this.getTabIndex()}`].includes(id);
   }
 
   checkDisabled(ind) {
-    return !this[`selected_tab_${ind + 1}`].length || this.loading;
+    return !this[`selected_tab_${ind}`].length || this.loading;
   }
 
   sendIdsToParent(btnIndex) {
     let obj = {};
     let index = this.getTabIndex();
     obj = {
-      selected: this[`selected_tab_${index + 1}`],
+      selected: this[`selected_tab_${index}`],
       tab: index,
       button: btnIndex,
     };
@@ -139,38 +149,41 @@ export class ProductTabViewComponent implements OnInit {
   }
 
   reset() {
-    this[`selected_tab_${this.getTabIndex() + 1}`] = [];
+    this[`selected_tab_${this.getTabIndex()}`] = [];
     this.getTabData();
   }
 
   changeTab(data): void {
-    console.log(data);
-    this.selectedTab = data.nextId;
+    this.selectedTab = data;
     this.getTabData();
   }
 
   getStateName(ind) {
-    return `tab_list_${ind + 1}`;
+    return `tab_list_${ind}`;
+  }
+
+  getTabProductData(ind) {
+    return this[`tab_list_${ind}`];
   }
 
   getTabIndex() {
     let index;
-    index = this.selectedTab.split('-');
-    return Number(index[index.length - 1]);
+    index = this.selectedTab;
+    return Number(index);
   }
 
   generateUrl() {
     const { PageSize, CurrentPage } = this.pagination;
-    let url = `${
-      this.tabUrls[this.getTabIndex()]
-    }?pageSize=${PageSize}&pageNumber=${CurrentPage}`;
-    if (this.tabUrls[this.getTabIndex()]) return url;
+    let struct = this.tabsStructure[this.getTabIndex()];
+    let url = `${struct['url']}?pageSize=${PageSize}&pageNumber=${CurrentPage}`;
+    if (struct['params']) url = `${url}&${struct['params']}`;
+
+    if (struct['url']) return url;
     else return '';
   }
 
   getTabData() {
-    console.log('aSD');
-    this[`tab_list_${this.getTabIndex() + 1}`] = [];
+    this[`tab_list_${this.getTabIndex()}`] = [];
     let url = this.generateUrl();
     if (url) {
       this.loading = true;
@@ -178,15 +191,16 @@ export class ProductTabViewComponent implements OnInit {
       this.productService.getCustomData(url).subscribe((res) => {
         let paginate = JSON.parse(res.headers.get('X-Pagination'));
         console.log('res', res, paginate);
-        let templist = res.body;
+        let templist = res.body || [];
         if (paginate) {
           this.pagination = paginate;
         }
         this.cs.isLoading.next(false);
         this.loading = false;
-        this[`tab_list_${this.getTabIndex() + 1}`] = JSON.parse(
+        this[`tab_list_${this.getTabIndex()}`] = JSON.parse(
           JSON.stringify(templist)
         );
+        console.log(this[`tab_list_${this.getTabIndex()}`]);
       });
     }
   }
@@ -214,10 +228,12 @@ export class ProductTabViewComponent implements OnInit {
     this.pagination['CurrentPage'] = this.pagination.CurrentPage + 1;
     this.getTabData();
   }
+  
   onEdit(id) {
     console.log(id);
     this.onEditCard.emit(id);
   }
+
   onApprove(id) {
     console.log(id);
     this.onApproveCard.emit(id);
@@ -225,6 +241,7 @@ export class ProductTabViewComponent implements OnInit {
       this.getTabData();
     }, 3000);
   }
+
   onReject() {
     // console.log(id);
     this.onRejectCard.emit({ id: this.rejectId, reason: this.reason });
@@ -233,9 +250,17 @@ export class ProductTabViewComponent implements OnInit {
       this.rejectId = null;
     }, 3000);
   }
-  openConfirm(id, content) {
-    this.open(content);
-    this.rejectId = id;
+  openConfirm(id, content, isModal) {
+    if (isModal) {
+      this.rejectId = id;
+      this.open(content);
+    } else {
+      this.onRejectCard.emit(id);
+      setTimeout(() => {
+        this.getTabData();
+        this.rejectId = null;
+      }, 3000);
+    }
   }
   onPending(id) {
     console.log(id);

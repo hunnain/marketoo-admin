@@ -2,10 +2,10 @@
   <div class="card">
     <div class="card-body">
       <div style="display: flex; align-items: center; justify-content: center">
-        <app-loader [loading]="fetching"></app-loader>
+        <app-loader [loading]="loading"></app-loader>
       </div>
     </div>
-    <div class="row product-page-main card-body" *ngIf="!fetching">
+    <div class="row product-page-main card-body" *ngIf="!loading">
       <div class="col-xl-8">
         <div class="product-page-details product-right mb-0">
           <div class="row">
@@ -87,6 +87,16 @@
                 <span class="badge badge-secondary">{{
                   order?.paymentStatus
                 }}</span>
+                <span
+                  *ngIf="order?.paymentService == 'Fps'"
+                  class="change-btn"
+                  data-toggle="modal"
+                  (click)="openModal(PaymentStatus)"
+                  >{{
+                    "ordermanagement_ordercustomershippingmethodchange"
+                      | translate
+                  }}</span
+                >
               </div>
               <div class="font-size-13">
                 <strong>{{
@@ -295,7 +305,7 @@
               <span
                 class="change-btn"
                 data-toggle="modal"
-                (click)="changeStatus(Status)"
+                (click)="openModal(Status)"
                 >{{
                   "ordermanagement_ordercustomersummaryorderstatuschange"
                     | translate
@@ -311,7 +321,7 @@
               <span
                 class="change-btn"
                 data-toggle="modal"
-                (click)="changeTotal(Total)"
+                (click)="openModal(Total)"
                 >{{
                   "ordermanagement_ordercustomersummaryorderstotalschange"
                     | translate
@@ -338,6 +348,7 @@
                 class="btn btn-custom col-12 col-sm-3"
                 type="button"
                 ngbTooltip="message"
+                (click)="openModal(MessageModal)"
                 placement="bottom"
               >
                 <app-feather-icons
@@ -419,9 +430,13 @@
       </div>
     </div>
     <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateTotal()">
-        Update
-      </button>
+      <app-button
+        [btnType]="'submit'"
+        [loading]="loading"
+        [disabled]="loading"
+        [btnText]="'Update'"
+        (onSubmit)="updateTotal()"
+      ></app-button>
     </div>
   </div>
 </ng-template>
@@ -459,9 +474,13 @@
       </select>
     </div>
     <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateStatus()">
-        Update
-      </button>
+      <app-button
+        [btnType]="'submit'"
+        [loading]="loading"
+        [disabled]="loading"
+        [btnText]="'Update'"
+        (onSubmit)="updateStatus()"
+      ></app-button>
     </div>
   </div>
 </ng-template>
@@ -529,11 +548,21 @@
           <input class="form-control col-12 col-sm-5" id="size" type="text" />
         </div>
       </div>
+      <div style="margin: 10px 0px">
+        <div class="row form-inline">
+          <label class="col-12 col-sm-4">Add Shipping Cost</label>
+          <input class="form-control col-12 col-sm-5" id="size" type="text" />
+        </div>
+      </div>
     </div>
     <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateStatus()">
-        Update
-      </button>
+      <app-button
+        [btnType]="'submit'"
+        [loading]="loading"
+        [disabled]="loading"
+        [btnText]="'Update'"
+        (onSubmit)="updateStatus()"
+      ></app-button>
     </div>
   </div>
 </ng-template>
@@ -627,4 +656,82 @@
   <!-- <div class="action">
             <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
         </div> -->
+</ng-template>
+
+<ng-template #MessageModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <label for="price">Message</label>
+        <input
+          type="text"
+          [(ngModel)]="textMessage"
+          class="form-control"
+          id="textMessage"
+          aria-describedby="textMessage"
+          placeholder="Type here..."
+        />
+      </div>
+    </div>
+    <div class="action">
+      <app-button
+        [btnType]="'submit'"
+        [loading]="false"
+        [disabled]="false"
+        [btnText]="'Send'"
+        (onSubmit)="onSendMessage()"
+      ></app-button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- payment Status Modal -->
+<ng-template #PaymentStatus let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Payment Status</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="payStatus">Select Status</label>
+      <select
+        class="form-control"
+        id="payStatus"
+        ngbAutofocus
+        [(ngModel)]="payStatus"
+        name="payStatus"
+      >
+        <option *ngFor="let opt of statusEnums; let i = index" [value]="i">
+          {{ opt | translate }}
+        </option>
+      </select>
+    </div>
+    <div class="action">
+      <app-button
+        [btnType]="'submit'"
+        [loading]="loading"
+        [disabled]="!payStatus || loading"
+        [btnText]="'Update'"
+        (onSubmit)="onUpdatePaymentStatus()"
+      ></app-button>
+    </div>
+  </div>
 </ng-template>

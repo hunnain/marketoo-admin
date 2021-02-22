@@ -1,5 +1,14 @@
-<app-product-tab-view
+<!-- <app-product-tab-view
   [tabsHeading]="['Products', 'Editor Choice']"
   [tabsButtonLabels]="['Add to Editor Choice', 'Remove From Editor Choice']"
   (sendSelected)="getData($event)"
+></app-product-tab-view> -->
+
+<app-product-tab-view
+  [tabsStructure]="tabsStructure"
+  (sendSelected)="getData($event)"
+  (onEditCard)="onEdit($event)"
+  (onApproveCard)="onApprove($event)"
+  (onRejectCard)="onReject($event)"
+  (onPendingCard)="onPending($event)"
 ></app-product-tab-view>

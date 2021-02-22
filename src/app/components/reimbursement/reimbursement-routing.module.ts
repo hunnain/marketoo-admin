@@ -18,7 +18,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'reimbursment/view-detail/:id',
+        path: 'view-detail/:id',
         component: ViewDetailComponent,
         data: {
           title: 'View Detail',

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BlastNotificationsService } from 'src/app/shared/service/blast-notifications/blast-notifications.service';
+import { CommonService } from 'src/app/shared/service/common.service';
 
 @Component({
   selector: 'app-add-notification',
@@ -7,31 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNotificationComponent implements OnInit {
   public selectedUser: any = {};
-  public openChatScreen: boolean = false;
+  // public openChatScreen: boolean = false;
+  public content = '';
+  public loading: boolean = false;
 
-  public dummyMessages = [
-    {
-      user_id: 1,
-      message: 'hello there',
-    },
-    {
-      user_id: 2,
-      message: 'Hi, how are you?',
-    },
-    {
-      user_id: 1,
-      message: "I'm, how are you?",
-    },
-  ];
-  constructor() {}
+  constructor(
+    private notificationService: BlastNotificationsService,
+    private cs: CommonService,
+    private router: Router
+  ) {
+    this.cs.isLoading.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit(): void {}
 
-  openChat(user) {
-    this.openChatScreen = true;
-    console.log('user', user);
-    this.selectedUser = user;
-  }
+  // openChat(user) {
+  //   this.openChatScreen = true;
+  //   console.log('user', user);
+  //   this.selectedUser = user;
+  // }
 
   uploadImage = null;
   //FileUpload
@@ -63,5 +62,18 @@ export class AddNotificationComponent implements OnInit {
   addBase64(data) {
     let base = `data:image/jpeg;base64,${data}`;
     return base;
+  }
+
+  handleChange(data) {
+    this.content = data;
+  }
+
+  onAddNotification(type) {
+    this.loading = true;
+    let data = { SendTo: type, content: this.content };
+    this.notificationService.addNotification(data).subscribe((res) => {
+      this.loading = false;
+      this.router.navigate(['/notifications']);
+    });
   }
 }

@@ -13,13 +13,10 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <button class="btn btn-primary mr-1 mb-3" style="float: right">
-              {{ "delete" | translate }}
-            </button>
             <div class="clearfix"></div>
             <ngx-datatable
               class="bootstrap"
-              [rows]="digital_categories"
+              [rows]="coupons"
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50"
@@ -34,7 +31,7 @@
               [offset]="pagination.CurrentPage"
               [limit]="pagination.PageSize"
               (page)="setPage($event)"-->
-              <ngx-datatable-column
+              <!-- <ngx-datatable-column
                 [width]="30"
                 [sortable]="false"
                 [canAutoResize]="false"
@@ -43,10 +40,8 @@
                 [headerCheckboxable]="true"
                 [checkboxable]="true"
               >
-                <button type="button" class="btn btn-primery">
-                  {{ "delete" | translate }}
-                </button>
-              </ngx-datatable-column>
+               
+              </ngx-datatable-column> -->
               <ngx-datatable-column
                 name="{{ 'coupon_title' | translate }}"
                 prop="couponTitle"
@@ -57,15 +52,24 @@
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'coupon_code_discount' | translate }}"
-                prop="percentageDiscount"
+                prop="amtOrPercentage"
               ></ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'coupon_duedate' | translate }}"
+                name="{{ 'coupon_start_date' | translate }}"
                 prop="startDate"
-              ></ngx-datatable-column>
-              <ngx-datatable-column
-                name="{{ 'coupon_duedate' | translate }}"
+                ><ng-template let-row="row" ngx-datatable-cell-template>
+                  <span>{{ formatDate(row.startDate) }}</span></ng-template
+                ></ngx-datatable-column
+              ><ngx-datatable-column
+                name="{{ 'coupon_end_date' | translate }}"
                 prop="endDate"
+                ><ng-template let-row="row" ngx-datatable-cell-template>
+                  <span>{{ formatDate(row.endDate) }}</span></ng-template
+                ></ngx-datatable-column
+              >
+              <ngx-datatable-column
+                name="{{ 'coupon_quantity' | translate }}"
+                prop="quantity"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'coupon_code_action' | translate }}"

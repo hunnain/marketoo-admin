@@ -145,6 +145,7 @@
                   class="form-control col-md-7"
                   formControlName="quantity"
                   type="number"
+                  min="0"
                   required=""
                 />
                 <div
@@ -186,14 +187,15 @@
                 }}</label>
                 <input
                   class="form-control col-md-7"
-                  formControlName="percentageDiscount"
+                  formControlName="amtOrPercentage"
                   type="number"
+                  min="0"
                   required=""
                 />
                 <div
                   *ngIf="
-                    generalForm.controls.percentageDiscount.touched &&
-                    generalForm.controls.percentageDiscount.errors?.required
+                    generalForm.controls.amtOrPercentage.touched &&
+                    generalForm.controls.amtOrPercentage.errors?.required
                   "
                   class="text text-danger offset-md-3 col-md-7"
                 >
@@ -201,8 +203,8 @@
                 </div>
                 <div
                   *ngIf="
-                    generalForm.controls.percentageDiscount.touched &&
-                    generalForm.controls.percentageDiscount.errors?.pattern
+                    generalForm.controls.amtOrPercentage.touched &&
+                    generalForm.controls.amtOrPercentage.errors?.pattern
                   "
                   class="text text-danger offset-md-3 col-md-7"
                 >
@@ -270,6 +272,7 @@
             <input
               class="form-control col-md-7"
               formControlName="minSpend"
+              min="1"
               id="validationCustom4"
               type="number"
             />
@@ -285,16 +288,17 @@
               type="number"
             />
           </div> -->
-          <h5>{{ "cop_usage_limit" | translate }}</h5>
+          <!-- <h5>{{ "cop_usage_limit" | translate }}</h5> -->
           <div class="form-group row">
             <label for="validationCustom6" class="col-xl-3 col-md-4">{{
-              "cop_can_be_used_time" | translate
+              "cop_usage_limit" | translate
             }}</label>
             <input
               class="form-control col-md-7"
-              formControlName="canBeUsed"
+              formControlName="usageLimit"
+              min="1"
               id="validationCustom6"
-              type="text"
+              type="number"
             />
           </div>
           <!-- <div class="form-group row">
@@ -312,10 +316,23 @@
             <label class="col-xl-3 col-md-4">{{
               "cop_offer_to" | translate
             }}</label>
-            <select class="custom-select col-md-5" formControlName="sendTo">
+            <select
+              class="custom-select col-md-5"
+              formControlName="sendTo"
+              required
+            >
               <option *ngFor="let opt of offerOptions" [value]="opt.id">
                 {{ opt.name }}
               </option>
+              <div
+                *ngIf="
+                  restrictionForm.controls.sendTo.touched &&
+                  restrictionForm.controls.sendTo.errors?.required
+                "
+                class="text text-danger offset-md-3 col-md-7"
+              >
+                {{ "PercentageDiscount_req" | translate }}
+              </div>
             </select>
 
             <!-- <div
@@ -337,22 +354,36 @@
         </form>
       </fieldset>
       <div class="pull-right" style="margin-top: 20px">
-        <button
+        <app-button
+          [btnType]="'submit'"
+          [loading]="loading"
+          [disabled]="generalForm.invalid || restrictionForm.invalid || loading"
+          btnText="{{ (isEdit ? 'cop_update' : 'cop_create') | translate }}"
+          (onSubmit)="isEdit ? editCoupon() : createCoupon()"
+        ></app-button>
+        <!-- <button
           type="button"
           class="btn btn-primary"
           [disabled]="generalForm.invalid || restrictionForm.invalid || loading"
           (click)="isEdit ? editCoupon() : createCoupon()"
         >
           {{ (isEdit ? "cop_update" : "cop_create") | translate }}
-        </button>
-        <button
+        </button> -->
+        <app-button
+          *ngIf="isEdit"
+          [btnType]="'submit'"
+          [loading]="loading"
+          btnText="{{ 'cop_back' | translate }}"
+          (onSubmit)="gotoCreateCoupon()"
+        ></app-button>
+        <!-- <button
           *ngIf="isEdit"
           type="button"
           class="btn btn-danger ml-1"
           [routerLink]="'/coupons/list-coupons'"
         >
           Back
-        </button>
+        </button> -->
       </div>
     </div>
   </div>

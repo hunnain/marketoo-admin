@@ -23,15 +23,15 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <input
+            <!-- <input
               type="text"
               class="filter-ngx form-control"
               placeholder="{{ 'r_search' | translate }}..."
               (keyup)="updateFilter($event)"
-            />
+            /> -->
             <ngx-datatable
               class="bootstrap"
-              [rows]="reimbursrments"
+              [rows]="notifications"
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50"
@@ -43,12 +43,12 @@
                 [limit]="pagination.PageSize"
                 (page)="setPage($event)" -->
               <ngx-datatable-column
-                name="{{ 'r_profile' | translate }}"
-                prop="image"
+                name="{{ 'not_send_to' | translate }}"
+                prop="sendTo"
               ></ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'r_name' | translate }}"
-                prop="name"
+                name="{{ 'not_content' | translate }}"
+                prop="content"
               >
                 <!-- <ng-template
                     let-row="row"
@@ -59,24 +59,27 @@
                   </ng-template> -->
               </ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'r_email' | translate }}"
-                prop="email"
+                name="{{ 'not_created_date' | translate }}"
+                prop="creationTime"
               ></ngx-datatable-column>
-              <ngx-datatable-column name="{{ 'r_upload_trans' | translate }}">
+              <ngx-datatable-column name="{{ 'not_preview' | translate }}">
                 <ng-template
                   let-row="row"
                   let-value="value"
                   ngx-datatable-cell-template
                 >
                   <span style="color: #f88379; cursor: pointer">
-                    <i class="fa fa-upload" (click)="onSelectRow(value)"></i>
+                    <i
+                      class="fa fa-eye"
+                      (click)="openModal(row, TemplateModal)"
+                    ></i>
                   </span>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column
+              <!--  <ngx-datatable-column
                 name="{{ 'r_join_date' | translate }}"
                 prop="join_date"
-              ></ngx-datatable-column>
+              ></ngx-datatable-column> -->
 
               <ngx-datatable-footer>
                 <ng-template ngx-datatable-footer-template>
@@ -105,3 +108,26 @@
   </div>
   <!-- Container-fluid Ends-->
 </div>
+
+<!-- Preview Modal -->
+<ng-template #TemplateModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Template</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div [innerHTML]="selectedRow.content"></div>
+    <div class="action" style="text-align: end">
+      <!-- <button class="btn btn-primary" type="button" (click)="onPublish()">
+        Publish
+      </button> -->
+    </div>
+  </div>
+</ng-template>

@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-md-4" style="margin-bottom: 20px">
+    <!-- <div class="col-12 col-md-4" style="margin-bottom: 20px">
       <div class="right-sidebar chat-side-bar">
         <app-right-sidebar (selectUser)="openChat($event)"></app-right-sidebar>
       </div>
-    </div>
-    <div class="col-12 col-md-8" style="margin-bottom: 20px">
+    </div> -->
+    <div class="col-12 col-md-12" style="margin-bottom: 20px">
       <div class="card editor-box">
         <div class="image-upload">
           <label for="file-input">
@@ -19,7 +19,10 @@
           <input id="file-input" type="file" (change)="readUrl($event)" />
         </div>
 
-        <app-text-editor></app-text-editor>
+        <app-text-editor
+          [(text)]="content"
+          (textEmit)="handleChange($event)"
+        ></app-text-editor>
         <div
           style="
             display: flex;
@@ -27,14 +30,35 @@
             padding-top: 15px;
           "
         >
-          <button type="button" class="btn btn-primary">
+          <app-button
+            [btnType]="'submit'"
+            [loading]="loading"
+            [disabled]="!content || loading"
+            btnText="{{ 'not_all_sellers' | translate }}"
+            (onSubmit)="onAddNotification(0)"
+          ></app-button
+          ><app-button
+            [btnType]="'submit'"
+            [loading]="loading"
+            [disabled]="!content || loading"
+            btnText="{{ 'not_all_customers' | translate }}"
+            (onSubmit)="onAddNotification(1)"
+          ></app-button
+          ><app-button
+            [btnType]="'submit'"
+            [loading]="loading"
+            [disabled]="!content || loading"
+            btnText="{{ 'not_spread_all' | translate }}"
+            (onSubmit)="onAddNotification(2)"
+          ></app-button>
+          <!-- <button type="button" class="btn btn-primary">
             {{ "not_all_sellers" | translate }}
           </button>
           <button type="button" class="btn btn-primary">
             {{ "not_all_customers" | translate }}</button
           ><button type="button" class="btn btn-primary">
             {{ "not_spread_all" | translate }}
-          </button>
+          </button> -->
         </div>
       </div>
       <!-- <div class="no-chat-msg" *ngIf="!openChatScreen">

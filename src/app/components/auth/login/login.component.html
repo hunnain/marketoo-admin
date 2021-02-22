@@ -227,14 +227,13 @@
                           </div>
                         </div>
                         <div class="form-button">
-                          <button
+                          <app-button
+                            [btnType]="'submit'"
+                            [loading]="loading"
                             [disabled]="loginForm.invalid || loading"
-                            (click)="onSubmit()"
-                            class="btn btn-primary"
-                            type="submit"
-                          >
-                            {{ "LOGIN" | translate }}
-                          </button>
+                            btnText="{{ 'LOGIN' | translate }}"
+                            (onSubmit)="onSubmit()"
+                          ></app-button>
                         </div>
                         <!-- [routerLink]="'/dashboard/default'" -->
 

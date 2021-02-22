@@ -40,6 +40,8 @@ export class ListReimbursementComponent implements OnInit {
 
   onViewDetail(data) {
     console.log(data);
+    let route = `reimbursment/view-detail/${data.id}`;
+    this.router.navigate([route]);
   }
 
   onSelect({ selected }) {

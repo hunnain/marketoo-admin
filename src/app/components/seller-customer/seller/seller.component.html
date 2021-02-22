@@ -78,8 +78,9 @@
             type="text"
             class="filter-ngx form-control"
             placeholder="Search..."
-            (keyup)="updateFilter($event)"
+            [formControl]="searchTerm"
           />
+          <!-- (keyup)="updateFilter($event)" -->
           <div
             style="display: flex; align-items: center; justify-content: center"
           >

@@ -6,7 +6,7 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 import { sellerCustomerDB } from '../../../shared/tables/seller-customerDB';
-import { SharedService } from 'src/app/shared/service/shared.service';
+import { generateUrl } from 'src/app/shared/utilities';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -39,8 +39,7 @@ export class CustomerComponent implements OnInit {
   constructor(
     private router: Router,
     private customerService: SellerCustomerService,
-    private cs: CommonService,
-    private ss: SharedService
+    private cs: CommonService
   ) {
     // this.customers = ;
   }
@@ -66,7 +65,7 @@ export class CustomerComponent implements OnInit {
     query =
       query +
       '&' +
-      this.ss.generateUrl({
+      generateUrl({
         [this.selectedFilter]: this.searchTerm,
       });
     this.customerService

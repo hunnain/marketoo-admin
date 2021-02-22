@@ -6,6 +6,7 @@ import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AllCoupons } from '../../../shared/interfaces/coupon/coupon';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list-coupon',
@@ -13,7 +14,7 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
   styleUrls: ['./list-coupon.component.scss'],
 })
 export class ListCouponComponent implements OnInit {
-  public digital_categories = [];
+  public coupons = [];
   public selected = [];
   public loading: boolean = false;
   public pagination: Paginate = {
@@ -31,7 +32,7 @@ export class ListCouponComponent implements OnInit {
     public translate: TranslateService,
     private cs: CommonService
   ) {
-    // this.digital_categories = listCouponsDB.list_coupons;
+    // this.coupons = listCouponsDB.list_coupons;
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;
     });
@@ -56,15 +57,16 @@ export class ListCouponComponent implements OnInit {
   fetchCoupons() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
-    let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+    let query = `?PageSize=${PageSize}&PageNumber=${CurrentPage}`;
     this.couponService.getCoupon(query).subscribe(
       (res) => {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.digital_categories = res.body;
-          console.log('coupon-res', res.headers.get('x-pagination'));
-          this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          this.coupons = res.body || [];
+          // console.log('coupon-res', res.headers.get('x-pagination'));
+          let paginate = JSON.parse(res.headers.get('X-Pagination'));
+          if (paginate) this.pagination = paginate;
           console.log('pagination', this.pagination);
         }
       }
@@ -81,9 +83,21 @@ export class ListCouponComponent implements OnInit {
 
   onDelete(val) {
     console.log('row click', val);
+    this.couponService.deleteCoupon(val).subscribe((res) => {
+      if (res) {
+        this.cs.isLoading.next(false);
+        this.loading = false;
+        this.fetchCoupons();
+      }
+    });
   }
 
   setPage(page) {
     console.log('page--', page);
+  }
+
+  formatDate(date = '') {
+    if (date) return moment(date).format('DD-MM-YYYY');
+    else return '---';
   }
 }

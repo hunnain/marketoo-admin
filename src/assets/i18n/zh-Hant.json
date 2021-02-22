@@ -118,6 +118,10 @@
   "sidebar_Create_Coupons": "新增優惠卷",
   "create_Store_Credit": "新增積分",
   "coupon_duedate": "限期",
+  "coupon_start_date": "Start Date",
+  "coupon_end_date": "End Date",
+  "coupon_amount": "Amount",
+  "coupon_quantity": "Quantity",
   "coupon_title": "名稱",
   "coupon_code": "優惠碼",
   "coupon_code_discount": "折扣",
@@ -755,5 +759,9 @@
 
   "not_all_sellers": "所有卖家",
   "not_all_customers": "所有顾客",
-  "not_spread_all": "全部传播"
+  "not_spread_all": "全部传播",
+  "not_send_to": "Send To",
+  "not_content": "Content",
+  "not_created_date": "Created At",
+  "not_preview": "Preview"
 }

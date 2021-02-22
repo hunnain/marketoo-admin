@@ -79,7 +79,7 @@ export class AdsRevenueComponent implements OnInit {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.reimbursrments = res.body;
+          this.reimbursrments = res.body || [];
           console.log('reimbursement-res', res.headers.get('x-pagination'));
           this.pagination = JSON.parse(res.headers.get('X-Pagination'));
           console.log('pagination', this.pagination);

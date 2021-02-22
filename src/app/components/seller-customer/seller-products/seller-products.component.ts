@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Button } from 'protractor';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 
@@ -11,27 +10,45 @@ import { SellerCustomerService } from 'src/app/shared/service/seller-customer-se
 })
 export class SellerProductsComponent implements OnInit {
   loading: boolean = false;
-  urls = ['', '', ''];
-  tabsStructure = [
+  tabsStructure =  [
     {
       tab: 'Products',
       tabIcon: 'user',
+      params: 'status=0',
       // buttons: ['Approve', 'Reject'],
+      url: '',
+      cardButtons: [true, true, true],
+      rejectModal: true,
     },
-    { tab: 'Approved', tabIcon: 'settings', 
-    // buttons: ['Remove From Approved'] 
-  },
-    { tab: 'Rejected', tabIcon: 'settings',
-    //  buttons: ['Remove From Rejected']
-     },
+    {
+      tab: 'Approved',
+      tabIcon: 'settings',
+      params: 'status=2',
+      cardButtons: [true, false, true],
+      rejectModal: true,
+      // buttons: ['Remove From Approved']
+    },
+    {
+      tab: 'Rejected',
+      tabIcon: 'settings',
+      params: 'status=1',
+      cardButtons: [true, true, false],
+      rejectModal: true,
+      //  buttons: ['Remove From Rejected']
+    },
   ];
   constructor(
     private sellerService: SellerCustomerService,
     private cs: CommonService,
     private activeRoute: ActivatedRoute
   ) {
-    if (this.activeRoute.params['value'].id)
-      this.urls[0] = `admin/get-products-by-seller/${this.activeRoute.params['value'].id}`;
+    let sellerId = this.activeRoute.params['value'].id;
+    if (sellerId) {
+      let url = `admin/get-products-by-seller/${sellerId}`;
+      this.tabsStructure[0].url = url;
+      this.tabsStructure[1].url = url;
+      this.tabsStructure[2].url = url;
+    }
 
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;

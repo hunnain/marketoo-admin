@@ -97,7 +97,7 @@ export class CampaignListComponent implements OnInit {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.campaigns = res.body;
+          this.campaigns = res.body || [];
           let data = JSON.parse(res.headers.get('X-Pagination'));
           if (data) {
             this.pagination = data;

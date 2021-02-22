@@ -8,7 +8,7 @@ export class CouponService {
   constructor(private commonService: CommonService) {}
 
   getCoupon(query) {
-    return this.commonService.get(`coupon/GetCouponBySeller?${query}`);
+    return this.commonService.get(`admin/get-coupons${query}`);
   }
 
   getCouponByCode(code) {
@@ -16,7 +16,7 @@ export class CouponService {
   }
 
   addCoupon(data) {
-    return this.commonService.post('coupon', data);
+    return this.commonService.post('admin/create-coupon', data);
   }
 
   updateCoupon(id, data) {
@@ -24,7 +24,7 @@ export class CouponService {
   }
 
   deleteCoupon(id) {
-    return this.commonService.delete(`coupon/${id}`);
+    return this.commonService.delete(`admin/delete-coupon/${id}`);
   }
 
   createStoreCredit(data) {

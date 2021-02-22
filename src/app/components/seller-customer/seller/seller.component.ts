@@ -6,7 +6,9 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 import { sellerCustomerDB } from '../../../shared/tables/seller-customerDB';
-import { SharedService } from 'src/app/shared/service/shared.service';
+import { generateUrl } from 'src/app/shared/utilities';
+import 'rxjs/add/operator/debounceTime';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-seller',
   templateUrl: './seller.component.html',
@@ -26,7 +28,8 @@ export class SellerComponent implements OnInit {
     'seller_filter_designHallUrl',
   ];
   selectedFilter = '';
-  searchTerm = '';
+  searchTerm = new FormControl();
+  formCtrlSub;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   public pagination: Paginate = {
@@ -42,13 +45,17 @@ export class SellerComponent implements OnInit {
   constructor(
     private router: Router,
     private sellerService: SellerCustomerService,
-    private cs: CommonService,
-    private ss: SharedService
+    private cs: CommonService
   ) {
     // this.sellers = sellerCustomerDB.list_return;
   }
 
   ngOnInit() {
+    this.formCtrlSub = this.searchTerm.valueChanges
+      .debounceTime(2000)
+      .subscribe((newValue) => {
+        this.fetchSellers();
+      });
     this.fetchSellers();
   }
 
@@ -62,6 +69,26 @@ export class SellerComponent implements OnInit {
     this.selectedFilter = this.filterOptions[filter].split('_')[2];
   }
 
+  ngOnDestroy() {
+    this.formCtrlSub.unsubscribe();
+  }
+
+  structureData(data = []) {
+    console.log(data);
+    if (data)
+      return data.map((item) => {
+        return {
+          ...item,
+          image: `<img src='${
+            item.imageUrl || 'assets/images/user.png'
+          }' class='img-30 mr-2'>`,
+          memberSince: item.memberSince
+            ? moment(item.memberSince).format('YYYY-MM-DD')
+            : '---',
+        };
+      });
+  }
+
   fetchSellers() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
@@ -69,39 +96,39 @@ export class SellerComponent implements OnInit {
     query =
       query +
       '&' +
-      this.ss.generateUrl({
-        [this.selectedFilter]: this.searchTerm,
+      generateUrl({
+        [this.selectedFilter]: this.searchTerm.value,
       });
     this.sellerService
       .getFilteredSellerCustomer('sellers', query)
-      .map((dt) => {
-        return {
-          ...dt,
-          body: dt.body.map((item) => {
-            return {
-              ...item,
-              image: `<img src='${
-                item.imageUrl || 'assets/images/user.png'
-              }' class='img-30 mr-2'>`,
-              memberSince: item.memberSince
-                ? moment(item.memberSince).format('YYYY-MM-DD')
-                : '---',
-            };
-          }),
-        };
-      })
+      // .map((dt) => {
+      //   return {
+      //     ...dt,
+      //     body: dt.body.map((item) => {
+      //       return {
+      //         ...item,
+      //         image: `<img src='${
+      //           item.imageUrl || 'assets/images/user.png'
+      //         }' class='img-30 mr-2'>`,
+      //         memberSince: item.memberSince
+      //           ? moment(item.memberSince).format('YYYY-MM-DD')
+      //           : '---',
+      //       };
+      //     }),
+      //   };
+      // })
       .subscribe(
         (res) => {
           console.log(res);
           if (res) {
             this.cs.isLoading.next(false);
-            this.loading = false;
-            this.sellers = res.body;
+            this.sellers = this.structureData(res.body || []);
             let paginate = JSON.parse(res.headers.get('X-Pagination'));
             if (paginate) {
               this.pagination = paginate;
             }
           }
+          this.loading = false;
         }
         //  ,err => {
         //   this.loading = false;

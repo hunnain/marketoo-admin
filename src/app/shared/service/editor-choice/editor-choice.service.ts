@@ -9,12 +9,13 @@ export class EditorChoiceService {
   getEditorsPick(query) {
     return this.commonService.get(`product/get-editors-pick?${query}`);
   }
-  addToEditorsPick(query) {
-    return this.commonService.get(`admin/add-product-to-editors-pick/${query}`);
+  addToEditorsPick(data) {
+    return this.commonService.post(`admin/add-product-to-editors-pick`, data);
   }
-  removeToEditorsPick(query) {
-    return this.commonService.get(
-      `admin/remove-product-to-editors-pick/${query}`
+  removeToEditorsPick(data) {
+    return this.commonService.post(
+      `admin/remove-product-to-editors-pick`,
+      data
     );
   }
 }

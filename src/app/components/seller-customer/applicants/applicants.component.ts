@@ -84,9 +84,9 @@ export class ApplicantsComponent implements OnInit {
       if (res) {
         console.log('fetch res---', res.body);
         this.details = res.body;
-        this.cs.isLoading.next(false);
         // this.fetching = false;
       }
+      this.cs.isLoading.next(false);
     });
   }
 
@@ -95,36 +95,43 @@ export class ApplicantsComponent implements OnInit {
     this.open(content);
   }
 
+  structureData(data = []) {
+    console.log(data);
+    if (data)
+      return data.map((item) => {
+        return {
+          ...item,
+          image: `<img src='${
+            item.imageUrl || 'assets/images/user.png'
+          }' class='img-30 mr-2'>`,
+          memberSince: item.memberSince
+            ? moment(item.memberSince).format('YYYY-MM-DD')
+            : '---',
+        };
+      });
+  }
+
   fetchSellers() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}&accountStatus=0`;
     this.sellerService
       .getFilteredSellerCustomer('sellers', query)
-      .map((dt) => {
-        return {
-          ...dt,
-          body: dt.body.map((item) => {
-            return {
-              ...item,
-              image: `<img src='${
-                item.imageUrl || 'assets/images/user.png'
-              }' class='img-30 mr-2'>`,
-              memberSince: item.memberSince
-                ? moment(item.memberSince).format('YYYY-MM-DD')
-                : '---',
-            };
-          }),
-        };
-      })
+      // .map((dt) => {
+      //   return {
+      //     ...dt,
+      //     body: ,
+      //   };
+      // })
       .subscribe(
         (res) => {
           console.log(res);
           if (res) {
-            this.cs.isLoading.next(false);
+            this.sellers = this.structureData(res.body || []);
+            let paginate = JSON.parse(res.headers.get('X-Pagination'));
+            if (paginate) this.pagination = paginate;
             this.loading = false;
-            this.sellers = res.body;
-            this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+            this.cs.isLoading.next(false);
           }
         }
         //  ,err => {
