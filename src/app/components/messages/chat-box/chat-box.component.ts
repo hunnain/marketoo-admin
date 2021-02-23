@@ -1,34 +1,50 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-chat-box',
   templateUrl: './chat-box.component.html',
-  styleUrls: ['./chat-box.component.scss'],
+  styleUrls: ['./chat-box.component.scss']
 })
 export class ChatBoxComponent implements OnInit {
-  @Input() user: any = {};
-  @Input() messages: Array<object> = [];
+  @ViewChild('scrollMe') scrollMe: ElementRef;
+  scrolltop: number = null;
+
+  @Input() user: any = {}
+  @Input() loading: boolean = false
+  @Input() messages: Array<object> = []
+  @Input() onlineUsers: Array<any> = [];
 
   @Output() sendMsg = new EventEmitter<any>();
 
-  constructor() {}
-  imgs = [];
-  ngOnInit() {}
-  readUrl(event: any) {
-    if (event.target.files.length === 0) return;
-    //Image upload validation
-    var mimeType = event.target.files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      return;
-    }
-    // Image upload
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (_event) => {
-      let img = reader.result.toString();
-      // let base = reader.result.toString();
-      console.log(img);
-      this.imgs.push(img);
-    };
+  public msg: string = "";
+
+  constructor() { }
+
+  ngOnInit() {
   }
+
+  sendMessage() {
+    console.log('💻', this.msg);
+    if (this.msg.trim()) {
+      this.sendMsg.emit(this.msg);
+      this.msg = "";
+    }
+  }
+
+  userStatus(userId) {
+    // console.log('💻', userId, this.onlineUsers, this.onlineUsers.includes(userId));
+    if (this.onlineUsers.length && this.onlineUsers.includes(userId)) {
+      return true;
+    }
+    return false;
+  }
+
+  get onScroll() {
+    if (this.scrollMe && this.scrollMe.nativeElement) {
+      this.scrolltop = this.scrollMe.nativeElement.scrollHeight;
+    }
+
+    return this.scrolltop;
+  }
+
 }

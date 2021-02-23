@@ -34,10 +34,16 @@
   <div class="p-l-30 p-r-30">
     <div class="chat-box">
       <div class="people-list friend-list">
-        <ul class="list">
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+          *ngIf="loading"
+        >
+          <app-loader [loading]="loading"></app-loader>
+        </div>
+        <ul class="list" *ngIf="isSeller">
           <li
             class="clearfix"
-            *ngFor="let user of users"
+            *ngFor="let user of sellers"
             (click)="onUserClick(user)"
             style="cursor: pointer"
           >
@@ -50,6 +56,35 @@
             <div class="about">
               <div class="name">{{ user.name }}</div>
               <div class="status">{{ user.status }}</div>
+            </div>
+          </li>
+          <li class="clearfix" *ngIf="!loading && sellers.length == 0">
+            <div class="about">
+              <div class="name">No seller available</div>
+            </div>
+          </li>
+        </ul>
+        <ul class="list" *ngIf="!isSeller">
+          <li
+            class="clearfix"
+            *ngFor="let user of customers"
+            (click)="onUserClick(user)"
+            style="cursor: pointer"
+          >
+            <img
+              class="rounded-circle user-image blur-up lazyloaded"
+              [src]="user.img"
+              alt=""
+            />
+            <div class="status-circle online"></div>
+            <div class="about">
+              <div class="name">{{ user.name }}</div>
+              <div class="status">{{ user.status }}</div>
+            </div>
+          </li>
+          <li class="clearfix" *ngIf="!loading && customers.length == 0">
+            <div class="about">
+              <div class="name">No customer available</div>
             </div>
           </li>
         </ul>

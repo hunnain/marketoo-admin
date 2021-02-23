@@ -59,6 +59,8 @@ import { ProductTabViewComponent } from './components/product-tab-view/product-t
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     NgSelect2Module,
     FeatherIconsComponent,
     NgbModule,
@@ -77,4 +79,4 @@ import { ProductTabViewComponent } from './components/product-tab-view/product-t
     ImageCropperModule,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }
