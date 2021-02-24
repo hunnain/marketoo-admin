@@ -122,6 +122,10 @@
 
   "create_Store_Credit": "Create Store Credit",
   "coupon_duedate": "Due Date",
+  "coupon_start_date": "Start Date",
+  "coupon_end_date": "End Date",
+  "coupon_amount": "Amount",
+  "coupon_quantity": "Quantity",
   "coupon_title": "Title",
   "coupon_code": "Code",
   "coupon_code_discount": "Discount",
@@ -764,5 +768,10 @@
 
   "not_all_sellers": "All Sellers",
   "not_all_customers": "All Customers",
-  "not_spread_all": "Spread All"
+  "not_spread_all": "Spread All",
+
+  "not_send_to": "Send To",
+  "not_content": "Content",
+  "not_created_date": "Created At",
+  "not_preview": "Preview"
 }
