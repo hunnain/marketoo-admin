@@ -545,13 +545,23 @@
       <div style="margin: 10px 0px">
         <div class="row form-inline">
           <label class="col-12 col-sm-4">Add Tracking Details</label>
-          <input class="form-control col-12 col-sm-5" id="size" type="text" />
+          <input
+            class="form-control col-12 col-sm-5"
+            id="size"
+            type="text"
+            [(ngModel)]="trackingDetails"
+          />
         </div>
       </div>
       <div style="margin: 10px 0px">
         <div class="row form-inline">
           <label class="col-12 col-sm-4">Add Shipping Cost</label>
-          <input class="form-control col-12 col-sm-5" id="size" type="text" />
+          <input
+            class="form-control col-12 col-sm-5"
+            id="size"
+            type="text"
+            [(ngModel)]="shippingCost"
+          />
         </div>
       </div>
     </div>
@@ -561,7 +571,7 @@
         [loading]="loading"
         [disabled]="loading"
         [btnText]="'Update'"
-        (onSubmit)="updateStatus()"
+        (onSubmit)="updateShippingMethodStatus()"
       ></app-button>
     </div>
   </div>

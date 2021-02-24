@@ -99,6 +99,7 @@ export class ProductTabViewComponent implements OnInit {
         }
       );
   }
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -228,7 +229,7 @@ export class ProductTabViewComponent implements OnInit {
     this.pagination['CurrentPage'] = this.pagination.CurrentPage + 1;
     this.getTabData();
   }
-  
+
   onEdit(id) {
     console.log(id);
     this.onEditCard.emit(id);
@@ -244,8 +245,10 @@ export class ProductTabViewComponent implements OnInit {
 
   onReject() {
     // console.log(id);
+    this.loading = true;
     this.onRejectCard.emit({ id: this.rejectId, reason: this.reason });
     setTimeout(() => {
+      this.modalService.dismissAll('close');
       this.getTabData();
       this.rejectId = null;
     }, 3000);

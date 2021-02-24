@@ -13,7 +13,8 @@
                 [icon]="'users'"
                 class="font-danger"
               ></app-feather-icons
-              >&nbsp; {{ sellers.length }} {{ "sc_sellers" | translate }}
+              >&nbsp; {{ pagination?.TotalCount }}
+              {{ "sc_sellers" | translate }}
             </h4>
             <app-button
               [btnType]="'submit'"
@@ -74,6 +75,7 @@
 
         <div class="card-body">
           <input
+            *ngIf="!loading"
             style="width: auto; margin: 20px 0px"
             type="text"
             class="filter-ngx form-control"
@@ -123,7 +125,7 @@
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'sc_shop_url' | translate }}"
-                prop="member_since"
+                prop="designHallUrl"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'sc_seller_code' | translate }}"

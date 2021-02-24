@@ -54,6 +54,8 @@ export class OrderDetailComponent implements OnInit {
   public fetching: boolean = false;
   public blast_notification: boolean = false;
   public seller_id: string = '';
+  public shippingCost = '';
+  public trackingDetails = '';
   constructor(
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute,
@@ -172,5 +174,22 @@ export class OrderDetailComponent implements OnInit {
 
   onUpdatePaymentStatus() {
     console.log(this.payStatus, 'Payment Status');
+  }
+
+  updateShippingMethodStatus() {
+    let obj = {
+      orderId: this.orderId,
+      CourierService: '',
+      IsMarketooAccount: false,
+      shippingCost: this.shippingCost,
+      trackingDetails: this.trackingDetails,
+    };
+    console.log(obj);
+
+    this.loading = true;
+    this.orderService.updateShippingMethod(obj).subscribe((res) => {
+      console.log(res);
+      this.loading = false;
+    });
   }
 }

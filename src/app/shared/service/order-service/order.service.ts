@@ -26,4 +26,11 @@ export class OrderService {
   updateOrder(id, data) {
     return this.commonService.put(`order/${id}`, data);
   }
+
+  updatePaymentStatus(id, data) {
+    return this.commonService.put(`order/${id}`, data);
+  }
+  updateShippingMethod(data) {
+    return this.commonService.post(`order/update-shipping-details`, data);
+  }
 }

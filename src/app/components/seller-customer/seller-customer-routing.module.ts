@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewDetailComponent } from './view-detail/view-detail.component';
-import { SellerCustomerComponent } from './seller-customer/seller-customer.component';
 import { SellerComponent } from './seller/seller.component';
 import { CustomerComponent } from './customer/customer.component';
 // import { ProductListComponent } from '../products/physical/product-list/product-list.component';

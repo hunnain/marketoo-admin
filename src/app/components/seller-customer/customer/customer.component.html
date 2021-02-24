@@ -12,7 +12,8 @@
               [icon]="'users'"
               class="font-danger"
             ></app-feather-icons
-            >&nbsp; {{ customers.length }} {{ "sc_customers" | translate }}
+            >&nbsp; {{ pagination?.TotalCount }}
+            {{ "sc_customers" | translate }}
           </h4>
           <div>
             <button type="button" class="btn btn-custom mr-1">
@@ -49,21 +50,21 @@
                 </button>
               </div>
             </div>
-            <button type="button" class="btn btn-custom mr-1">
+            <!-- <button type="button" class="btn btn-custom mr-1">
               <app-feather-icons
                 [icon]="'globe'"
                 class="font-danger"
               ></app-feather-icons>
-            </button>
+            </button> -->
           </div>
         </div>
         <div class="card-body">
           <input
-          style="width: auto; margin: 20px 0px"
+            style="width: auto; margin: 20px 0px"
             type="text"
             class="filter-ngx form-control"
             placeholder="Search..."
-            (keyup)="updateFilter($event)"
+            [formControl]="searchTerm"
           />
           <div
             style="display: flex; align-items: center; justify-content: center"

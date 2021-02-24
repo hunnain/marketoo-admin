@@ -101,39 +101,18 @@ export class SellerComponent implements OnInit {
       });
     this.sellerService
       .getFilteredSellerCustomer('sellers', query)
-      // .map((dt) => {
-      //   return {
-      //     ...dt,
-      //     body: dt.body.map((item) => {
-      //       return {
-      //         ...item,
-      //         image: `<img src='${
-      //           item.imageUrl || 'assets/images/user.png'
-      //         }' class='img-30 mr-2'>`,
-      //         memberSince: item.memberSince
-      //           ? moment(item.memberSince).format('YYYY-MM-DD')
-      //           : '---',
-      //       };
-      //     }),
-      //   };
-      // })
-      .subscribe(
-        (res) => {
-          console.log(res);
-          if (res) {
-            this.cs.isLoading.next(false);
-            this.sellers = this.structureData(res.body || []);
-            let paginate = JSON.parse(res.headers.get('X-Pagination'));
-            if (paginate) {
-              this.pagination = paginate;
-            }
+      .subscribe((res) => {
+        console.log(res);
+        if (res) {
+          this.cs.isLoading.next(false);
+          this.sellers = this.structureData(res.body || []);
+          let paginate = JSON.parse(res.headers.get('X-Pagination'));
+          if (paginate) {
+            this.pagination = paginate;
           }
-          this.loading = false;
         }
-        //  ,err => {
-        //   this.loading = false;
-        //  }
-      );
+        this.loading = false;
+      });
   }
 
   onSelectRow(row, dt) {

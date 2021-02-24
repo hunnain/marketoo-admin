@@ -66,7 +66,7 @@ export class ListReimbursementComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.fetchReimbursements();
+    this.fetchReimbursements();
   }
 
   pageEvent(data) {
@@ -79,7 +79,7 @@ export class ListReimbursementComponent implements OnInit {
   fetchReimbursements() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
-    let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+    let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}&accountStatus=2`;
     this.reimbursementService.getReimbursement(query).subscribe(
       (res) => {
         if (res) {

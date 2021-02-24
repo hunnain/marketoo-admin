@@ -221,22 +221,16 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">{{ "dash_amount" | translate }}</th>
-                <!-- <th scope="col">Other Deductions</th>
-                <th scope="col">Returns</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">{{ "dash_trans_mang_fee" | translate }}</th>
-                <td>$80</td>
-                <!-- <td>Otto</td>
-                <td>@mdo</td> -->
+              <tr *ngFor="let item of dashboardDetails | keyvalue">
+                <th scope="row">{{ getKey(item.key) | translate }}</th>
+                <td>{{ item.value }}</td>
               </tr>
               <tr>
                 <th scope="row">{{ "dash_online_payment" | translate }}</th>
                 <td>$16</td>
-                <!-- <td>Thornton</td>
-                <td>@fat</td> -->
               </tr>
               <tr>
                 <th scope="row">{{ "dash_shipment_cost" | translate }}</th>

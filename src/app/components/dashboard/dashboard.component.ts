@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DashboardService } from 'src/app/shared/service/dashboard/dashboard.service';
 import * as chartData from '../../shared/data/chart';
 import { doughnutData, pieData } from '../../shared/data/chart';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   public doughnutData = doughnutData;
   public pieData = pieData;
-  constructor(private translate: TranslateService) {
-    Object.assign(this, { doughnutData, pieData })
+  constructor(
+    private translate: TranslateService,
+    private dashboardService: DashboardService
+  ) {
+    Object.assign(this, { doughnutData, pieData });
   }
 
   // doughnut 2
@@ -23,7 +27,6 @@ export class DashboardComponent implements OnInit {
   public doughnutChartTooltip = chartData.doughnutChartTooltip;
 
   public chart5 = chartData.chart5;
-
 
   // lineChart
   public lineChartData = chartData.lineChartData;
@@ -67,15 +70,23 @@ export class DashboardComponent implements OnInit {
 
   public chart3 = chartData.chart3;
 
-
-
   // events
-  public chartClicked(e: any): void {
-  }
-  public chartHovered(e: any): void {
-  }
-
+  public chartClicked(e: any): void {}
+  public chartHovered(e: any): void {}
+  dashboardDetails = {};
   ngOnInit() {
+    this.fetchData();
   }
 
+  fetchData() {
+    this.dashboardService.getDashboardData().subscribe((res) => {
+      this.dashboardDetails = res.body || {};
+      console.log(res);
+    });
+  }
+
+  getKey(key = '') {
+    let tempKey = key.match(/[A-Z][a-z]+/g).join(' ');
+    return tempKey;
+  }
 }

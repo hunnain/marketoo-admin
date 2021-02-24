@@ -46,19 +46,44 @@
     <div class="row product-page-main card-body">
       <div class="col-xl-8">
         <div class="title-style">
-          {{ "sd_online_payment_fee" | translate }} :
+          {{ "sd_online_payment_fee" | translate }} :{{
+            details.onlinePaymentFee
+          }}
         </div>
         <div class="title-style">
-          {{ "sd_transaction_management_fee" | translate }} :
+          {{ "sd_transaction_management_fee" | translate }} :{{
+            details.transactionsManagementFee
+          }}
         </div>
-        <div class="title-style">{{ "sd_shipment_used" | translate }} :</div>
-        <div class="title-style">{{ "sd_refund_amount" | translate }} :</div>
-        <div class="title-style">{{ "sd_return_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_exchange_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_cancelled_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_total_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_delivered_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_performance" | translate }} :</div>
+        <div class="title-style">
+          {{ "sd_shipment_used" | translate }} :{{ details.onlinePaymentFee }}
+        </div>
+        <div class="title-style">
+          {{ "sd_refund_amount" | translate }} :{{ details.refund }}
+        </div>
+        <div class="title-style">
+          {{ "sd_return_orders" | translate }} :{{ details.onlinePaymentFee }}
+        </div>
+        <div class="title-style">
+          {{ "sd_exchange_orders" | translate }}
+          :{{ details.onlinePaymentFee }}
+        </div>
+        <div class="title-style">
+          {{ "sd_cancelled_orders" | translate }} :{{
+            details.totalCancelledOrders
+          }}
+        </div>
+        <div class="title-style">
+          {{ "sd_total_orders" | translate }} :{{ details.totalOrders }}
+        </div>
+        <div class="title-style">
+          {{ "sd_delivered_orders" | translate }} :{{
+            details.totalDeliveredOrders
+          }}
+        </div>
+        <div class="title-style">
+          {{ "sd_performance" | translate }} :{{ details.onlinePaymentFee }}
+        </div>
       </div>
       <div class="col-xl-4"></div>
       <button type="button" class="btn btn-primary" (click)="gotoProducts()">

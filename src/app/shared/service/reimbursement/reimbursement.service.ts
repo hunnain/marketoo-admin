@@ -2,18 +2,20 @@ import { Injectable } from '@angular/core';
 import { CommonService } from '../common.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReimbursementService {
-
-  constructor(private commonService: CommonService) { }
+  constructor(private commonService: CommonService) {}
 
   getReimbursement(query) {
-    return this.commonService.get(`reimbursement/GetReimbursementBySeller?${query}`);
+    let prefix = 'seller';
+    return this.commonService.get(`admin/get-all-${prefix}?${query}`);
   }
 
   getReimbursementByCode(code) {
-    return this.commonService.get(`reimbursement/GetReimbursementByCode/${code}`);
+    return this.commonService.get(
+      `reimbursement/GetReimbursementByCode/${code}`
+    );
   }
 
   addReimbursement(data) {
