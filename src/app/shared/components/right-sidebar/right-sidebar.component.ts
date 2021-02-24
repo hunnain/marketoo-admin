@@ -18,57 +18,57 @@ export class RightSidebarComponent implements OnInit {
   public customers: Array<any> = []
   constructor() { }
 
-  public users = [
-    {
-      id: 1,
-      img: 'assets/images/dashboard/user.png',
-      name: 'Vincent Porter',
-      role: 'customer',
-      status: 'Online',
-    },
-    {
-      id: 2,
-      img: 'assets/images/dashboard/user1.jpg',
-      name: 'Ain Chavez',
-      role: 'customer',
-      status: '28 minutes ago',
-    },
-    {
-      id: 3,
-      img: 'assets/images/dashboard/user2.jpg',
-      name: 'Kori Thomas',
-      role: 'seller',
-      status: 'Online',
-    },
-    {
-      id: 4,
-      img: 'assets/images/dashboard/user3.jpg',
-      name: 'Erica Hughes',
-      role: 'seller',
-      status: 'Online',
-    },
-    {
-      id: 5,
-      img: 'assets/images/dashboard/man.png',
-      name: 'Ginger Johnston',
-      role: 'seller',
-      status: '2 minutes ago',
-    },
-    {
-      id: 6,
-      img: 'assets/images/dashboard/user5.jpg',
-      name: 'Prasanth Anand',
-      role: 'seller',
-      status: '2 hour ago',
-    },
-    {
-      id: 7,
-      img: 'assets/images/dashboard/designer.jpg',
-      name: 'Hileri Jecno',
-      role: 'customer',
-      status: 'Online',
-    },
-  ];
+  // public users = [
+  //   {
+  //     id: 1,
+  //     img: 'assets/images/dashboard/user.png',
+  //     name: 'Vincent Porter',
+  //     role: 'customer',
+  //     status: 'Online',
+  //   },
+  //   {
+  //     id: 2,
+  //     img: 'assets/images/dashboard/user1.jpg',
+  //     name: 'Ain Chavez',
+  //     role: 'customer',
+  //     status: '28 minutes ago',
+  //   },
+  //   {
+  //     id: 3,
+  //     img: 'assets/images/dashboard/user2.jpg',
+  //     name: 'Kori Thomas',
+  //     role: 'seller',
+  //     status: 'Online',
+  //   },
+  //   {
+  //     id: 4,
+  //     img: 'assets/images/dashboard/user3.jpg',
+  //     name: 'Erica Hughes',
+  //     role: 'seller',
+  //     status: 'Online',
+  //   },
+  //   {
+  //     id: 5,
+  //     img: 'assets/images/dashboard/man.png',
+  //     name: 'Ginger Johnston',
+  //     role: 'seller',
+  //     status: '2 minutes ago',
+  //   },
+  //   {
+  //     id: 6,
+  //     img: 'assets/images/dashboard/user5.jpg',
+  //     name: 'Prasanth Anand',
+  //     role: 'seller',
+  //     status: '2 hour ago',
+  //   },
+  //   {
+  //     id: 7,
+  //     img: 'assets/images/dashboard/designer.jpg',
+  //     name: 'Hileri Jecno',
+  //     role: 'customer',
+  //     status: 'Online',
+  //   },
+  // ];
 
 
 

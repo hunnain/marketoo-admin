@@ -369,21 +369,21 @@
         >
           {{ (isEdit ? "cop_update" : "cop_create") | translate }}
         </button> -->
-        <app-button
+        <!-- <app-button
           *ngIf="isEdit"
           [btnType]="'submit'"
           [loading]="loading"
           btnText="{{ 'cop_back' | translate }}"
           (onSubmit)="gotoCreateCoupon()"
-        ></app-button>
-        <!-- <button
+        ></app-button> -->
+        <button
           *ngIf="isEdit"
           type="button"
           class="btn btn-danger ml-1"
           [routerLink]="'/coupons/list-coupons'"
         >
           Back
-        </button> -->
+        </button>
       </div>
     </div>
   </div>

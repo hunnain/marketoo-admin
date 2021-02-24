@@ -49,13 +49,16 @@
           >
             <img
               class="rounded-circle user-image blur-up lazyloaded"
-              [src]="user.img"
+              [src]="user.imageUrl ? user.imageUrl : 'assets/images/team/1.jpg'"
               alt=""
             />
-            <div class="status-circle online"></div>
+            <div
+              class="status-circle offline"
+              [ngClass]="{ online: userStatus(user.senderId) }"
+            ></div>
             <div class="about">
-              <div class="name">{{ user.name }}</div>
-              <div class="status">{{ user.status }}</div>
+              <div class="name">{{ user?.name }}</div>
+              <div class="status">{{ user?.status }}</div>
             </div>
           </li>
           <li class="clearfix" *ngIf="!loading && sellers.length == 0">
@@ -73,13 +76,16 @@
           >
             <img
               class="rounded-circle user-image blur-up lazyloaded"
-              [src]="user.img"
+              [src]="user.imageUrl ? user.imageUrl : 'assets/images/team/1.jpg'"
               alt=""
             />
-            <div class="status-circle online"></div>
+            <div
+              class="status-circle offline"
+              [ngClass]="{ online: userStatus(user.senderId) }"
+            ></div>
             <div class="about">
-              <div class="name">{{ user.name }}</div>
-              <div class="status">{{ user.status }}</div>
+              <div class="name">{{ user?.name }}</div>
+              <div class="status">{{ user?.status }}</div>
             </div>
           </li>
           <li class="clearfix" *ngIf="!loading && customers.length == 0">

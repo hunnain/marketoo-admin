@@ -121,8 +121,8 @@ export class CreateCouponComponent implements OnInit {
           startDate: this.formatDate(startDate, true),
           endDate: this.formatDate(endDate, true),
         };
-        this.generalForm.setValue(general);
-        this.restrictionForm.setValue(rest);
+        this.generalForm.patchValue(general);
+        this.restrictionForm.patchValue(rest);
         console.log(
           'general form invalid',
           this.generalForm.invalid,
@@ -164,15 +164,15 @@ export class CreateCouponComponent implements OnInit {
       // extendedSubCategory: [''],
       minSpend: [''],
       // maxSpend: [''],
-      perLimit: [''],
-      perCustomer: [''],
+      // perLimit: [''],
+      // perCustomer: [''],
       sendTo: ['', Validators.required],
       usageLimit: ['1'],
       notifyRecivers: [false],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   createCoupon() {
     console.log('general form', this.generalForm.value);
