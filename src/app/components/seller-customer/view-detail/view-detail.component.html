@@ -45,44 +45,70 @@
 
     <div class="row product-page-main card-body">
       <div class="col-xl-8">
-        <div class="title-style">
-          {{ "sd_online_payment_fee" | translate }} :{{
-            details.onlinePaymentFee
-          }}
+        <h3 class="product-title">
+          {{ "sd_payment" | translate }}
+        </h3>
+        <hr />
+        <div class="font-size-15">
+          <strong>{{ "sd_online_payment_fee" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_transaction_management_fee" | translate }} :{{
-            details.transactionsManagementFee
-          }}
+
+        <div class="font-size-15">
+          <strong> {{ "sd_transaction_management_fee" | translate }}:</strong>
+          {{ details.transactionsManagementFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_shipment_used" | translate }} :{{ details.onlinePaymentFee }}
+
+        <div class="font-size-15">
+          <strong> {{ "sd_refund_amount" | translate }}:</strong>
+          {{ details.refund }}
         </div>
-        <div class="title-style">
-          {{ "sd_refund_amount" | translate }} :{{ details.refund }}
+        <div class="font-size-15">
+          <strong>{{ "sd_shipment_used" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_return_orders" | translate }} :{{ details.onlinePaymentFee }}
+        <div class="font-size-15">
+          <strong>{{ "sd_performance" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_exchange_orders" | translate }}
-          :{{ details.onlinePaymentFee }}
+        <hr />
+        <h3 class="product-title">
+          {{ "sd_coupon" | translate }}
+        </h3>
+        <hr />
+        <div class="font-size-15">
+          <strong>{{ "sd_coupons" | translate }}:</strong> {{ details.coupons }}
         </div>
-        <div class="title-style">
-          {{ "sd_cancelled_orders" | translate }} :{{
-            details.totalCancelledOrders
-          }}
+
+        <div class="font-size-15">
+          <strong> {{ "sd_store_credit" | translate }}:</strong>
+          {{ details.storeCredit }}
         </div>
-        <div class="title-style">
-          {{ "sd_total_orders" | translate }} :{{ details.totalOrders }}
+        <hr />
+        <h3 class="product-title">
+          {{ "sd_orders" | translate }}
+        </h3>
+        <hr />
+        <div class="font-size-15">
+          <strong>{{ "sd_return_orders" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_delivered_orders" | translate }} :{{
-            details.totalDeliveredOrders
-          }}
+
+        <div class="font-size-15">
+          <strong>{{ "sd_exchange_orders" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_performance" | translate }} :{{ details.onlinePaymentFee }}
+        <div class="font-size-15">
+          <strong>{{ "sd_cancelled_orders" | translate }}:</strong>
+          {{ details.totalCancelledOrders }}
+        </div>
+        <div class="font-size-15">
+          <strong>{{ "sd_total_orders" | translate }}:</strong>
+          {{ details.totalOrders }}
+        </div>
+        <div class="font-size-15">
+          <strong> {{ "sd_delivered_orders" | translate }}:</strong>
+          {{ details.totalDeliveredOrders }}
         </div>
       </div>
       <div class="col-xl-4"></div>

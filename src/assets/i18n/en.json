@@ -700,9 +700,16 @@
   "sd_new_signups_customer": "New Sign-ups (Customers)",
   "sd_new_signups_sellers": "New Sign-ups (Sellers)",
 
+  "sd_payment": "Payment",
+  "sd_orders": "Order",
+
+  "sd_coupon": "Coupon",
+  "sd_coupons": "Coupons",
+  "sd_store_credit": "Store Credit",
+
   "customer_filter_none": "None",
   "customer_filter_username": "Username",
-  "customer_filter_customerId": "CustomerId",
+  "customer_filter_customerId": "Customer Id",
   "customer_filter_email": "Email",
 
   "r_heading": "Reimbursement",

@@ -8,8 +8,8 @@ export class ReimbursementService {
   constructor(private commonService: CommonService) {}
 
   getReimbursement(query) {
-    let prefix = 'seller';
-    return this.commonService.get(`admin/get-all-${prefix}?${query}`);
+    let prefix = 'sellers';
+    return this.commonService.get(`admin/get-filtered-${prefix}?${query}`);
   }
 
   getReimbursementByCode(code) {

@@ -13,12 +13,12 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <input
+            <!-- <input
               type="text"
               class="filter-ngx form-control"
               placeholder="{{ 'r_search' | translate }}..."
               (keyup)="updateFilter($event)"
-            />
+            /> -->
             <ngx-datatable
               class="bootstrap"
               [rows]="reimbursrments"
@@ -28,28 +28,36 @@
               [rowHeight]="'auto'"
             >
               <ngx-datatable-column
-                name="{{ 'r_seller_icon' | translate }}"
+                name="{{ 'sc_profile' | translate }}"
                 prop="image"
-              ></ngx-datatable-column>
-              <ngx-datatable-column
-                name="{{ 'r_name' | translate }}"
-                prop="name"
               >
-                <!-- <ng-template
-                  let-row="row"
-                  let-value="value"
-                  ngx-datatable-cell-template
-                >
-                  {{ getProductsName(value) }}
-                </ng-template> -->
               </ngx-datatable-column>
+              <!-- <ngx-datatable-column
+            name="{{ 'sc_username' | translate }}"
+            prop="username"
+          >
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span style="color: #f88379; cursor: pointer">
+                {{ row.username + row.name }}
+                <!-- <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
+              </span>
+            </ng-template>
+          </ngx-datatable-column> -->
               <ngx-datatable-column
-                name="{{ 'r_shop_url' | translate }}"
-                prop="url"
+                name="{{ 'sc_name' | translate }}"
+                prop="englishFname"
               ></ngx-datatable-column>
               <ngx-datatable-column
-                name="{{ 'r_seller_code' | translate }}"
-                prop="code"
+                name="{{ 'sc_member_since' | translate }}"
+                prop="memberSince"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'sc_shop_url' | translate }}"
+                prop="designHallUrl"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'sc_seller_code' | translate }}"
+                prop="sellerId"
               ></ngx-datatable-column>
               <ngx-datatable-column name="{{ 'r_upload_trans' | translate }}">
                 <ng-template
@@ -62,14 +70,14 @@
                   </span>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column
+              <!-- <ngx-datatable-column
                 name="{{ 'r_amount' | translate }}"
                 prop="amount"
-              ></ngx-datatable-column>
-              <ngx-datatable-column
+              ></ngx-datatable-column> -->
+              <!-- <ngx-datatable-column
                 name="{{ 'r_join_date' | translate }}"
                 prop="join_date"
-              ></ngx-datatable-column>
+              ></ngx-datatable-column> -->
               <ngx-datatable-column
                 name="{{ 'r_action' | translate }}"
                 prpp="action"

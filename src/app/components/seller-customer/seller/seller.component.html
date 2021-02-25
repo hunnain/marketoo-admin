@@ -52,7 +52,7 @@
               <div ngbDropdownMenu aria-labelledby="dropdownManual">
                 <button
                   *ngFor="let opt of filterOptions; let i = index"
-                  (click)="onSelectFilter(i)"
+                  (click)="!loading ? onSelectFilter(i) : null"
                   class="btn-custom drop"
                   ngbDropdownItem
                 >
@@ -74,8 +74,17 @@
         </div>
 
         <div class="card-body">
+          <div style="display: flex">
+            <div
+              class="chip"
+              *ngFor="let item of selectedFilter; let ind = index"
+              style="margin: 5px"
+            >
+              <span>{{ item | translate }}</span>
+              <i class="close fa fa-times" (click)="filterRemove(ind)"></i>
+            </div>
+          </div>
           <input
-            *ngIf="!loading"
             style="width: auto; margin: 20px 0px"
             type="text"
             class="filter-ngx form-control"

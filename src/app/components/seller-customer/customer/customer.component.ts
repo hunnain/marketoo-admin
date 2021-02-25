@@ -17,12 +17,12 @@ export class CustomerComponent implements OnInit {
   public temp = [];
   public loading = false;
   public filterOptions = [
-    'customer_filter_none',
+    // 'customer_filter_none',
     'customer_filter_username',
     'customer_filter_customerId',
     'customer_filter_email',
   ];
-  selectedFilter = '';
+  selectedFilter = [];
   searchTerm = new FormControl();
   formCtrlSub;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
@@ -48,9 +48,9 @@ export class CustomerComponent implements OnInit {
     this.formCtrlSub = this.searchTerm.valueChanges
       .debounceTime(2000)
       .subscribe((newValue) => {
-        this.fetchSellers();
+        this.fetchCustomers();
       });
-    this.fetchSellers();
+    this.fetchCustomers();
   }
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
@@ -59,24 +59,34 @@ export class CustomerComponent implements OnInit {
   }
 
   onSelectFilter(filter) {
-    this.selectedFilter = this.filterOptions[filter].split('_')[2];
+    let temp = this.filterOptions[filter];
+    console.log(temp);
+    if (!this.selectedFilter.includes(temp)) this.selectedFilter.push(temp);
+  }
+  filterRemove(index) {
+    console.log(index);
+    this.selectedFilter.splice(index, 1);
+  }
+
+  getKey(key) {
+    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
+    console.log(tempKey);
+    return tempKey;
   }
 
   ngOnDestroy() {
     this.formCtrlSub.unsubscribe();
   }
 
-  fetchSellers() {
+  fetchCustomers() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
-
-    query =
-      query +
-      '&' +
-      generateUrl({
-        [this.selectedFilter]: this.searchTerm.value,
-      });
+    let filters = {};
+    this.selectedFilter.forEach((key) => {
+      filters[this.getKey(key)] = this.searchTerm;
+    });
+    query = query + '&' + generateUrl(filters);
     this.customerService
       .getFilteredSellerCustomer('customers', query)
       .subscribe(
@@ -123,6 +133,6 @@ export class CustomerComponent implements OnInit {
     console.log(data);
     this.pagination.PageSize = data.pageSize;
     this.pagination.CurrentPage = data.pageIndex + 1;
-    this.fetchSellers();
+    this.fetchCustomers();
   }
 }

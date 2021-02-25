@@ -32,7 +32,7 @@ export class ListReimbursementComponent implements OnInit {
     public translate: TranslateService,
     private cs: CommonService
   ) {
-    this.reimbursrments = reimbursementDB.list_return;
+    // this.reimbursrments = reimbursementDB.list_return;
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;
     });
@@ -50,6 +50,7 @@ export class ListReimbursementComponent implements OnInit {
   }
   onSelectRow(data) {
     console.log(data);
+    
   }
   updateFilter(event) {
     const val = event.target.value.toLowerCase();

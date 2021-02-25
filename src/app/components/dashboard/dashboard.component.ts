@@ -87,6 +87,7 @@ export class DashboardComponent implements OnInit {
 
   getKey(key = '') {
     let tempKey = key.match(/[A-Z][a-z]+/g).join(' ');
+    
     return tempKey;
   }
 }

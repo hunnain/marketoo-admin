@@ -3,3 +3,13 @@
   border: none !important;
   outline: none !important;
 }
+
+.chip {
+  background: gainsboro;
+  align-items: center;
+  justify-content: space-evenly;
+  display: flex;
+  width: max-content;
+  padding: 4px 8px;
+  border-radius: 15px;
+}
