@@ -461,6 +461,7 @@
   "cop_per_customer": "每用戶",
   "cop_create": "增設",
   "cop_update": "更新",
+  "cop_back": "背部",
 
   "csc": "新增積分",
   "csc_send_amount": "發放⾦額",
@@ -649,6 +650,7 @@
   "sc_email": "電子郵件",
   "sc_member_since": "會員自",
   "sc_shop_url": "SHOP URL",
+  "sc_design_hall_url": "Design Hall URL",
   "sc_seller_code": "SELLER CODE",
   "sc_membership": "會員資格",
   "sc_country": "國家",

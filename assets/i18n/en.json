@@ -454,6 +454,8 @@
   "cop_notify_recivers": "Notify Recivers",
   "cop_per_customer": "Per Customer",
   "cop_create": "CREATE",
+  "cop_update": "UPDATE",
+  "cop_back": "Back",
 
   "csc": "Create Store Credit",
   "csc_send_amount": "Send Amount",
@@ -653,6 +655,7 @@
   "sc_email": "Email",
   "sc_member_since": "MEMBER SINCE",
   "sc_shop_url": "SHOP URL",
+  "sc_design_hall_url": "Design Hall URL",
   "sc_seller_code": "SELLER Code",
   "sc_membership": "MEMBERSHIPS",
   "sc_country": "COUNTRY",
