@@ -73,7 +73,37 @@ export class DashboardComponent implements OnInit {
   // events
   public chartClicked(e: any): void {}
   public chartHovered(e: any): void {}
-  dashboardDetails = {};
+  dashboardDetails = {
+    adminCouponsAmt: 0,
+    averageBasketValue: 0,
+    averageBasketValueCompareDesc: '0% Increase',
+    averageBasketValueLastMonth: 0,
+    customerSignUpsCompareDesc: '0% Decrease',
+    customerSignUpsLastMonth: 0,
+    newCustomerSignUps: 0,
+    newSellerSignUps: 0,
+    onlinePaymentFee: 0,
+    referredSellerAmount: 0,
+    sellerSignUpsCompareDesc: '0% Increase',
+    sellerSignUpsLastMonth: 0,
+    sellersCouponsAmt: 0,
+    shippingViaMarketooAccount: 0,
+    shippingViaOwnAccount: 0,
+    storeCreditsAdm: 0,
+    storeCreditsSeller: 0,
+    totalActiveProducts: 0,
+    totalCancelledOrders: 0,
+    totalDeliveredOrders: 0,
+    totalOrders: 0,
+    totalRefundedOrders: 0,
+    totalRevenue: 0,
+    totalRevenueCompareDesc: '100% Increase',
+    totalRevenueLastMonth: 0,
+    totalSubscriptions: 3,
+    totalTransactionsAmt: 0,
+    transactionsManagementFee: 0,
+  };
+  loading = true;
   ngOnInit() {
     this.fetchData();
   }
@@ -81,13 +111,14 @@ export class DashboardComponent implements OnInit {
   fetchData() {
     this.dashboardService.getDashboardData().subscribe((res) => {
       this.dashboardDetails = res.body || {};
+      this.loading = false;
       console.log(res);
     });
   }
 
   getKey(key = '') {
     let tempKey = key.match(/[A-Z][a-z]+/g).join(' ');
-    
+
     return tempKey;
   }
 }

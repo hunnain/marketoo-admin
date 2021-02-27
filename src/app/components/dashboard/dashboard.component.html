@@ -20,7 +20,7 @@
               <h3 class="mb-0">
                 $
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
-                  dashboardDetails.totalTransactionsAmt
+                  dashboardDetails?.totalTransactionsAmt
                 }}</span
                 ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
@@ -47,7 +47,7 @@
               }}</span>
               <h3 class="mb-0">
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
-                  dashboardDetails.totalActiveProducts
+                  dashboardDetails?.totalActiveProducts
                 }}</span
                 ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
@@ -72,7 +72,7 @@
               <span class="m-0">{{ "dash_sign_customer" | translate }}</span>
               <h3 class="mb-0">
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
-                  dashboardDetails.newCustomerSignUps
+                  dashboardDetails?.newCustomerSignUps
                 }}</span
                 ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
@@ -97,7 +97,7 @@
               <span class="m-0">{{ "dash_sign_seller" | translate }}</span>
               <h3 class="mb-0">
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
-                  dashboardDetails.newSellerSignUps
+                  dashboardDetails?.newSellerSignUps
                 }}</span
                 ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
