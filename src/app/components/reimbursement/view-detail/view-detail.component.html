@@ -3,21 +3,21 @@
     <div class="detail-header">
       <div class="sub-header-1">
         <h3 style="margin-bottom: 0px">
-          {{ "sd_seller_detail" | translate }}
+          {{ "sd_reim_detail" | translate }}
         </h3>
       </div>
       <div class="sub-header-2">
-        <app-button
+        <!-- <app-button
           [btnType]="'submit'"
           [loading]="loading"
           [disabled]="loading"
           [btnText]="'Deny'"
           (onSubmit)="updateStatus(1)"
-        ></app-button>
+        ></app-button> -->
         <!-- <button type="button" class="btn btn-primary" (click)="updateStatus(1)">
           Deny
         </button> -->
-        <div style="margin-left: 10px">
+        <!-- <div style="margin-left: 10px">
           <app-button
             [btnType]="'submit'"
             [loading]="loading"
@@ -25,13 +25,7 @@
             [btnText]="'Approved'"
             (onSubmit)="updateStatus(2)"
           ></app-button>
-          <!-- <button
-            type="button"
-            class="btn btn-primary"
-            (click)="updateStatus('2')"
-          >
-            Approved
-          </button> -->
+         
           <div class="checkbox checkbox-primary">
             <input
               id="checkbox-primary-1"
@@ -44,27 +38,78 @@
               Blast Email
             </label>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <hr />
 
     <div class="row product-page-main card-body">
       <div class="col-xl-8">
-        <div class="title-style">
-          {{ "sd_online_payment_fee" | translate }} :
+        <h3 class="product-title">
+          {{ "sd_payment" | translate }}
+        </h3>
+        <hr />
+        <div class="font-size-15">
+          <strong>{{ "sd_online_payment_fee" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
         </div>
-        <div class="title-style">
-          {{ "sd_transaction_management_fee" | translate }} :
+
+        <div class="font-size-15">
+          <strong> {{ "sd_transaction_management_fee" | translate }}:</strong>
+          {{ details.transactionsManagementFee }}
         </div>
-        <div class="title-style">{{ "sd_shipment_used" | translate }} :</div>
-        <div class="title-style">{{ "sd_refund_amount" | translate }} :</div>
-        <div class="title-style">{{ "sd_return_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_exchange_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_cancelled_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_total_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_delivered_orders" | translate }} :</div>
-        <div class="title-style">{{ "sd_performance" | translate }} :</div>
+
+        <div class="font-size-15">
+          <strong> {{ "sd_refund_amount" | translate }}:</strong>
+          {{ details.refund }}
+        </div>
+        <div class="font-size-15">
+          <strong>{{ "sd_shipment_used" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
+        </div>
+        <div class="font-size-15">
+          <strong>{{ "sd_performance" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
+        </div>
+        <hr />
+        <h3 class="product-title">
+          {{ "sd_coupon" | translate }}
+        </h3>
+        <hr />
+        <div class="font-size-15">
+          <strong>{{ "sd_coupons" | translate }}:</strong> {{ details.coupons }}
+        </div>
+
+        <div class="font-size-15">
+          <strong> {{ "sd_store_credit" | translate }}:</strong>
+          {{ details.storeCredit }}
+        </div>
+        <hr />
+        <h3 class="product-title">
+          {{ "sd_orders" | translate }}
+        </h3>
+        <hr />
+        <div class="font-size-15">
+          <strong>{{ "sd_return_orders" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
+        </div>
+
+        <div class="font-size-15">
+          <strong>{{ "sd_exchange_orders" | translate }}:</strong>
+          {{ details.onlinePaymentFee }}
+        </div>
+        <div class="font-size-15">
+          <strong>{{ "sd_cancelled_orders" | translate }}:</strong>
+          {{ details.totalCancelledOrders }}
+        </div>
+        <div class="font-size-15">
+          <strong>{{ "sd_total_orders" | translate }}:</strong>
+          {{ details.totalOrders }}
+        </div>
+        <div class="font-size-15">
+          <strong> {{ "sd_delivered_orders" | translate }}:</strong>
+          {{ details.totalDeliveredOrders }}
+        </div>
       </div>
       <div class="col-xl-4"></div>
       <!-- <button type="button" class="btn btn-primary" (click)="gotoProducts()">

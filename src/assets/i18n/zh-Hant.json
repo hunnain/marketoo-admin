@@ -664,6 +664,7 @@
   "seller_filter_sellerId": "Seller Id",
   "seller_filter_designHallUrl": "Design Hall Url",
 
+  "sd_reim_detail": "Reimbursement Details",
   "sd_seller_detail": "Seller Details",
   "sd_transaction_management_fee": "Transaction Management Fee",
   "sd_online_payment_fee": "Online Payment Fee",
@@ -697,6 +698,7 @@
   "sd_coupon": "Coupon",
   "sd_coupons": "Coupons",
   "sd_store_credit": "Store Credit",
+  "sd_products": "Products",
 
   "customer_filter_none": "None",
   "customer_filter_username": "用戶名",

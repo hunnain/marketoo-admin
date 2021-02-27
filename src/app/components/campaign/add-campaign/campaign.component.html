@@ -15,6 +15,13 @@
         />
       </div>
       <br />
+      <dropzone
+        [config]="config"
+        [message]="'Click or drag images here to upload'"
+        (error)="onUploadError($event)"
+        (success)="onUploadSuccess($event)"
+      ></dropzone>
+      <br />
       <div style="background: white">
         <app-text-editor
           [(text)]="template"
@@ -46,13 +53,20 @@
           <div>
             <div style="justify-content: flex-end; display: flex">
               <!-- <button type="button" class="btn btn-primary">Save Draft</button> -->
-              <button
+              <!-- <button
                 type="button"
                 class="btn btn-primary"
                 (click)="onViewTemplate(TemplateModal)"
               >
                 preview
-              </button>
+              </button> -->
+              <app-button
+                [btnType]="'submit'"
+                [loading]="false"
+                [disabled]="!template"
+                [btnText]="'Preview'"
+                (onSubmit)="onViewTemplate(TemplateModal)"
+              ></app-button>
             </div>
             <br />
             <div style="align-items: center; display: flex">

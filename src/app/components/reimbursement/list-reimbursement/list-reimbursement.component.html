@@ -19,6 +19,7 @@
               placeholder="{{ 'r_search' | translate }}..."
               (keyup)="updateFilter($event)"
             /> -->
+
             <ngx-datatable
               class="bootstrap"
               [rows]="reimbursrments"
@@ -29,7 +30,7 @@
             >
               <ngx-datatable-column
                 name="{{ 'sc_profile' | translate }}"
-                prop="image"
+                prop="imageUrl"
               >
               </ngx-datatable-column>
               <!-- <ngx-datatable-column

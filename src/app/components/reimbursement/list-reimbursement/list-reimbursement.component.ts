@@ -7,6 +7,7 @@ import { AllReimbursements } from '../../../shared/interfaces/reimbursement/reim
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { reimbursementDB } from '../../../shared/tables/reimbursementDB';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import * as moment from 'moment';
 @Component({
   selector: 'app-list-reimbursement',
   templateUrl: './list-reimbursement.component.html',
@@ -40,7 +41,7 @@ export class ListReimbursementComponent implements OnInit {
 
   onViewDetail(data) {
     console.log(data);
-    let route = `reimbursment/view-detail/${data.id}`;
+    let route = `reimbursement/view-detail/${data.sellerId}`;
     this.router.navigate([route]);
   }
 
@@ -50,7 +51,6 @@ export class ListReimbursementComponent implements OnInit {
   }
   onSelectRow(data) {
     console.log(data);
-    
   }
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
@@ -86,9 +86,10 @@ export class ListReimbursementComponent implements OnInit {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.reimbursrments = res.body;
+          this.reimbursrments = this.structureData(res.body || []);
           console.log('reimbursement-res', res.headers.get('x-pagination'));
-          this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          let paginate = JSON.parse(res.headers.get('X-Pagination'));
+          if (paginate) this.pagination = paginate;
           console.log('pagination', this.pagination);
         }
       }
@@ -96,6 +97,22 @@ export class ListReimbursementComponent implements OnInit {
       //   this.loading = false;
       //  }
     );
+  }
+
+  structureData(data = []) {
+    console.log(data);
+    if (data)
+      return data.map((item) => {
+        return {
+          ...item,
+          imageUrl: `<img src='${
+            item.imageUrl || 'assets/images/user.png'
+          }' class='img-30 mr-2'>`,
+          memberSince: item.memberSince
+            ? moment(item.memberSince).format('YYYY-MM-DD')
+            : '---',
+        };
+      });
   }
 
   onEdit(val) {

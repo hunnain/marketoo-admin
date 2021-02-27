@@ -26,8 +26,22 @@ export class ViewDetailComponent implements OnInit {
   public blast_notification: boolean = false;
 
   public id = '';
-  public prefix = '';
-  details = {};
+  public prefix = 'seller';
+  details = {
+    coupons: 0,
+    onlinePaymentFee: 0,
+    rating: 4,
+    referrelDeduction: 0,
+    refund: 0,
+    shippingViaMarketooAccount: 0,
+    shippingViaOwnAccount: 0,
+    storeCredit: 80,
+    totalCancelledOrders: 0,
+    totalDeliveredOrders: 0,
+    totalOrders: 12,
+    totalRefundedOrders: 0,
+    transactionsManagementFee: 0,
+  };
   public selectedLang: string = 'en';
   constructor(
     private modalService: NgbModal,
@@ -47,7 +61,7 @@ export class ViewDetailComponent implements OnInit {
     // console.log(this.activeRoute.url['value'][0].path);
 
     if (this.activeRoute.params['value'].id) {
-      this.prefix = this.activeRoute.url['value'][0].path;
+      // this.prefix = this.activeRoute.url['value'][0].path;
       this.id = this.activeRoute.params['value'].id;
       this.fetchById(this.id);
     }
@@ -83,21 +97,17 @@ export class ViewDetailComponent implements OnInit {
       // console.log(res);
       if (res) {
         console.log('fetch res---', res.body);
-        this.details = res.body;
+        this.details = res.body || {};
         this.cs.isLoading.next(false);
         // this.fetching = false;
       }
     });
   }
 
-  
-
   updateStatus(status) {
     this.approveReject(status);
     // this.modalService.dismissAll('save button clicked');
   }
-
-  
 
   //FileUpload
   // readUrlSizeImg(event: any) {

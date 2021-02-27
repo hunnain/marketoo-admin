@@ -5,7 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CampaignService } from 'src/app/shared/service/campaign/campaign.service';
 import { CommonService } from 'src/app/shared/service/common.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-campaign-list',
   templateUrl: './campaign-list.component.html',
@@ -97,7 +97,7 @@ export class CampaignListComponent implements OnInit {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.campaigns = res.body || [];
+          this.campaigns = this.structureData(res.body || []);
           let data = JSON.parse(res.headers.get('X-Pagination'));
           if (data) {
             this.pagination = data;
@@ -109,6 +109,23 @@ export class CampaignListComponent implements OnInit {
       //  }
     );
   }
+
+  structureData(data = []) {
+    console.log(data);
+    if (data)
+      return data.map((item) => {
+        return {
+          ...item,
+          // imageUrl: `<img src='${
+          //   item.imageUrl || 'assets/images/user.png'
+          // }' class='img-30 mr-2'>`,
+          creationDate: item.creationDate
+            ? moment(item.creationDate).format('YYYY-MM-DD')
+            : '---',
+        };
+      });
+  }
+
   onViewTemplate(row, content) {
     this.selectedRow = row;
     this.open(content);

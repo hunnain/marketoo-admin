@@ -34,10 +34,7 @@
               [limit]="5"
             >
               <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
-              <ngx-datatable-column
-                name="{{ 'campaign_image' | translate }}"
-                prop="image"
-              ></ngx-datatable-column>
+
               <ngx-datatable-column
                 name="{{ 'campaign_name' | translate }}"
                 prop="name"
@@ -46,7 +43,10 @@
                 name="{{ 'campaign_status' | translate }}"
                 prop="status"
               ></ngx-datatable-column>
-
+              <ngx-datatable-column
+                name="{{ 'campaign_image' | translate }}"
+                prop="creationDate"
+              ></ngx-datatable-column>
               <!-- <ngx-datatable-column
                 name="{{ 'campaign_text' | translate }}"
                 prop="text"

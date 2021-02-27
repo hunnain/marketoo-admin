@@ -111,10 +111,15 @@
           {{ details.totalDeliveredOrders }}
         </div>
       </div>
-      <div class="col-xl-4"></div>
-      <button type="button" class="btn btn-primary" (click)="gotoProducts()">
-        Products
-      </button>
+    </div>
+    <div style="display: flex; text-align: end">
+      <app-button
+        [btnType]="'submit'"
+        [loading]="false"
+        [disabled]="loading"
+        btnText="{{ 'sd_products' | translate }}"
+        (onSubmit)="gotoProducts()"
+      ></app-button>
     </div>
   </div>
 </div>

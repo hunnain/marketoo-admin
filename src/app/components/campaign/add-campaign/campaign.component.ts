@@ -80,13 +80,13 @@ export class CampaignComponent implements OnInit {
   }
 
   handleChange(data, key) {
-    console.log(data, key);
+    // console.log(data, key);
     this.template = data;
     // console.log(this.updateObj);
   }
 
   onAddCampaign() {
-    console.log(this.name, this.template);
+    // console.log(this.name, this.template);
     this.loading = true;
     this.campaignService
       .createCampaign({
@@ -101,6 +101,7 @@ export class CampaignComponent implements OnInit {
       });
   }
   onViewTemplate(content) {
+    // console.log(this.template);
     this.open(content);
   }
 }
