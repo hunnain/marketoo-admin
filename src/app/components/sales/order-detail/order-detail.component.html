@@ -226,7 +226,7 @@
                       {{ prod?.name | titlecase }}
                     </div>
                     <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
-                      ${{ prod?.size }}
+                      {{ prod?.size }}
                     </div>
                     <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
                       ${{ prod?.unitAmount }}
@@ -315,8 +315,8 @@
             <div style="margin-top: 20px" class="font-size-13">
               <strong>{{
                 "ordermanagement_ordercustomersummarydate" | translate
-              }}</strong
-              >:---
+              }}</strong>
+              :&nbsp; &nbsp; {{ formetDate(order?.creationDate) }}
               <!-- {{ formatDate(order.creationDate) }} -->
             </div>
             <div style="margin-top: 20px" class="font-size-13">
@@ -693,7 +693,7 @@
 
 <ng-template #MessageModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
     <button
       type="button"
       class="close"

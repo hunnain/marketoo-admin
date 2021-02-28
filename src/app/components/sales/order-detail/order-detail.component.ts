@@ -207,4 +207,9 @@ export class OrderDetailComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  formetDate(date) {
+    let formatedDate = moment(date).format('DD-MM-YYYY');
+    return formatedDate;
+  }
 }

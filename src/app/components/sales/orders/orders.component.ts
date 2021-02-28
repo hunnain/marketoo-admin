@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -7,6 +8,7 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { OrderService } from 'src/app/shared/service/order-service/order.service';
 import { generateUrl } from 'src/app/shared/utilities';
+import 'rxjs/add/operator/debounceTime';
 import { orderDB } from '../../../shared/tables/order-list';
 @Component({
   selector: 'app-orders',
@@ -25,7 +27,8 @@ export class OrdersComponent implements OnInit {
     'order_filter_paymentStatus',
   ];
   selectedFilter = 'orderId';
-  searchTerm = '';
+  searchTerm = new FormControl();
+  formCtrlSub;
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
@@ -60,7 +63,7 @@ export class OrdersComponent implements OnInit {
       query +
       '&' +
       generateUrl({
-        [this.selectedFilter]: this.searchTerm,
+        [this.selectedFilter]: this.searchTerm.value,
       });
     this.orderService.getFilteredOrders(query).subscribe(
       (res) => {
@@ -87,6 +90,11 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formCtrlSub = this.searchTerm.valueChanges
+      .debounceTime(2000)
+      .subscribe((newValue) => {
+        this.fetchOrders();
+      });
     this.fetchOrders();
   }
 
@@ -115,5 +123,9 @@ export class OrdersComponent implements OnInit {
       return products.map((prod) => prod.name).join(',');
     }
     return 'N/A';
+  }
+
+  ngOnDestroy() {
+    this.formCtrlSub.unsubscribe();
   }
 }
