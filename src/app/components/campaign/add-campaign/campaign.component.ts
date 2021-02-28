@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { CampaignService } from 'src/app/shared/service/campaign/campaign.service';
 import { CommonService } from 'src/app/shared/service/common.service';
 
@@ -104,4 +105,18 @@ export class CampaignComponent implements OnInit {
     // console.log(this.template);
     this.open(content);
   }
+  public config: DropzoneConfigInterface = {
+    clickable: true,
+    maxFiles: 1,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    autoProcessQueue: false,
+    autoQueue: false,
+    addRemoveLinks: true,
+  };
+
+  public onUploadError(args: any): void {}
+
+  public onUploadSuccess(args: any): void {}
 }

@@ -50,18 +50,33 @@
                 </div>
                 <div class="font-size-13">
                   <strong>{{
+                    "ordermanagement_ordercustomeremail" | translate
+                  }}</strong
+                  >:
+                  {{ order?.customer?.email || "---" }}
+                </div>
+              </div>
+              <div class="payment-section" style="margin-top: 20px">
+                <div class="font-size-13">
+                  <strong>{{
                     "ordermanagement_ordercustomercontactno" | translate
                   }}</strong
                   >:
                   {{ order?.customer?.phoneNumber || "---" }}
                 </div>
+                <div class="font-size-13">
+                  <strong>{{
+                    "ordermanagement_ordercustomeraddress" | translate
+                  }}</strong
+                  >: {{ order?.customer?.address || "---" }}
+                </div>
               </div>
-              <div style="margin-top: 20px" class="font-size-13">
+              <!-- <div style="margin-top: 20px" class="font-size-13">
                 <strong>{{
                   "ordermanagement_ordercustomeraddress" | translate
                 }}</strong
                 >: {{ order?.customer?.address || "---" }}
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -159,14 +174,19 @@
               <ul>
                 <li class="mb-2">
                   <div class="row align-items-center">
-                    <div class="col-2 col-sm-4 col-md-2">
+                    <!-- <div class="col-2 col-sm-4 col-md-2">
                       <strong>
                         {{ "prod_image" | translate }}
                       </strong>
-                    </div>
+                    </div> -->
                     <div class="col-4 col-sm-4 col-md-4">
                       <strong>
                         {{ "prod_name" | translate }}
+                      </strong>
+                    </div>
+                    <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
+                      <strong>
+                        {{ "prod_item_size" | translate }}
                       </strong>
                     </div>
                     <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
@@ -192,7 +212,7 @@
                   *ngFor="let prod of order?.orderedProductDetails"
                 >
                   <div class="row align-items-center">
-                    <div class="prod_img col-2 col-sm-4 col-md-2">
+                    <!-- <div class="prod_img col-2 col-sm-4 col-md-2">
                       <img
                         [src]="
                           prod.src
@@ -201,15 +221,18 @@
                         "
                         class="img-30 mr-2"
                       />
-                    </div>
+                    </div> -->
                     <div class="prod_name col-4 col-sm-4 col-md-4">
                       {{ prod?.name | titlecase }}
+                    </div>
+                    <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
+                      ${{ prod?.size }}
                     </div>
                     <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
                       ${{ prod?.unitAmount }}
                     </div>
                     <div class="prod_qty col-2 col-sm-4 col-md-2">
-                      {{ prod?.qty }}
+                      {{ prod?.quantity }}
                     </div>
                     <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
                       ${{ prod?.totalAmount }}
@@ -729,7 +752,7 @@
         [(ngModel)]="payStatus"
         name="payStatus"
       >
-        <option *ngFor="let opt of statusEnums; let i = index" [value]="i">
+        <option *ngFor="let opt of paymentEnums; let i = index" [value]="i">
           {{ opt | translate }}
         </option>
       </select>

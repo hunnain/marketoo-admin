@@ -6,6 +6,7 @@ import { CustomerComponent } from './customer/customer.component';
 // import { ProductListComponent } from '../products/physical/product-list/product-list.component';
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
+import { SignUpComponent } from './sign-up-data-view/sign-up-data-view.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,14 @@ const routes: Routes = [
         data: {
           title: 'View Detail',
           breadcrumb: 'View Detail',
+        },
+      },
+      {
+        path: 'seller/new-applicant/:id/form',
+        component: SignUpComponent,
+        data: {
+          title: 'Form View',
+          breadcrumb: 'Form View',
         },
       },
       {

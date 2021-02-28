@@ -13,6 +13,7 @@ import { SellerComponent } from './seller/seller.component';
 import { CustomerComponent } from './customer/customer.component';
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
+import { SignUpComponent } from './sign-up-data-view/sign-up-data-view.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ApplicantsComponent } from './applicants/applicants.component';
     CustomerComponent,
     SellerProductsComponent,
     ApplicantsComponent,
+    SignUpComponent,
   ],
   imports: [
     CommonModule,

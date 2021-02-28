@@ -20,3 +20,4 @@ export const OrderStatusEnum = [
   'OrderConfirmed',
   'Cancelled',
 ];
+export const PaymentStatusEnum = ['Paid', 'Unpaid', 'Refunded'];

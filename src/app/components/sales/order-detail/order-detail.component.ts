@@ -7,7 +7,10 @@ import { OrderService } from 'src/app/shared/service/order-service/order.service
 import { CommonService } from 'src/app/shared/service/common.service';
 import { Order } from 'src/app/shared/interfaces/order';
 import * as moment from 'moment';
-import { OrderStatusEnum } from 'src/app/enums/order-status';
+import {
+  OrderStatusEnum,
+  PaymentStatusEnum,
+} from 'src/app/enums/order-details';
 
 @Component({
   selector: 'app-order-detail',
@@ -50,6 +53,7 @@ export class OrderDetailComponent implements OnInit {
     total: 54671,
   };
   public statusEnums;
+  public paymentEnums;
   public orderId: string;
   public fetching: boolean = false;
   public blast_notification: boolean = false;
@@ -64,6 +68,7 @@ export class OrderDetailComponent implements OnInit {
     private cs: CommonService
   ) {
     this.statusEnums = OrderStatusEnum;
+    this.paymentEnums = PaymentStatusEnum;
     // this.status = this.dummyData.order_status;
     if (this.activeRoute.params['value'].id) {
       this.orderId = this.activeRoute.params['value'].id;
@@ -174,6 +179,16 @@ export class OrderDetailComponent implements OnInit {
 
   onUpdatePaymentStatus() {
     console.log(this.payStatus, 'Payment Status');
+    this.loading = true;
+    this.orderService
+      .updatePaymentStatus(this.orderId, this.payStatus)
+      .subscribe((res) => {
+        console.log(res);
+        this.order['paymentStatus'] = this.paymentEnums[this.payStatus];
+        this.payStatus = null;
+        this.loading = false;
+        this.modalService.dismissAll('update');
+      });
   }
 
   updateShippingMethodStatus() {

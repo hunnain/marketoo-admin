@@ -92,7 +92,9 @@ export class ApplicantsComponent implements OnInit {
 
   openFormModal(row, content) {
     this.fetchById(row.sellerId);
-    this.open(content);
+    let route = `seller/new-applicant/${row.sellerId}/form`;
+    this.router.navigate([route]);
+    // this.open(content);
   }
 
   structureData(data = []) {

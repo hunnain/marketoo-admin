@@ -153,6 +153,7 @@
   "ordersmanagement_orderid": "訂單編號",
   "ordersmanagement_orderby": "排序依据",
   "ordersmanagement_invoice_no": "Invoice #",
+  "ordersmanagement_product_name": "Product",
   "ordersmanagement_paymentstatus": "付款狀態",
   "ordersmanagement_orderstatus": "訂單狀態",
   "ordersmanagement_orderdate": "日期",
@@ -169,6 +170,7 @@
   "ordermanagement_orderinvoice": "收據",
   "ordermanagement_ordercustomer": "客人",
   "ordermanagement_ordercustomername": "名字",
+  "ordermanagement_ordercustomeremail": "Email",
   "ordermanagement_ordercustomercontactno": "聯絡電話",
   "ordermanagement_ordercustomeraddress": "地址",
   "ordermanagement_ordercustomerpayment": "付款資料",
@@ -194,6 +196,7 @@
 
   "prod_image": "图片",
   "prod_Name": "名称",
+  "prod_item_size": "Size",
   "prod_unitAmount": "单位金额",
   "prod_qty": "数量",
   "prod_totalAmount": "总金额",
