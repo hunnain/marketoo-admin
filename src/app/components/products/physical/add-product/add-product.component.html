@@ -33,9 +33,14 @@
                       </li>
                     </ul>
                   </div>
-                  <!-- <div class="col-12">
-                                        <dropzone [config]="config" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
-                                    </div> -->
+                  <div class="col-12">
+                    <dropzone
+                      [config]="config"
+                      [message]="'Click or drag images here to upload'"
+                      (error)="onUploadError($event)"
+                      (success)="onUploadSuccess($event)"
+                    ></dropzone>
+                  </div>
                 </div>
               </div>
             </div>
@@ -519,7 +524,7 @@
                   </div>
                 </div>
               </form>
-              
+
               <div class="form-group row mb-0">
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                   <button

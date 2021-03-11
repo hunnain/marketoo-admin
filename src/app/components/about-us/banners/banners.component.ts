@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { BannerService } from 'src/app/shared/service/banner/banner.service';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-banners',
@@ -11,20 +13,53 @@ export class BannersComponent implements OnInit {
   @ViewChild('addBannerModal') addBannerModal: ElementRef;
   public closeResult: string;
   public loading: boolean = false;
+  public addMore: boolean = false;
+  public banners: [];
   public bannerImage;
   constructor(
     private modalService: NgbModal,
-    // private productService: ProductService,
+    private bannerService: BannerService,
     private translate: TranslateService
   ) {}
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.fetchBanners();
+  }
 
   saveBanner() {
     console.log('save');
   }
 
+  removeBase64(data) {
+    let base = data;
+    let splited = base.split('base64,');
+    let byteImg = splited[1];
+    return byteImg;
+  }
+
+  addBase64(data) {
+    let base = `data:image/jpeg;base64,${data}`;
+    return base;
+  }
+
+  addBanner() {
+    let data = {
+      IsActive: true,
+      BannerImage: this.removeBase64(this.bannerImage),
+    };
+    console.log(data);
+
+    this.loading = true;
+    this.bannerService.AddBanner(data).subscribe((res) => {
+      console.log(res);
+      this.modalService.dismissAll('close');
+      // this.loading = false;
+      this.fetchBanners();
+    });
+  }
+
   getCroppedImage(croppedImg) {
-    // console.log("crop image", croppedImg)
+    console.log('crop image', croppedImg);
     this.bannerImage = croppedImg;
   }
 
@@ -58,5 +93,23 @@ export class BannersComponent implements OnInit {
   }
   openAddModal() {
     this.open(this.addBannerModal);
+  }
+
+  fetchBanners() {
+    this.loading = true;
+    this.bannerService.getAllBanners().subscribe(
+      (res) => {
+        if (res) {
+          let noDataMsg = 'No Data Available';
+          // this.cs.isLoading.next(false);
+          this.loading = false;
+          this.banners = res.body || [];
+          this.addMore = this.banners.length < 4 ? true : false;
+        }
+      },
+      (err) => {
+        this.loading = false;
+      }
+    );
   }
 }

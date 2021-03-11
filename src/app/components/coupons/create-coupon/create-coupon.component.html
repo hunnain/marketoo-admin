@@ -351,6 +351,27 @@
               }}</label>
             </div> -->
           </div>
+
+          <div
+            class="form-group row"
+            *ngIf="restrictionForm.controls.sendTo.value == 'customer_code'"
+          >
+            <label
+              for="exampleFormControlSelect1"
+              class="col-xl-3 col-sm-4 mb-0"
+              >{{ "prod_select_color" | translate }}
+            </label>
+
+            <div class="col-xl-8 col-sm-7" style="padding-left: 0">
+              <ng-select2
+                [formControl]="restrictionForm.controls['customers']"
+                [data]="customersOptions"
+                [options]="customersConfig"
+                [width]="300"
+              >
+              </ng-select2>
+            </div>
+          </div>
         </form>
       </fieldset>
       <div class="pull-right" style="margin-top: 20px">

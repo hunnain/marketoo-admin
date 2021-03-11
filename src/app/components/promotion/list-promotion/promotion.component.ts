@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/shared/service/common.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { PromotionService } from 'src/app/shared/service/promotions/promotion.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { PathLocationStrategy } from '@angular/common';
 @Component({
   selector: 'app-promotion',
   templateUrl: './promotion.component.html',
@@ -135,7 +136,7 @@ export class PromotionComponent implements OnInit {
   }
   handleChange(data, key) {
     // console.log(data, key);
-    this.tempPromotion = data;
+    this[key] = data;
     // console.log(this.updateObj);
   }
 
@@ -191,18 +192,19 @@ export class PromotionComponent implements OnInit {
     this.editable = !this.editable;
   }
   onUpdate() {
-    // console.log(this.privacyPolicies, '55555');
-    // this.loading = true;
-    // this.aboutUsService.updateAboutUs({ ...this.updateObj }).subscribe(
-    //   (res) => {
-    //     this.setData(res);
-    //     this.editable = false;
-    //     this.cs.isLoading.next(false);
-    //     this.loading = false;
-    //   },
-    //   (err) => {
-    //     this.loading = false;
-    //   }
-    // );
+    console.log(this.promotionText, '55555');
+    this.loading = true;
+    this.promotionService
+      .updatePromotion({ promotion: this.promotionText })
+      .subscribe(
+        (res) => {
+          this.editable = false;
+          this.cs.isLoading.next(false);
+          this.loading = false;
+        },
+        (err) => {
+          this.loading = false;
+        }
+      );
   }
 }

@@ -76,12 +76,6 @@ export class SellerComponent implements OnInit {
     this.selectedFilter.splice(index, 1);
   }
 
-  getKey(key) {
-    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
-    console.log(tempKey);
-    return tempKey;
-  }
-
   ngOnDestroy() {
     this.formCtrlSub.unsubscribe();
   }
@@ -102,15 +96,34 @@ export class SellerComponent implements OnInit {
       });
   }
 
-  fetchSellers() {
-    const { PageSize, CurrentPage } = this.pagination;
-    this.loading = true;
+  getKey(key) {
+    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
+    console.log(tempKey);
+    return tempKey;
+  }
+  
+  generateUrlLocal(query) {
     let filters = {};
     this.selectedFilter.forEach((key) => {
       filters[this.getKey(key)] = this.searchTerm;
     });
+
+    let que = query;
+    if (query) que = query + '&' + generateUrl(filters);
+
+    return que;
+  }
+
+  fetchSellers() {
+    const { PageSize, CurrentPage } = this.pagination;
+    this.loading = true;
+    // let filters = {};
+    // this.selectedFilter.forEach((key) => {
+    //   filters[this.getKey(key)] = this.searchTerm;
+    // });
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}&accountStatus=2`;
-    query = query + '&' + generateUrl(filters);
+    query = this.generateUrlLocal(query);
+    // + '&' + generateUrl(filters);
     this.sellerService
       .getFilteredSellerCustomer('sellers', query)
       .subscribe((res) => {

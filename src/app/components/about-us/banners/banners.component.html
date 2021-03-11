@@ -8,6 +8,7 @@
         >
           <h5>{{ "ban_banners" | translate }}</h5>
           <button
+            *ngIf="addMore"
             type="button"
             [disabled]="loading"
             class="btn btn-primary"
@@ -18,7 +19,45 @@
           </button>
         </div>
         <div class="card-body">
-          <div><h4>No Banners Availble</h4></div>
+          <div
+            style="
+              display: grid;
+              grid-gap: 10px;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <!-- <div
+            style="display: flex; align-items: center; justify-content: center"
+          > -->
+            <app-loader [loading]="loading"></app-loader>
+            <!-- </div> -->
+            <div
+              style="
+                text-align: center;
+                border: dotted 1px #f88379;
+                border-radius: 10px;
+              "
+              *ngFor="let banner of banners"
+            >
+              <img
+                style="height: 250px; border-radius: 10px"
+                [src]="banner.bannerUrl"
+              />
+              <div
+                *ngIf="banner.isActive"
+                style="color: green; font-weight: 600"
+              >
+                Active
+              </div>
+              <div
+                *ngIf="!banner.isActive"
+                style="color: red; font-weight: 600"
+              >
+                Deactive
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -62,7 +101,7 @@
       type="button"
       [disabled]="loading"
       class="btn btn-primary"
-      (click)="saveBanner()"
+      (click)="addBanner()"
     >
       {{ "ban_add_banner" | translate }}
       <!-- {{ "prod_discard" | translate }} -->

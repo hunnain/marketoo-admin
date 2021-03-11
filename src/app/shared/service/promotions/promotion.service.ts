@@ -12,6 +12,6 @@ export class PromotionService {
 
   // update returnExchange status
   updatePromotion(data) {
-    return this.commonService.post(`common/update-promotion`, data);
+    return this.commonService.post(`admin/update-promotions`, data);
   }
 }

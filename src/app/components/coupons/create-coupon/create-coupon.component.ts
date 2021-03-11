@@ -8,8 +8,11 @@ import {
   NgbDatepickerConfig,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { Select2OptionData } from 'ng-select2';
+import { Options } from 'select2';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
+import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 import {
   ExtendedCategories,
   MainCategories,
@@ -45,6 +48,8 @@ export class CreateCouponComponent implements OnInit {
   public offerOptions = OfferToOptions(this.selectedLang);
   public subCategories = SubCategories;
   public extendedCategories = ExtendedCategories;
+  public customersOptions: Array<Select2OptionData>;
+  public customersConfig: Options;
 
   get send_to() {
     return this.restrictionForm.get('category');
@@ -68,7 +73,8 @@ export class CreateCouponComponent implements OnInit {
     private calendar: NgbCalendar,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private customerService: SellerCustomerService
   ) {
     this.createGeneralForm();
     this.createRestrictionForm();
@@ -88,6 +94,12 @@ export class CreateCouponComponent implements OnInit {
       this.loading = loading;
       this.fetching = loading;
     });
+    this.customersConfig = {
+      multiple: true,
+      theme: 'classic',
+      closeOnSelect: false,
+      width: '100%',
+    };
   }
 
   fetchCouponByCode(code) {
@@ -167,12 +179,41 @@ export class CreateCouponComponent implements OnInit {
       // perLimit: [''],
       // perCustomer: [''],
       sendTo: ['', Validators.required],
+      customers: [''],
+
       usageLimit: ['1'],
       notifyRecivers: [false],
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchCustomers();
+  }
+
+  fetchCustomers() {
+    let query = ``;
+
+    this.customerService
+      .getSellerOrCustomer('customers', query)
+      .subscribe((res) => {
+        console.log(res);
+        if (res) {
+          this.cs.isLoading.next(false);
+          this.fetching = false;
+          this.customersOptions = this.generateOptions(res.body || []);
+        }
+      });
+  }
+
+  generateOptions(data) {
+    let options = [];
+    if (data.length)
+      data.forEach((dt) => {
+        let obj = { id: dt.customerId, text: dt.username };
+        options.push(obj);
+      });
+    return options;
+  }
 
   createCoupon() {
     console.log('general form', this.generalForm.value);
