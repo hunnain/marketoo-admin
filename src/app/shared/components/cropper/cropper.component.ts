@@ -20,6 +20,7 @@ import {
 })
 export class CropperComponent implements OnInit {
   @Input() roundCropper: boolean = false;
+  @Input() imageUrl: string = '';
   @Input() aspectRatio: number = 4 / 4;
   @Output() getImage: EventEmitter<any> = new EventEmitter();
 

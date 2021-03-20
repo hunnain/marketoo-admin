@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { BannerService } from 'src/app/shared/service/banner/banner.service';
@@ -16,6 +17,8 @@ export class BannersComponent implements OnInit {
   public addMore: boolean = false;
   public banners: [];
   public bannerImage;
+  public selectedBanner = null;
+  isActive = new FormControl();
   constructor(
     private modalService: NgbModal,
     private bannerService: BannerService,
@@ -23,6 +26,7 @@ export class BannersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isActive.setValue(true);
     this.fetchBanners();
   }
 
@@ -42,25 +46,48 @@ export class BannersComponent implements OnInit {
     return base;
   }
 
-  addBanner() {
+  addUpdateBanner() {
     let data = {
-      IsActive: true,
+      IsActive: this.isActive.value,
       BannerImage: this.removeBase64(this.bannerImage),
     };
     console.log(data);
 
     this.loading = true;
-    this.bannerService.AddBanner(data).subscribe((res) => {
-      console.log(res);
-      this.modalService.dismissAll('close');
-      // this.loading = false;
-      this.fetchBanners();
-    });
+    if (this.selectedBanner) {
+      this.bannerService
+        .updateBanner(this.selectedBanner.id, data)
+        .subscribe((res) => {
+          console.log(res);
+          this.closeModal();
+          // this.loading = false;
+          this.fetchBanners();
+        });
+    } else {
+      this.bannerService.AddBanner(data).subscribe((res) => {
+        console.log(res);
+        this.closeModal();
+        // this.loading = false;
+        this.fetchBanners();
+      });
+    }
   }
 
   getCroppedImage(croppedImg) {
     console.log('crop image', croppedImg);
     this.bannerImage = croppedImg;
+  }
+
+  onEdit(banner) {
+    console.log('Edit', banner);
+    this.selectedBanner = banner;
+    this.isActive.setValue(banner.isActive);
+    this.openAddModal();
+  }
+
+  onDelete(banner) {
+    console.log('Delete', banner);
+    this.deleteBanner(banner.id);
   }
 
   open(content) {
@@ -91,12 +118,19 @@ export class BannersComponent implements OnInit {
     // this.label = '';
     this.modalService.dismissAll('close');
   }
+
   openAddModal() {
     this.open(this.addBannerModal);
   }
 
+  closeModal() {
+    this.selectedBanner = null;
+    this.modalService.dismissAll('close');
+  }
+
   fetchBanners() {
     this.loading = true;
+    this.banners = [];
     this.bannerService.getAllBanners().subscribe(
       (res) => {
         if (res) {
@@ -104,7 +138,20 @@ export class BannersComponent implements OnInit {
           // this.cs.isLoading.next(false);
           this.loading = false;
           this.banners = res.body || [];
-          this.addMore = this.banners.length < 4 ? true : false;
+          this.addMore = this.banners.length < 3 ? true : false;
+        }
+      },
+      (err) => {
+        this.loading = false;
+      }
+    );
+  }
+
+  deleteBanner(id) {
+    this.bannerService.deleteBanner(id).subscribe(
+      (res) => {
+        if (res) {
+          this.fetchBanners();
         }
       },
       (err) => {

@@ -25,6 +25,7 @@
               grid-gap: 10px;
               align-items: center;
               justify-content: center;
+              text-align: center;
             "
           >
             <!-- <div
@@ -44,17 +45,49 @@
                 style="height: 250px; border-radius: 10px"
                 [src]="banner.bannerUrl"
               />
+
+              <hr />
               <div
-                *ngIf="banner.isActive"
-                style="color: green; font-weight: 600"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
               >
-                Active
-              </div>
-              <div
-                *ngIf="!banner.isActive"
-                style="color: red; font-weight: 600"
-              >
-                Deactive
+                <div style="padding: 0px 25px">
+                  <div
+                    [ngClass]="{
+                      'green-status-class': banner.isActive,
+                      'red-status-class': !banner.isActive
+                    }"
+                  >
+                    {{ banner.isActive ? "Active" : "In Active" }}
+                  </div>
+                  <!-- <div
+                    *ngIf="!banner.isActive"
+                    style="color: red; font-weight: 600"
+                  >
+                    Deactive
+                  </div> -->
+                </div>
+                <div>
+                  <button
+                    class="btn"
+                    type="button"
+                    title=""
+                    (click)="onEdit(banner)"
+                  >
+                    <i class="fa fa-pencil-square-o fa-lg"></i>
+                  </button>
+                  <button
+                    class="btn"
+                    type="button"
+                    title=""
+                    (click)="onDelete(banner)"
+                  >
+                    <i class="fa fa-trash-o fa-lg"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -69,7 +102,7 @@
 <ng-template #addBannerModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">
-      {{ "ban_add_banner" | translate }}
+      {{ (selectedBanner ? "Edit Banner" : "ban_add_banner") | translate }}
     </h5>
     <button
       type="button"
@@ -83,37 +116,57 @@
   <div class="modal-body">
     <div class="main-container" ngbAutofocus>
       <div>
+        <!-- <img
+          style="height: 250px; border-radius: 10px"
+          [src]="banner.bannerUrl"
+        /> -->
         <app-cropper
           [aspectRatio]="7 / 3"
+          [imageUrl]="selectedBanner ? selectedBanner.bannerUrl : ''"
           (getImage)="getCroppedImage($event)"
         ></app-cropper>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" style="justify-content: space-between">
     <!-- <app-button
       [loading]="submittingPic"
       [disabled]="!tempProfileImage"
       [btnText]="'save_announcement'"
       (onSubmit)="saveProfilePic()"
     ></app-button> -->
-    <button
-      type="button"
-      [disabled]="loading"
-      class="btn btn-primary"
-      (click)="addBanner()"
-    >
-      {{ "ban_add_banner" | translate }}
-      <!-- {{ "prod_discard" | translate }} -->
-    </button>
-    <button
-      class="btn btn-light"
-      type="button"
-      data-dismiss="modal"
-      (click)="modal.dismiss('Cross click')"
-    >
-      {{ "close" | translate }}
-    </button>
+
+    <div class="custom-control custom-switch">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="customSwitch1"
+        [formControl]="isActive"
+      />
+      <label class="custom-control-label" for="customSwitch1">{{
+        "Active" | translate
+      }}</label>
+    </div>
+    <div>
+      <button
+        type="button"
+        [disabled]="loading"
+        class="btn btn-primary"
+        (click)="addUpdateBanner()"
+      >
+        {{ (selectedBanner ? "Save Banner" : "ban_add_banner") | translate }}
+        <!-- {{ "prod_discard" | translate }} -->
+      </button>
+      <button
+        style="margin-left: 10px"
+        class="btn btn-light"
+        type="button"
+        data-dismiss="modal"
+        (click)="modal.dismiss('Cross click')"
+      >
+        {{ "close" | translate }}
+      </button>
+    </div>
   </div>
 </ng-template>
 <!-- Cropper Modal End -->
