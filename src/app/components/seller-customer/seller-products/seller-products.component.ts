@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { SellerCustomerService } from 'src/app/shared/service/seller-customer-service/seller-customer.service';
 
@@ -10,7 +10,8 @@ import { SellerCustomerService } from 'src/app/shared/service/seller-customer-se
 })
 export class SellerProductsComponent implements OnInit {
   loading: boolean = false;
-  tabsStructure =  [
+  sellerId = '';
+  tabsStructure = [
     {
       tab: 'Products',
       tabIcon: 'user',
@@ -40,11 +41,12 @@ export class SellerProductsComponent implements OnInit {
   constructor(
     private sellerService: SellerCustomerService,
     private cs: CommonService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {
-    let sellerId = this.activeRoute.params['value'].id;
-    if (sellerId) {
-      let url = `admin/get-products-by-seller/${sellerId}`;
+    this.sellerId = this.activeRoute.params['value'].id;
+    if (this.sellerId) {
+      let url = `admin/get-products-by-seller/${this.sellerId}`;
       this.tabsStructure[0].url = url;
       this.tabsStructure[1].url = url;
       this.tabsStructure[2].url = url;
@@ -90,6 +92,9 @@ export class SellerProductsComponent implements OnInit {
 
   onEdit(id) {
     console.log(id);
+    // seller/:id/product-list/:product_id
+    let route = `/sellers-customers/seller/${this.sellerId}/product-list/${id}`;
+    this.router.navigate([route]);
   }
   onApprove(id) {
     let temp = { productList: { [id]: 2 } };

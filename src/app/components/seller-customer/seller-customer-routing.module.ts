@@ -7,6 +7,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { SignUpComponent } from './sign-up-data-view/sign-up-data-view.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,14 @@ const routes: Routes = [
         component: SellerProductsComponent,
         data: {
           title: 'Products',
+          breadcrumb: 'Products',
+        },
+      },
+      {
+        path: 'seller/:id/product-list/:product_id',
+        component: ProductDetailComponent,
+        data: {
+          title: 'Product Detail',
           breadcrumb: 'Products',
         },
       },
