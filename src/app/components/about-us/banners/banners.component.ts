@@ -82,7 +82,7 @@ export class BannersComponent implements OnInit {
     console.log('Edit', banner);
     this.selectedBanner = banner;
     this.isActive.setValue(banner.isActive);
-    this.openAddModal();
+    this.open(this.addBannerModal);
   }
 
   onDelete(banner) {
@@ -120,6 +120,7 @@ export class BannersComponent implements OnInit {
   }
 
   openAddModal() {
+    this.selectedBanner = null;
     this.open(this.addBannerModal);
   }
 
