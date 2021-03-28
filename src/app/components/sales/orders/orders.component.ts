@@ -24,7 +24,7 @@ export class OrdersComponent implements OnInit {
     'order_filter_orderId',
     'order_filter_customerId',
     'order_filter_sellerId',
-    'order_filter_paymentStatus',
+    // 'order_filter_paymentStatus',
   ];
   selectedFilter = 'orderId';
   searchTerm = new FormControl();
@@ -59,11 +59,16 @@ export class OrdersComponent implements OnInit {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+    // console.log(this.searchTerm.value);
+
     query =
       query +
       '&' +
       generateUrl({
-        [this.selectedFilter]: this.searchTerm.value,
+        [this.selectedFilter]:
+          this.selectedFilter == 'orderId'
+            ? Number(this.searchTerm.value)
+            : this.searchTerm.value,
       });
     this.orderService.getFilteredOrders(query).subscribe(
       (res) => {

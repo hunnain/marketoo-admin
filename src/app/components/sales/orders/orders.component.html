@@ -46,6 +46,13 @@
           </div>
         </div>
         <div class="card-body">
+          <div style="display: flex">
+            <!-- *ngFor="let item of selectedFilter; let ind = index" -->
+            <div class="chip" style="margin: 5px">
+              <span>{{ selectedFilter | translate }}</span>
+              <!-- <i class="close fa fa-times"></i> -->
+            </div>
+          </div>
           <input
             style="width: auto; margin: 20px 0px"
             type="text"

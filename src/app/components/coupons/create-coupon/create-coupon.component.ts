@@ -209,7 +209,7 @@ export class CreateCouponComponent implements OnInit {
     let options = [];
     if (data.length)
       data.forEach((dt) => {
-        let obj = { id: dt.customerId, text: dt.username };
+        let obj = { id: dt.customerId, text: dt.customerId };
         options.push(obj);
       });
     return options;

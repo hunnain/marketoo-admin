@@ -26,6 +26,7 @@ import { CropperComponent } from './components/cropper/cropper.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ButtonComponent } from './components/button/button.component';
 import { ProductTabViewComponent } from './components/product-tab-view/product-tab-view.component';
+import { RatingComponent } from './components/rating/rating.component';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -42,6 +43,7 @@ import { ProductTabViewComponent } from './components/product-tab-view/product-t
     CropperComponent,
     ButtonComponent,
     ProductTabViewComponent,
+    RatingComponent,
   ],
   imports: [
     CommonModule,
@@ -76,7 +78,8 @@ import { ProductTabViewComponent } from './components/product-tab-view/product-t
     CropperComponent,
     ButtonComponent,
     ProductTabViewComponent,
+    RatingComponent,
     ImageCropperModule,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

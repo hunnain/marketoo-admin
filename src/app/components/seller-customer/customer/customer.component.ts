@@ -69,7 +69,7 @@ export class CustomerComponent implements OnInit {
   }
 
   getKey(key) {
-    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
+    let tempKey = key.split('_')[2];
     console.log(tempKey);
     return tempKey;
   }
@@ -77,16 +77,29 @@ export class CustomerComponent implements OnInit {
   ngOnDestroy() {
     this.formCtrlSub.unsubscribe();
   }
+  generateUrlLocal(query) {
+    let filters = {};
+    this.selectedFilter.forEach((key) => {
+      filters[this.getKey(key)] = this.searchTerm.value;
+    });
+
+    let que = query;
+    if (query) que = query + '&' + generateUrl(filters);
+    console.log(que);
+
+    return que;
+  }
 
   fetchCustomers() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
-    let filters = {};
-    this.selectedFilter.forEach((key) => {
-      filters[this.getKey(key)] = this.searchTerm;
-    });
-    query = query + '&' + generateUrl(filters);
+    // let filters = {};
+    // this.selectedFilter.forEach((key) => {
+    //   filters[this.getKey(key)] = this.searchTerm.value;
+    // });
+    // query = query + '&' + generateUrl(filters);
+    query = this.generateUrlLocal(query);
     this.customerService
       .getFilteredSellerCustomer('customers', query)
       .subscribe(

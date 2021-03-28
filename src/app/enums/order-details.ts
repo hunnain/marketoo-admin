@@ -12,9 +12,9 @@
 export const OrderStatusEnum = [
   'None',
   // ' Created',
-  ' Shipped',
-  ' Delivered',
-  ' ProcessingRefund',
+  'Shipped',
+  'Delivered',
+  'ProcessingRefund',
   'Refunded',
   'ConfirmingOrder',
   'OrderConfirmed',

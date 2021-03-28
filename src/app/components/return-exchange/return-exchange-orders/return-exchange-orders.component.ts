@@ -5,6 +5,8 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { ReturnExchangeService } from 'src/app/shared/service/return-exchange/return-exchange.service';
 import { returnDB } from '../../../shared/tables/return-list';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-return-exchange-orders',
   templateUrl: './return-exchange-orders.component.html',
@@ -38,6 +40,17 @@ export class ReturnExchanngeOrderComponent implements OnInit {
   onSelectRow(row) {
     let route = `/return-exchange/view-detail/${row.replace(/#/g, '')}`;
     this.router.navigate([route]);
+  }
+
+  getFormatDate(date) {
+    return moment(date).format('MMM DD,YY');
+  }
+
+  getProductsName(products) {
+    if (products && products.length) {
+      return products.map((prod) => prod.name).join(',');
+    }
+    return 'N/A';
   }
 
   onNotify(row) {

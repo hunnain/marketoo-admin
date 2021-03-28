@@ -7,6 +7,13 @@
         </h3>
       </div>
       <div class="sub-header-2">
+        <app-button
+          [btnType]="'submit'"
+          [loading]="false"
+          [disabled]="loading"
+          btnText="{{ 'sd_products' | translate }}"
+          (onSubmit)="gotoProducts()"
+        ></app-button>
         <!-- <app-button
           [btnType]="'submit'"
           [loading]="loading"
@@ -44,7 +51,13 @@
     <hr />
 
     <div class="row product-page-main card-body">
-      <div class="col-xl-8">
+      <div
+        class="col-xl-12"
+        style="display: flex; align-items: center; justify-content: center"
+      >
+        <app-loader [loading]="loading"></app-loader>
+      </div>
+      <div class="col-xl-8" *ngIf="!loading">
         <h3 class="product-title">
           {{ "sd_payment" | translate }}
         </h3>
@@ -112,15 +125,9 @@
         </div>
       </div>
     </div>
-    <div style="display: flex; justify-content: flex-end; margin: 10px">
-      <app-button
-        [btnType]="'submit'"
-        [loading]="false"
-        [disabled]="loading"
-        btnText="{{ 'sd_products' | translate }}"
-        (onSubmit)="gotoProducts()"
-      ></app-button>
-    </div>
+    <!-- <div style="display: flex; justify-content: flex-end; margin: 10px">
+      
+    </div> -->
   </div>
 </div>
 <!-- 

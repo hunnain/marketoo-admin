@@ -20,10 +20,15 @@
         <div class="col-xl-8">
           <div class="product-page-details product-right mb-0">
             <h2>{{ productDetails.name }}</h2>
-            <ngb-rating
+            <app-rating
+              [rating]="productDetails.rating"
+              [readonly]="true"
+            ></app-rating>
+            <!-- <ngb-rating
               [rate]="productDetails.rating"
               class="rating-size-product"
-            ></ngb-rating>
+              [readonly]="true"
+            ></ngb-rating> -->
             <hr />
             <h6 class="product-title">product details</h6>
             <p class="mb-0">

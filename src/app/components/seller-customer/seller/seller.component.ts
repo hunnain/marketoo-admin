@@ -71,6 +71,7 @@ export class SellerComponent implements OnInit {
     console.log(temp);
     if (!this.selectedFilter.includes(temp)) this.selectedFilter.push(temp);
   }
+  
   filterRemove(index) {
     console.log(index);
     this.selectedFilter.splice(index, 1);
@@ -97,19 +98,22 @@ export class SellerComponent implements OnInit {
   }
 
   getKey(key) {
-    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
+    console.log(key);
+
+    let tempKey = key.split('_')[2];
     console.log(tempKey);
     return tempKey;
   }
-  
+
   generateUrlLocal(query) {
     let filters = {};
     this.selectedFilter.forEach((key) => {
-      filters[this.getKey(key)] = this.searchTerm;
+      filters[this.getKey(key)] = this.searchTerm.value;
     });
 
     let que = query;
     if (query) que = query + '&' + generateUrl(filters);
+    console.log(que);
 
     return que;
   }

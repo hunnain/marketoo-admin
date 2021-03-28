@@ -92,12 +92,13 @@ export class ViewDetailComponent implements OnInit {
   ngOnInit() {}
 
   fetchById(id) {
-    // this.loading = true;
+    this.loading = true;
     this.sellerCustomerService.getById(this.prefix, id).subscribe((res) => {
       // console.log(res);
       if (res) {
         console.log('fetch res---', res.body);
         this.details = res.body || {};
+        this.loading = false;
         this.cs.isLoading.next(false);
         // this.fetching = false;
       }

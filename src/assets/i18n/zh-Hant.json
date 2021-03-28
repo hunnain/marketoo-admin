@@ -465,6 +465,7 @@
   "cop_create": "增設",
   "cop_update": "更新",
   "cop_back": "背部",
+  "cop_select_code": "Select Code",
 
   "csc": "新增積分",
   "csc_send_amount": "發放⾦額",
@@ -701,7 +702,7 @@
   "sd_coupon": "Coupon",
   "sd_coupons": "Coupons",
   "sd_store_credit": "Store Credit",
-  "sd_products": "Products",
+  "sd_products": "View Products",
 
   "customer_filter_none": "None",
   "customer_filter_username": "用戶名",
@@ -760,6 +761,7 @@
   "ab_about_shop": "关于店铺",
   "ab_ads_policies": "广告政策",
   "ab_terms_conditions": "条款和条件",
+  "ab_weekend_marketoo": "Weekend Marketoo",
 
   "ban_banners": "标语",
   "ban_add_banner": "添加横幅",

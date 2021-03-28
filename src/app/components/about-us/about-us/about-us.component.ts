@@ -11,21 +11,23 @@ export class AboutUsComponent implements OnInit {
   editable: boolean = false;
   loading: boolean = false;
   keys = [
-    'privacyPolicies',
-    'contactInfo',
-    'faqs',
-    'aboutShop',
-    'adsPolicies',
-    'termsAndConditions',
+    'ab_privacy_policies',
+    'ab_contact_info',
+    'ab_faq',
+    'ab_about_shop',
+    'ab_ads_policies',
+    'ab_terms_conditions',
+    'ab_weekend_marketoo',
   ];
   aboutUs = {};
   public tabId;
-  privacyPolicies: string = '';
-  contactInfo: string = '';
-  faqs: string = '';
-  aboutShop: string = '';
-  adsPolicies: string = '';
-  termsAndConditions: string = '';
+  ab_privacy_policies: string = '';
+  ab_contact_info: string = '';
+  ab_faq: string = '';
+  ab_about_shop: string = '';
+  ab_ads_policies: string = '';
+  ab_terms_conditions: string = '';
+  ab_weekend_marketoo: string = '';
   updateObj = {};
   config1: AngularEditorConfig = {
     editable: true,
@@ -128,12 +130,13 @@ export class AboutUsComponent implements OnInit {
           let data = res.body;
           this.setData(data);
           this.updateObj = {
-            Faqs: data.faqs || noDataMsg,
-            AboutShop: data.aboutShop || noDataMsg,
-            AdsPolicies: data.adsPolicies || noDataMsg,
-            ContactInfo: data.contactInfo || noDataMsg,
-            PrivacyPolicies: data.privacyPolicies || noDataMsg,
-            TermsAndConditions: data.termsAndConditions || noDataMsg,
+            ab_faq: data.faqs || noDataMsg,
+            ab_about_shop: data.aboutShop || noDataMsg,
+            ab_ads_policies: data.adsPolicies || noDataMsg,
+            ab_contact_info: data.contactInfo || noDataMsg,
+            ab_privacy_policies: data.privacyPolicies || noDataMsg,
+            ab_terms_conditions: data.termsAndConditions || noDataMsg,
+            ab_weekend_marketoo: data.weekendMarketoo || noDataMsg,
           };
         }
       },
@@ -144,12 +147,13 @@ export class AboutUsComponent implements OnInit {
   }
 
   setData = (data) => {
-    this.privacyPolicies = data.privacyPolicies;
-    this.contactInfo = data.contactInfo;
-    this.faqs = data.faqs;
-    this.aboutShop = data.aboutShop;
-    this.adsPolicies = data.adsPolicies;
-    this.termsAndConditions = data.termsAndConditions;
+    this.ab_privacy_policies = data.privacyPolicies;
+    this.ab_contact_info = data.contactInfo;
+    this.ab_faq = data.faqs;
+    this.ab_about_shop = data.aboutShop;
+    this.ab_ads_policies = data.adsPolicies;
+    this.ab_terms_conditions = data.termsAndConditions;
+    this.ab_weekend_marketoo = data.weekendMarketoo;
   };
 
   onEditClick() {
@@ -157,9 +161,20 @@ export class AboutUsComponent implements OnInit {
   }
 
   onUpdate() {
-    console.log(this.privacyPolicies, '55555');
+    console.log(this.ab_privacy_policies, '55555');
     this.loading = true;
-    this.aboutUsService.updateAboutUs({ ...this.updateObj }).subscribe(
+    let tempObj = {
+      Faqs: this.updateObj['ab_faq'],
+      AboutShop: this.updateObj['ab_about_shop'],
+      AdsPolicies: this.updateObj['ab_ads_policies'],
+      ContactInfo: this.updateObj['ab_contact_info'],
+      PrivacyPolicies: this.updateObj['ab_privacy_policies'],
+      TermsAndConditions: this.updateObj['ab_terms_conditions'],
+      WeekendMarketoo: this.updateObj['ab_weekend_marketoo'],
+    };
+    console.log(tempObj);
+
+    this.aboutUsService.updateAboutUs(tempObj).subscribe(
       (res) => {
         this.setData(res);
         this.editable = false;
