@@ -128,14 +128,19 @@
           </h2>
           <div class="col-4 text-right">
             <span
+              *ngIf="!generating"
               class="d-flex align-items-center justify-content-end"
               style="cursor: pointer"
+              (click)="downloadReport()"
             >
               <app-feather-icons
                 [icon]="'download'"
                 class="font-primary"
               ></app-feather-icons>
               <span>{{ "dash_export_report" | translate }}</span>
+            </span>
+            <span *ngIf="generating">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
             </span>
           </div>
         </div>

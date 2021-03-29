@@ -71,8 +71,8 @@ export class DashboardComponent implements OnInit {
   public chart3 = chartData.chart3;
 
   // events
-  public chartClicked(e: any): void {}
-  public chartHovered(e: any): void {}
+  public chartClicked(e: any): void { }
+  public chartHovered(e: any): void { }
   dashboardDetails = {
     adminCouponsAmt: 0,
     averageBasketValue: 0,
@@ -120,5 +120,42 @@ export class DashboardComponent implements OnInit {
     let tempKey = key.match(/[A-Z][a-z]+/g).join(' ');
 
     return tempKey;
+  }
+
+
+  public generating: boolean = false;
+  downloadReport() {
+    this.generating = true;
+    let currentDate = new Date();
+    let month = currentDate.getMonth() + 1;
+    let year = currentDate.getFullYear();
+    this.dashboardService.generateReport(year, month).subscribe(res => {
+      if (res && res['body']) {
+        console.log(res['body'])
+        this.generating = false;
+        let content = res['body'].fileContents;
+        let type = res['body'].contentType;
+        let name = res['body'].fileDownloadName;
+        this.downLoadFile(content, type, name);
+      }
+    })
+  }
+
+  /**
+     * Method is use to download file.
+     * @param data - Array Buffer data
+     * @param type - type of the document.
+     */
+  downLoadFile(data: any, type: string, filename: string) {
+    let blob = new Blob([data], { type: type });
+    let url = window.URL.createObjectURL(blob);
+    let downloadLink = document.createElement('a');
+    downloadLink.href = url
+    if (filename) {
+      downloadLink.setAttribute('download', filename);
+    }
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
   }
 }

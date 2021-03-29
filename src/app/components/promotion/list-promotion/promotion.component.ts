@@ -195,7 +195,7 @@ export class PromotionComponent implements OnInit {
     console.log(this.promotionText, '55555');
     this.loading = true;
     this.promotionService
-      .updatePromotion({ promotion: this.promotionText })
+      .updatePromotion({ promotions: this.promotionText })
       .subscribe(
         (res) => {
           this.editable = false;

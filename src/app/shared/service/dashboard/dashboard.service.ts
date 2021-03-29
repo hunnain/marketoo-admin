@@ -5,7 +5,7 @@ import { CommonService } from '../common.service';
   providedIn: 'root',
 })
 export class DashboardService {
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
   getDashboardData() {
     return this.commonService.get(`admin/get-monthly-report`);
@@ -14,4 +14,8 @@ export class DashboardService {
   // addNotification(data) {
   //   return this.commonService.post('admin/spread-notification', data);
   // }
+
+  generateReport(year, month) {
+    return this.commonService.get(`admin/generate-report/${year}-${month}`);
+  }
 }
