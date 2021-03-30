@@ -135,14 +135,14 @@ export class CreateStoreCreditComponent implements OnInit {
 
   createStoreCreditForm() {
     this.storeCreditForm = this.formBuilder.group({
-      sendAmount: ['', Validators.required],
+      amount: ['', Validators.required],
       reason: ['', Validators.required],
       receivers: ['', Validators.required],
       notifyRecivers: [false],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   createStoreCredit() {
     // console.log('general form', this.generalForm.value);
