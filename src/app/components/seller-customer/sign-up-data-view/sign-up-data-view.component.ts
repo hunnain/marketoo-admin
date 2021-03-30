@@ -14,7 +14,26 @@ import { SellerCustomerService } from 'src/app/shared/service/seller-customer-se
 })
 export class SignUpComponent implements OnInit {
   public isTranslate: boolean = false;
-
+  public formData = {
+    name: 'asd',
+    deliver: '',
+    placeProduct: '',
+    avgPrice: '',
+    instagram: '',
+    facebook: '',
+    website: '',
+    provideProduct: '',
+    category: '',
+    designHall: '',
+    brandName: '',
+    refree: '',
+    identity: '',
+    email: '',
+    contact: '',
+    country: '',
+    gender: '',
+    nickName: '',
+  };
   public sellerForm: FormGroup;
   public brandForm: FormGroup;
   public counter: number = 1;

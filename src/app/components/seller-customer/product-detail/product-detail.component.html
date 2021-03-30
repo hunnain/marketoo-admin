@@ -6,6 +6,52 @@
       </div>
       <div class="row" *ngIf="!loading">
         <div class="col-xl-4">
+          <div style="border: 1px solid #ddd; padding: 15px 10px 10px 10px">
+            <h4>Category</h4>
+            <h6>{{ productDetails.category }}</h6>
+            <hr style="margin: 10px 0px" />
+            <h4>Sub Category</h4>
+            <h6>{{ productDetails.subCategory }}</h6>
+            <hr style="margin: 10px 0px" />
+            <h4>Extended Sub Category</h4>
+            <h6>{{ productDetails.extendedSubCategory }}</h6>
+          </div>
+          <hr />
+          <div style="padding: 10px">
+            <h4 style="font-weight: 500">Promotion</h4>
+            <h6 class="mb-0">
+              {{ productDetails.promotions }}
+            </h6>
+          </div>
+          <hr />
+          <div
+            class="about-seller border-product"
+            style="border: 1px solid #ddd; padding: 15px 10px 10px 10px"
+          >
+            <h4 class="product-title mb-2">About Seller</h4>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+              "
+            >
+              <div class="mr-1">
+                <img
+                  alt="seller-image"
+                  style="width: 50px"
+                  [src]="productDetails.sellerImage"
+                />
+              </div>
+              <div>
+                <strong>{{ productDetails.sellerEnglishFName }}</strong>
+                <!-- <p>GD Products</p>
+                <p>View Detail</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4">
           <section>
             <ks-carousel
               [id]="100"
@@ -17,7 +63,7 @@
             </ks-carousel>
           </section>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-4">
           <div class="product-page-details product-right mb-0">
             <h2>{{ productDetails.name }}</h2>
             <app-rating
@@ -40,6 +86,8 @@
                 <del>${{ productDetails.markdownPrice }}</del>
               </h3>
             </div>
+            <hr />
+            <h6 class="product-title size-text mb-1">Colors</h6>
             <ul class="color-variant">
               <li
                 class=""
@@ -51,8 +99,8 @@
             </ul>
             <hr />
             <h6 class="product-title size-text">
-              select size
-              <span class="pull-right">
+              Size
+              <span class="pull-right" *ngIf="productDetails.customSize">
                 <a
                   data-toggle="modal"
                   (click)="open(content)"
@@ -63,9 +111,7 @@
             </h6>
             <ng-template #content let-modal>
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Sheer Straight Kurta
-                </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Size Chart</h5>
                 <button
                   type="button"
                   class="close"
@@ -77,10 +123,11 @@
               </div>
               <div class="modal-body">
                 <img
-                  src="assets/images/size-chart.jpg"
+                  [src]="productDetails.customImageUrl"
                   alt=""
                   class="img-fluid blur-up lazyloaded"
                 />
+                <!-- src="assets/images/size-chart.jpg" -->
               </div>
             </ng-template>
             <div class="size-box">
@@ -114,7 +161,7 @@
               </div> -->
             </div>
             <hr />
-            <h6 class="product-title">Time Reminder</h6>
+            <!-- <h6 class="product-title">Time Reminder</h6>
             <div class="timer">
               <p id="demo">
                 <span
@@ -134,7 +181,7 @@
                 Add To Cart
               </button>
               <button class="btn btn-secondary" type="button">Buy Now</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
