@@ -229,4 +229,12 @@ export const content: Routes = [
       breadcrumb: 'Editor Choice',
     },
   },
+  {
+    path: 'push-notifications',
+    loadChildren: () =>
+      import('../../components/push-notifications/push-notification.module').then((m) => m.PushNotificationModule),
+    data: {
+      breadcrumb: 'Push Notification',
+    },
+  }
 ];

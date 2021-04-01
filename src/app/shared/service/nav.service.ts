@@ -249,6 +249,14 @@ export class NavService {
       badgeType: 'primary',
       active: false,
     },
+    {
+      path: '/push-notifications',
+      title: 'sidebar_PushNotifications',
+      icon: 'bell',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
+    },
     // {
     // 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [
     // 		{ path: '/pages/list-page', title: 'List Page', type: 'link' },

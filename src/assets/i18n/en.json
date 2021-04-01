@@ -119,6 +119,7 @@
   "sidebar_List_Coupons": "List Coupons",
   "sidebar_Create_Coupons": "Create Coupons",
   "sidebar_Notifications": "Notifications",
+  "sidebar_PushNotifications": "Push Notifications",
 
   "create_Store_Credit": "Create Store Credit",
   "coupon_duedate": "Due Date",
@@ -789,5 +790,11 @@
   "not_send_to": "Send To",
   "not_content": "Content",
   "not_created_date": "Created At",
-  "not_preview": "Preview"
+  "not_preview": "Preview",
+
+  "Type":"Type",
+  "Created On":"Created On",
+  "Text":"Text",
+  "Sender":"Sender",
+  "Action":"Action"
 }

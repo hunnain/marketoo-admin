@@ -10,6 +10,8 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { AuthServiceService } from '../../service/auth-service/auth-service.service';
 import { NavService } from '../../service/nav.service';
+import { PushNotificationService } from '../../service/pushNotification.service';
+import { SignalrService } from '../../service/signalr.service';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +30,9 @@ export class HeaderComponent implements OnInit {
     public navServices: NavService,
     private authService: AuthServiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public signalRService: SignalrService,
+    private pnService: PushNotificationService
   ) { }
 
   collapseSidebar() {
@@ -55,7 +59,12 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     console.log('logout');
     this.authService.logout().subscribe(res => {
-      localStorage.clear();
+      if (res && this.pnService.pushNotificationStatus.isSubscribed) {
+        this.pnService.unsubscribeUser();
+      }
+      setTimeout(() => {
+        localStorage.clear();
+      }, 2000)
     })
     // localStorage.removeItem('userInfo');
     // localStorage.removeItem('userInfo');
@@ -63,4 +72,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() { }
+  formatType(type) {
+    let formattedType = type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+    return formattedType;
+  }
 }

@@ -137,6 +137,7 @@
   "sidebar_Adds_Revenue": "广告收入",
   "sidebar_Adds_Trends": "广告趋势",
   "sidebar_Notifications": "通知事項",
+  "sidebar_PushNotifications": "推送通知",
 
   "total_clicks_ratio": "7日獲得1260 點擊數數量",
   "sidebar_Return_Exchange": "退換貨品",
@@ -778,5 +779,11 @@
   "not_send_to": "Send To",
   "not_content": "Content",
   "not_created_date": "Created At",
-  "not_preview": "Preview"
+  "not_preview": "Preview",
+
+  "Type":"類型",
+  "Created On":"創建於",
+  "Text":"文本",
+  "Sender":"發件人",
+  "Action":"行動"
 }
