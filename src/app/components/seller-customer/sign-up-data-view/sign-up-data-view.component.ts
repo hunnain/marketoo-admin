@@ -34,6 +34,7 @@ export class SignUpComponent implements OnInit {
     country: '',
     gender: '',
     nickName: '',
+    brandUu: {}
   };
   public sellerForm: FormGroup;
   public brandForm: FormGroup;
@@ -217,7 +218,7 @@ export class SignUpComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public config1: DropzoneConfigInterface = {
     clickable: true,
@@ -230,11 +231,11 @@ export class SignUpComponent implements OnInit {
     cancelReset: null,
   };
 
-  public onUploadInit(args: any): void {}
+  public onUploadInit(args: any): void { }
 
-  public onUploadError(args: any): void {}
+  public onUploadError(args: any): void { }
 
-  public onUploadSuccess(args: any): void {}
+  public onUploadSuccess(args: any): void { }
 
   changeLanguage() {
     this.isTranslate = !this.isTranslate;
