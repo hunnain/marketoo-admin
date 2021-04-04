@@ -61,7 +61,14 @@
               <ngx-datatable-column
                 name="{{ 'not_created_date' | translate }}"
                 prop="creationTime"
-              ></ngx-datatable-column>
+                ><ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ getFormatDate(value) }}
+                </ng-template></ngx-datatable-column
+              >
               <ngx-datatable-column name="{{ 'not_preview' | translate }}">
                 <ng-template
                   let-row="row"
@@ -123,7 +130,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <div [innerHTML]="selectedRow.content"></div>
+    <div ngbAutofocus [innerHTML]="selectedRow.content"></div>
     <div class="action" style="text-align: end">
       <!-- <button class="btn btn-primary" type="button" (click)="onPublish()">
         Publish

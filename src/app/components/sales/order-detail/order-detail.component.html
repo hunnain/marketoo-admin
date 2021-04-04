@@ -707,14 +707,16 @@
     <div class="form-group">
       <div>
         <label for="price">Message</label>
-        <input
+        <textarea
+          ngbAutofocus
           type="text"
           [(ngModel)]="textMessage"
           class="form-control"
           id="textMessage"
+          row="3"
           aria-describedby="textMessage"
           placeholder="Type here..."
-        />
+        ></textarea>
       </div>
     </div>
     <div class="action">

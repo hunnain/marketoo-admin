@@ -25,7 +25,9 @@
                           <label class="mb-0"
                             >{{ "ch_full_name" | translate }} :
                           </label>
-                          <div class="mb-0">{{ formData.name || "---" }}</div>
+                          <div class="mb-0">
+                            {{ formData.chineseFname || "---" }}
+                          </div>
                           <!-- <input
                             [disabled]="true"
                             class="form-control"
@@ -45,10 +47,12 @@
                           </div> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="englishFname" class=" mb-0"
+                          <label for="englishFname" class="mb-0"
                             >{{ "en_full_name" | translate }} :
                           </label>
-                          <div class="mb-0">{{ formData.name || "---" }}</div>
+                          <div class="mb-0">
+                            {{ formData.englishFname || "---" }}
+                          </div>
                           <!-- <input
                             [disabled]="true"
                             class="form-control"
@@ -103,7 +107,7 @@
                           </div> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom04" class=" mb-0"
+                          <label for="validationCustom04" class="mb-0"
                             >{{ "gender" | translate }}:
                           </label>
                           <div class="mb-0">{{ formData.gender || "---" }}</div>
@@ -120,7 +124,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="country" class=" mb-0"
+                          <label for="country" class="mb-0"
                             >{{ "select_country" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -142,11 +146,11 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom06" class=" mb-0"
+                          <label for="validationCustom06" class="mb-0"
                             >{{ "contact_no" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.contact || "---" }}
+                            {{ formData.contactNo || "---" }}
                           </div>
                           <!-- <input
                             [disabled]="true"
@@ -169,7 +173,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="email" class=" mb-0"
+                          <label for="email" class="mb-0"
                             >{{ "email" | translate }}:
                           </label>
                           <div class="mb-0">{{ formData.email || "---" }}</div>
@@ -377,11 +381,11 @@
                       </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_name" class=" mb-0"
+                          <label for="brand_name" class="mb-0"
                             >{{ "brand_name" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.brandName || "---" }}
+                            {{ formData?.brandUu?.brandName || "---" }}
                           </div>
                           <!-- <input
                             [disabled]="true"
@@ -402,11 +406,11 @@
                           </div> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="url" class=" mb-0">
+                          <label for="url" class="mb-0">
                             {{ "design_hall" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.designHall || "---" }}
+                            {{ formData?.brandUu?.designHallUrl || "---" }}
                           </div>
                           <!-- <input
                             [disabled]="true"
@@ -438,11 +442,11 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="product_category" class=" mb-0"
+                          <label for="product_category" class="mb-0"
                             >{{ "product_cat" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.category || "---" }}
+                            {{ formData?.brandUu?.productCategory || "---" }}
                           </div>
                           <!-- <select
                             class="form-control digits"
@@ -458,7 +462,7 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="product_images" class=" mb-0"
+                          <label for="product_images" class="mb-0"
                             >{{ "provide_product" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -494,7 +498,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_website" class=" mb-0"
+                          <label for="brand_website" class="mb-0"
                             >{{ "brand_website" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -509,7 +513,7 @@
                           /> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="facebook_url" class=" mb-0"
+                          <label for="facebook_url" class="mb-0"
                             >{{ "facebook" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -526,7 +530,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="instagram_url" class=" mb-0"
+                          <label for="instagram_url" class="mb-0"
                             >{{ "instagram" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -541,9 +545,7 @@
                           /> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label
-                            for="average_price_per_product"
-                            class=" mb-0"
+                          <label for="average_price_per_product" class="mb-0"
                             >{{ "avg_price" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -566,7 +568,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="place_of_product" class=" mb-0"
+                          <label for="place_of_product" class="mb-0"
                             >{{ "place_product" | translate }}:
                           </label>
                           <div class="mb-0">
@@ -588,7 +590,7 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="deliver_from" class=" mb-0"
+                          <label for="deliver_from" class="mb-0"
                             >{{ "deliver_from" | translate }}:
                           </label>
                           <div class="mb-0">

@@ -15,7 +15,7 @@ export class EditorChoiceComponent implements OnInit {
       tab: 'Products',
       tabIcon: 'user',
       // buttons: ['Approve', 'Reject'],
-      url: 'product',
+      url: 'product/get-products-for-editors-pick',
       params: 'status=2',
       cardButtons: [false, true, false],
       // rejectModal: false,

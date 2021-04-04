@@ -465,6 +465,7 @@
   "csc_send_amount": "Send Amount",
   "csc_reason": "Reason",
   "csc_reciver": "Receiver",
+  "csc_type_email_press": "Type Email & Press Enter",
   "csc_email_here": "Email Here...",
 
   "bid_boosting": "Boosting",
@@ -773,6 +774,7 @@
   "ab_ads_policies": "Ads Policies",
   "ab_terms_conditions": "Terms & Conditions",
   "ab_weekend_marketoo": "Weekend Marketoo",
+  "ab_return_exchange_policy": "Return & Exchange Policy",
 
   "ban_banners": "Banners",
   "ban_add_banner": "Add Banner",

@@ -14,9 +14,13 @@ export class SellerCustomerService {
   getFilteredSellerCustomer(prefix, query) {
     return this.commonService.get(`admin/get-filtered-${prefix}?${query}`);
   }
-
+  // get-seller-info-by-id
   getById(prefix, uuid) {
     return this.commonService.get(`admin/get-${prefix}-by-id/${uuid}`);
+  }
+
+  getSellerInfoById(prefix, uuid) {
+    return this.commonService.get(`admin/get-${prefix}-info-by-id/${uuid}`);
   }
 
   approveRejectSeller(prefix, data) {

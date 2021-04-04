@@ -472,6 +472,7 @@
   "csc_send_amount": "發放⾦額",
   "csc_reason": "原因",
   "csc_reciver": "接收者",
+  "csc_type_email_press": "Type Email & Press Enter",
   "csc_email_here": "請電郵致",
 
   "bid_boosting": "廣告優化",
@@ -763,6 +764,7 @@
   "ab_ads_policies": "广告政策",
   "ab_terms_conditions": "条款和条件",
   "ab_weekend_marketoo": "Weekend Marketoo",
+  "ab_return_exchange_policy": "Return & Exchange Policy",
 
   "ban_banners": "标语",
   "ban_add_banner": "添加横幅",

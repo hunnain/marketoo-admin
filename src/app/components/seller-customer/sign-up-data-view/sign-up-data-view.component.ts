@@ -15,7 +15,8 @@ import { SellerCustomerService } from 'src/app/shared/service/seller-customer-se
 export class SignUpComponent implements OnInit {
   public isTranslate: boolean = false;
   public formData = {
-    name: 'asd',
+    chineseFname: 'asd',
+    englishFname: 'asd',
     deliver: '',
     placeProduct: '',
     avgPrice: '',
@@ -26,10 +27,10 @@ export class SignUpComponent implements OnInit {
     category: '',
     designHall: '',
     brandName: '',
-    refree: '',
+    refereeUrl: '',
     identity: '',
     email: '',
-    contact: '',
+    contactNo: '',
     country: '',
     gender: '',
     nickName: '',
@@ -170,15 +171,19 @@ export class SignUpComponent implements OnInit {
 
   fetchById(id) {
     // this.loading = true;
-    this.sellerCustomerService.getById(this.prefix, id).subscribe((res) => {
-      // console.log(res);
-      if (res) {
-        console.log('fetch res---', res.body);
-        this.signUpData = res.body || {};
-        this.cs.isLoading.next(false);
-        // this.fetching = false;
-      }
-    });
+    this.sellerCustomerService
+      .getSellerInfoById(this.prefix, id)
+      .subscribe((res) => {
+        // console.log(res);
+        if (res) {
+          console.log('fetch res---', res.body);
+          this.signUpData = res.body || {};
+          this.formData = res.body || {};
+
+          this.cs.isLoading.next(false);
+          // this.fetching = false;
+        }
+      });
   }
 
   increment() {

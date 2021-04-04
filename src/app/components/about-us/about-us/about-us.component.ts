@@ -18,6 +18,7 @@ export class AboutUsComponent implements OnInit {
     'ab_ads_policies',
     'ab_terms_conditions',
     'ab_weekend_marketoo',
+    'ab_return_exchange_policy',
   ];
   aboutUs = {};
   public tabId;
@@ -28,6 +29,7 @@ export class AboutUsComponent implements OnInit {
   ab_ads_policies: string = '';
   ab_terms_conditions: string = '';
   ab_weekend_marketoo: string = '';
+  ab_return_exchange_policy: string = '';
   updateObj = {};
   config1: AngularEditorConfig = {
     editable: true,
@@ -137,6 +139,7 @@ export class AboutUsComponent implements OnInit {
             ab_privacy_policies: data.privacyPolicies || noDataMsg,
             ab_terms_conditions: data.termsAndConditions || noDataMsg,
             ab_weekend_marketoo: data.weekendMarketoo || noDataMsg,
+            ab_return_exchange_policy: data.returnExchangePolicy || noDataMsg,
           };
         }
       },
@@ -154,6 +157,7 @@ export class AboutUsComponent implements OnInit {
     this.ab_ads_policies = data.adsPolicies;
     this.ab_terms_conditions = data.termsAndConditions;
     this.ab_weekend_marketoo = data.weekendMarketoo;
+    this.ab_return_exchange_policy = data.returnExchange;
   };
 
   onEditClick() {
@@ -171,6 +175,7 @@ export class AboutUsComponent implements OnInit {
       PrivacyPolicies: this.updateObj['ab_privacy_policies'],
       TermsAndConditions: this.updateObj['ab_terms_conditions'],
       WeekendMarketoo: this.updateObj['ab_weekend_marketoo'],
+      ReturnExchangePolicy: this.updateObj['ab_return_exchange_policy'],
     };
     console.log(tempObj);
 

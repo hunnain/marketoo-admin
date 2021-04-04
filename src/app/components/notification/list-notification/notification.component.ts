@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import * as moment from 'moment';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 // import { notificationDB } from '../../../shared/tables/notificationDB';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -68,6 +68,9 @@ export class NotificationComponent implements OnInit {
 
   addNotification() {
     this.router.navigate(['/notifications/add-notification']);
+  }
+  getFormatDate(date) {
+    return moment(date).format('MMM DD,YY');
   }
 
   onSelectRow(data) {
