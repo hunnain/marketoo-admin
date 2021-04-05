@@ -147,8 +147,9 @@ export class DashboardComponent implements OnInit {
      * @param type - type of the document.
      */
   downLoadFile(data: any, type: string, filename: string) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
+    // let blob = new Blob([data], { type: type });
+    // let url = window.URL.createObjectURL(blob);
+    let url = `data:${type};base64,${data}`;
     let downloadLink = document.createElement('a');
     downloadLink.href = url
     if (filename) {
