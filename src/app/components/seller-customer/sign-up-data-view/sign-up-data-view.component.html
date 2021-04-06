@@ -3,17 +3,17 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div
-          class="card-header"
-          style="padding-bottom: 0px; text-align: center"
-        >
+        <div class="card-header" style="padding-bottom: 0px; text-align: center">
           <h5 class="heading">{{ "signup_info" | translate }}</h5>
           <span class="heading-border"></span>
         </div>
         <div class="card-body" style="padding-top: 0px">
           <div class="row product-adding">
             <div class="col-xl-7">
-              <div class="add-product-form">
+              <div style="display: flex; align-items: center; justify-content: center">
+                <app-loader [loading]="loading"></app-loader>
+              </div>
+              <div class="add-product-form" *ngIf="!loading">
                 <form class="needs-validation" [formGroup]="sellerForm">
                   <div>
                     <fieldset class="fieldset" style="margin-bottom: 20px">
@@ -22,8 +22,7 @@
                       </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label class="mb-0"
-                            >{{ "ch_full_name" | translate }} :
+                          <label class="mb-0">{{ "ch_full_name" | translate }} :
                           </label>
                           <div class="mb-0">
                             {{ formData.chineseFname || "---" }}
@@ -47,8 +46,7 @@
                           </div> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="englishFname" class="mb-0"
-                            >{{ "en_full_name" | translate }} :
+                          <label for="englishFname" class="mb-0">{{ "en_full_name" | translate }} :
                           </label>
                           <div class="mb-0">
                             {{ formData.englishFname || "---" }}
@@ -83,8 +81,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom03" class="mb-0"
-                            >{{ "nick_name" | translate }}:
+                          <label for="validationCustom03" class="mb-0">{{ "nick_name" | translate }}:
                           </label>
                           <div class="mb-0">
                             {{ formData.nickName || "---" }}
@@ -107,8 +104,7 @@
                           </div> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom04" class="mb-0"
-                            >{{ "gender" | translate }}:
+                          <label for="validationCustom04" class="mb-0">{{ "gender" | translate }}:
                           </label>
                           <div class="mb-0">{{ formData.gender || "---" }}</div>
                           <!-- <select
@@ -124,8 +120,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="country" class="mb-0"
-                            >{{ "select_country" | translate }}:
+                          <label for="country" class="mb-0">{{ "signup_country" | translate }}:
                           </label>
                           <div class="mb-0">
                             {{ formData.country || "---" }}
@@ -146,8 +141,7 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom06" class="mb-0"
-                            >{{ "contact_no" | translate }}:
+                          <label for="validationCustom06" class="mb-0">{{ "contact_no" | translate }}:
                           </label>
                           <div class="mb-0">
                             {{ formData.contactNo || "---" }}
@@ -173,8 +167,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="email" class="mb-0"
-                            >{{ "email" | translate }}:
+                          <label for="email" class="mb-0">{{ "email" | translate }}:
                           </label>
                           <div class="mb-0">{{ formData.email || "---" }}</div>
                           <!-- <input
@@ -229,11 +222,10 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="your_identity" class="mb-0"
-                            >{{ "your_identity" | translate }}:
+                          <label for="your_identity" class="mb-0">{{ "your_identity" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.identity || "---" }}
+                            {{ formData.sellerIdentity || "---" }}
                           </div>
                           <!-- <select
                             class="form-control digits"
@@ -254,10 +246,9 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="sell_product_before" class="mb-0"
-                            >{{ "how_did_you_sell" | translate }}:
+                          <label for="sell_product_before" class="mb-0">{{ "how_did_you_sell" | translate }}:
                           </label>
-                          <div class="mb-0">{{ formData?.name || "---" }}</div>
+                          <div class="mb-0">{{ formData?.hdySellBefore || "---" }}</div>
                           <!-- <select
                             class="form-control digits"
                             id="sell_product_before"
@@ -278,10 +269,9 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="hear_about" class="mb-0"
-                            >{{ "how_did_you_hear" | translate }}:
+                          <label for="hear_about" class="mb-0">{{ "how_did_you_hear" | translate }}:
                           </label>
-                          <div class="mb-0">{{ formData.name || "---" }}</div>
+                          <div class="mb-0">{{ formData.hdyHearAbtMarketoo || "---" }}</div>
                           <!-- <select
                             class="form-control digits"
                             id="hear_about"
@@ -304,10 +294,9 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="weekend_market" class="mb-0"
-                            >{{ "are_you_interested" | translate }}:
+                          <label for="weekend_market" class="mb-0">{{ "are_you_interested" | translate }}:
                           </label>
-                          <div class="mb-0">{{ formData.name || "---" }}</div>
+                          <div class="mb-0">{{ formData?.interestedToJoinWm || "---" }}</div>
                           <!-- <div>
                             <div class="form-check form-check-inline">
                               <input
@@ -348,10 +337,9 @@
                           </div> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="referee_url" class="mb-0"
-                            >{{ "your_referee" | translate }}:
+                          <label for="referee_url" class="mb-0">{{ "your_referee" | translate }}:
                           </label>
-                          <div class="mb-0">{{ formData.refree || "---" }}</div>
+                          <div class="mb-0">{{ formData?.refereeUrl || "---" }}</div>
                           <!-- <input
                             [disabled]="true"
                             class="form-control"
@@ -381,8 +369,7 @@
                       </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_name" class="mb-0"
-                            >{{ "brand_name" | translate }}:
+                          <label for="brand_name" class="mb-0">{{ "brand_name" | translate }}:
                           </label>
                           <div class="mb-0">
                             {{ formData?.brandUu?.brandName || "---" }}
@@ -442,8 +429,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="product_category" class="mb-0"
-                            >{{ "product_cat" | translate }}:
+                          <label for="product_category" class="mb-0">{{ "product_cat" | translate }}:
                           </label>
                           <div class="mb-0">
                             {{ formData?.brandUu?.productCategory || "---" }}
@@ -462,18 +448,14 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="product_images" class="mb-0"
-                            >{{ "provide_product" | translate }}:
+                          <label for="product_images" class="mb-0">{{ "provide_product" | translate }}:
                           </label>
                           <div class="mb-0">
                             {{ formData.provideProduct || "---" }}
                           </div>
-                          <div class="add-product">
+                          <div class="add-product" *ngIf="formData?.brandUu?.productWishImages">
                             <ul class="file-upload-product images-ul">
-                              <li
-                                style="margin-left: 15px"
-                                *ngFor="let item of url; let i = index"
-                              >
+                              <li style="margin-left: 15px" *ngFor="let item of url; let i = index">
                                 <div class="box-input-file">
                                   <!-- <input
                                     [disabled]="true"
@@ -481,15 +463,11 @@
                                     type="file"
                                     (change)="readUrl($event, i)"
                                   /> -->
-                                  <img
-                                    class="imgUpload"
-                                    alt="prod-img"
-                                    [src]="
+                                  <img class="imgUpload" alt="prod-img" [src]="
                                       productWishImages[i]
                                         ? productWishImages[i]
                                         : item.img
-                                    "
-                                  />
+                                    " />
                                 </div>
                               </li>
                             </ul>
@@ -498,11 +476,10 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_website" class="mb-0"
-                            >{{ "brand_website" | translate }}:
+                          <label for="brand_website" class="mb-0">{{ "brand_website" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.website || "---" }}
+                            {{ formData?.brandUu?.brandUrl || "---" }}
                           </div>
                           <!-- <input
                             [disabled]="true"
@@ -513,11 +490,10 @@
                           /> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="facebook_url" class="mb-0"
-                            >{{ "facebook" | translate }}:
+                          <label for="facebook_url" class="mb-0">{{ "facebook" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.facebook || "---" }}
+                            {{ formData?.brandUu?.facebookUrl || "---" }}
                           </div>
                           <!-- <input
                             [disabled]="true"
@@ -530,11 +506,10 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="instagram_url" class="mb-0"
-                            >{{ "instagram" | translate }}:
+                          <label for="instagram_url" class="mb-0">{{ "instagram" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.instagram || "---" }}
+                            {{ formData?.brandUu?.instaUrl || "---" }}
                           </div>
                           <!-- <input
                             [disabled]="true"
@@ -545,11 +520,10 @@
                           /> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="average_price_per_product" class="mb-0"
-                            >{{ "avg_price" | translate }}:
+                          <label for="average_price_per_product" class="mb-0">{{ "avg_price" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.avgPrice || "---" }}
+                            {{ formData?.brandUu?.avgPricePerProduct || "---" }}
                           </div>
                           <!-- <select
                             class="form-control digits"
@@ -568,11 +542,10 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="place_of_product" class="mb-0"
-                            >{{ "place_product" | translate }}:
+                          <label for="place_of_product" class="mb-0">{{ "place_product" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.placeProduct || "---" }}
+                            {{ formData?.brandUu?.placeOfProduct || "---" }}
                           </div>
                           <!-- <select
                             class="form-control digits"
@@ -590,11 +563,10 @@
                           </select> -->
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="deliver_from" class="mb-0"
-                            >{{ "deliver_from" | translate }}:
+                          <label for="deliver_from" class="mb-0">{{ "deliver_from" | translate }}:
                           </label>
                           <div class="mb-0">
-                            {{ formData.deliver || "---" }}
+                            {{ formData?.brandUu?.deliverFrom || "---" }}
                           </div>
                           <!-- <select
                             class="form-control digits"

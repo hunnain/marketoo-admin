@@ -5,71 +5,18 @@
         <app-loader [loading]="loading"></app-loader>
       </div>
       <div class="row" *ngIf="!loading">
-        <div class="col-xl-4">
-          <div style="border: 1px solid #ddd; padding: 15px 10px 10px 10px">
-            <h4>Category</h4>
-            <h6>{{ productDetails.category }}</h6>
-            <hr style="margin: 10px 0px" />
-            <h4>Sub Category</h4>
-            <h6>{{ productDetails.subCategory }}</h6>
-            <hr style="margin: 10px 0px" />
-            <h4>Extended Sub Category</h4>
-            <h6>{{ productDetails.extendedSubCategory }}</h6>
-          </div>
-          <hr />
-          <div style="padding: 10px">
-            <h4 style="font-weight: 500">Promotion</h4>
-            <h6 class="mb-0">
-              {{ productDetails.promotions }}
-            </h6>
-          </div>
-          <hr />
-          <div
-            class="about-seller border-product"
-            style="border: 1px solid #ddd; padding: 15px 10px 10px 10px"
-          >
-            <h4 class="product-title mb-2">About Seller</h4>
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-              "
-            >
-              <div class="mr-1">
-                <img
-                  alt="seller-image"
-                  style="width: 50px"
-                  [src]="productDetails.sellerImage"
-                />
-              </div>
-              <div>
-                <strong>{{ productDetails.sellerEnglishFName }}</strong>
-                <!-- <p>GD Products</p>
-                <p>View Detail</p> -->
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div class="col-xl-4">
           <section>
-            <ks-carousel
-              [id]="100"
-              [images]="imagesRect"
-              [dotsConfig]="{ visible: true }"
-              [carouselConfig]="{ maxHeight: '600px', keyboardEnable: true }"
-              [previewConfig]="{ maxHeight: '125px' }"
-            >
+            <ks-carousel [id]="100" [images]="imagesRect" [dotsConfig]="{ visible: true }"
+              [carouselConfig]="{ maxHeight: '600px', keyboardEnable: true }" [previewConfig]="{ maxHeight: '125px' }">
             </ks-carousel>
           </section>
         </div>
-        <div class="col-xl-4">
+        <div class="col-xl-8">
           <div class="product-page-details product-right mb-0">
             <h2>{{ productDetails.name }}</h2>
-            <app-rating
-              [rating]="productDetails.rating"
-              [readonly]="true"
-            ></app-rating>
+            <app-rating [rating]="productDetails.rating" [readonly]="true"></app-rating>
             <!-- <ngb-rating
               [rate]="productDetails.rating"
               class="rating-size-product"
@@ -88,12 +35,11 @@
             </div>
             <hr />
             <h6 class="product-title size-text mb-1">Colors</h6>
-            <ul class="color-variant">
-              <li
-                class=""
-                *ngFor="let color of productDetails.availableColors"
-                [ngStyle]="{ backgroundColor: color }"
-              ></li>
+            <ul style="display: flex;">
+              <!-- [ngStyle]="{ backgroundColor: color }" -->
+              <li class="" *ngFor="let color of productDetails.availableColors; let ind= index">
+                {{color}}<span *ngIf="ind < productDetails.availableColors.length-1">,&nbsp;</span>
+              </li>
               <!-- <li class="bg-light1"></li>
               <li class="bg-light2"></li> -->
             </ul>
@@ -101,49 +47,32 @@
             <h6 class="product-title size-text">
               Size
               <span class="pull-right" *ngIf="productDetails.customSize">
-                <a
-                  data-toggle="modal"
-                  (click)="open(content)"
-                  class="font-primary"
-                  >size chart</a
-                >
+                <a data-toggle="modal" (click)="open(content)" class="font-primary">size chart</a>
               </span>
             </h6>
             <ng-template #content let-modal>
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Size Chart</h5>
-                <button
-                  type="button"
-                  class="close"
-                  aria-label="Close"
-                  (click)="modal.dismiss('Cross click')"
-                >
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <img
-                  [src]="productDetails.customImageUrl"
-                  alt=""
-                  class="img-fluid blur-up lazyloaded"
-                />
+                <img [src]="productDetails.customImageUrl" alt="" class="img-fluid blur-up lazyloaded" />
                 <!-- src="assets/images/size-chart.jpg" -->
               </div>
             </ng-template>
-            <div class="size-box">
-              <ul>
+            <div>
+              <ul style="display: flex;">
                 <!-- <li class="active"><a href="javascript:void(0)">s</a></li>
                 <li><a href="javascript:void(0)">m</a></li>
                 <li><a href="javascript:void(0)">l</a></li> -->
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    *ngFor="let size of productDetails.availableSizes"
-                    >{{ size }}</a
-                  >
+                <li *ngFor="let size of productDetails.availableSizes; let ind= index">
+                  {{ size }}<span *ngIf="ind < productDetails.availableSizes.length-1">,&nbsp;</span>
                 </li>
               </ul>
             </div>
+            <hr />
             <div class="add-product-form">
               <h6 class="product-title">quantity</h6>
               <h5>{{ productDetails.quantity }}</h5>
@@ -161,6 +90,19 @@
               </div> -->
             </div>
             <hr />
+            <!-- <div class="col-xl-4"> -->
+            <div>
+              <h4>Category</h4>
+              <h6>{{ productDetails.category }}</h6>
+              <hr style="margin: 10px 0px" />
+              <h4>Sub Category</h4>
+              <h6>{{ productDetails.subCategory }}</h6>
+              <hr style="margin: 10px 0px" />
+              <h4>Extended Sub Category</h4>
+              <h6>{{ productDetails.extendedSubCategory }}</h6>
+            </div>
+
+            <!-- </div> -->
             <!-- <h6 class="product-title">Time Reminder</h6>
             <div class="timer">
               <p id="demo">
@@ -182,6 +124,7 @@
               </button>
               <button class="btn btn-secondary" type="button">Buy Now</button>
             </div> -->
+
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@
   "mick_name_req": "Nick Name is required.",
   "gender": "Gender",
   "select_country": "Select Country",
+  "signup_country": "Country",
   "contact_no": "Contact No",
   "contact_no_req": "Contact No is required.",
   "email": "Email",

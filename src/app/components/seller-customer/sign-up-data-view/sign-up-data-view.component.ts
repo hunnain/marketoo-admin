@@ -17,6 +17,11 @@ export class SignUpComponent implements OnInit {
   public formData = {
     chineseFname: 'asd',
     englishFname: 'asd',
+    name: "",
+    sellerIdentity: "",
+    hdyHearAbtMarketoo: "",
+    hdySellBefore: "",
+    interestedToJoinWm: true,
     deliver: '',
     placeProduct: '',
     avgPrice: '',
@@ -171,7 +176,7 @@ export class SignUpComponent implements OnInit {
   }
 
   fetchById(id) {
-    // this.loading = true;
+    this.loading = true;
     this.sellerCustomerService
       .getSellerInfoById(this.prefix, id)
       .subscribe((res) => {
@@ -182,7 +187,7 @@ export class SignUpComponent implements OnInit {
           this.formData = res.body || {};
 
           this.cs.isLoading.next(false);
-          // this.fetching = false;
+          this.loading = false;
         }
       });
   }

@@ -17,6 +17,7 @@
   "nick_name_req": "必須填寫別名",
   "gender": "姓別",
   "select_country": "選擇國家",
+  "signup_country": "Country",
   "contact_no": "聯絡電話",
   "contact_no_req": "必須填寫聯絡電話",
   "email": "電郵",
@@ -46,7 +47,6 @@
   "refereeUrl_invalid": "输入有效的网址",
   "sign_up": "註冊",
   "cancel": "取消",
-
   "dash_earnings": "收益",
   "dash_total_transaction": "總交易",
   "dash_sign_customer": "新註冊（客戶）",
@@ -61,7 +61,6 @@
   "dash_amount": "合計 （港元）",
   "dash_total_sign_customer": "總註冊人數（客戶）",
   "dash_total_sign_seller": "總註冊（賣家）",
-
   "dash_trans_mang_fee": "交易管理費",
   "dash_online_payment": "網上支付費用",
   "dash_shipment_cost": "運輸成本 (通過Marketoo帳戶)",
@@ -81,7 +80,6 @@
   "dash_total_active_prod": "活動產品總數",
   "dash_total_amount_trans": "總交易額",
   "dash_top_50_sellers": "前50名賣家",
-
   "dash_shipped_via_own_account": "運費 （使用個人用戶）",
   "dash_shipped_via_marketoo_account": "運費 （使用Marketoo帳戶）",
   "dash_total_revenue": "總收",
@@ -93,7 +91,6 @@
   "dash_order_total": "訂單金額",
   "dash_product_name": "產品名稱",
   "dash_status": "訂單狀態",
-
   "sidebar_Home": "家",
   "sidebar_My_Account": "我的帳戶",
   "sidebar_Seller_Customer": "賣方和客戶F",
@@ -138,12 +135,10 @@
   "sidebar_Adds_Trends": "广告趋势",
   "sidebar_Notifications": "通知事項",
   "sidebar_PushNotifications": "推送通知",
-
   "total_clicks_ratio": "7日獲得1260 點擊數數量",
   "sidebar_Return_Exchange": "退換貨品",
   "sidebar_Refer_a_Seller": "推薦設計師",
   "sidebar_Campaign": "運動",
-
   "returnexchange_requestedon": "申請日期",
   "returnexchange_products": "產品",
   "returnexchange_type": "類別",
@@ -160,7 +155,6 @@
   "ordersmanagement_orderdate": "日期",
   "ordersmanagement_total": "合計",
   "ordersmanagement_action": "更改",
-
   "Dashboard": "數據庫",
   "Products": "產品展示",
   "Category": "类别",
@@ -188,20 +182,17 @@
   "ordermanagement_ordercustomersummaryorderstatuschange": "更改",
   "ordermanagement_ordercustomersummaryorderstotals": "總額",
   "ordermanagement_ordercustomersummaryorderstotalschange": "更改",
-
   "order_filter_none": "None",
   "order_filter_orderId": "Order Id",
   "order_filter_customerId": "Customer Id",
   "order_filter_sellerId": "Seller Id",
   "order_filter_paymentStatus": "Payment Status",
-
   "prod_image": "图片",
   "prod_Name": "名称",
   "prod_item_size": "Size",
   "prod_unitAmount": "单位金额",
   "prod_qty": "数量",
   "prod_totalAmount": "总金额",
-
   "Product Detail": "产品信息",
   "Add Products": "添加产品",
   "Add Product": "添加产品",
@@ -244,9 +235,7 @@
   "My Ads Performance": "我的廣告成效果",
   "Notifications": "通知",
   "Add Notification": "添加通知",
-
   "n_create_notification": "建立通知",
-
   "Boosting_performance": "我的廣告成效果",
   "Boosting_last30days": "這過去30天",
   "Boosting_result_daily": "每天結算",
@@ -271,19 +260,16 @@
   "Promotions": "促銷活動",
   "Campiagn": "運動",
   "Campiagns": "運動",
-
   "campaign_image": "Image",
   "campaign_name": "Name",
   "campaign_status": "Status",
   "campaign_publish": "Publish",
   "campaign_text": "Text",
   "campaign_action": "Action",
-
   "Revenue": "收入",
   "Trend": "趨勢",
   "About Us": "關於我們",
   "Banner": "旗帜",
-
   "tab_marketoo_seller": "Marketoo 設計師",
   "tab_marketoo_performance": "我的表現",
   "tab_marketoo_averagetime_ship": "平均發貨時間",
@@ -302,7 +288,6 @@
   "p_bank": "銀行:",
   "p_shop_intro": "商店簡介:",
   "p_acc_no": "商店編號:",
-
   "tab_settings": "設定",
   "notification": "提示信息",
   "announcement": "公告",
@@ -312,22 +297,18 @@
   "n_enable_not": "允許提示信息",
   "n_get_not": "允許個人活動提示信息",
   "n_dnd": "請勿打擾",
-
   "deactivate_acc": "使帳戶將無法用",
   "d_i_have_priv": "我對私人保障存懷",
   "d_this_is_temp": "這決定是暫時的",
   "d_other": "其他",
   "d_deactive_acc": "使帳號將無法用",
-
   "delete_acc": "刪除帳戶",
   "d_no_long": "帳戶再無用途",
   "d_want_to_switch": "想轉用其他帳戶",
   "d_delete_acc": "刪除帳戶",
-
   "prev": "上一頁",
   "next": "下一頁",
   "filter_by": "篩選",
-
   "add_product": "增加商品",
   "edit_product": "編輯產品",
   "prod_name": "商品名稱",
@@ -361,7 +342,6 @@
   "prod_update": "更新",
   "prod_close": "關閉",
   "prod_discard": "棄置",
-
   "Red": "紅",
   "Orange": "橙",
   "Yellow": "黃",
@@ -372,7 +352,6 @@
   "Grey": "灰",
   "Black": "黑",
   "White": "白",
-
   "Gifts": "禮物",
   "Recommended Gifts": "推薦禮物",
   "Custom Gifts": "訂做禮物",
@@ -423,12 +402,9 @@
   "Hong Kong Designs": "香港設計",
   "Hong Kong Brands": "香港品牌",
   "Original Design": "原創設計",
-
   "manage_order": "管理訂單",
-
   "all_coupons": "所有優惠卷",
   "delete": "刪除",
-
   "discount_coup": "優惠卷詳情",
   "cop_general": "一段優惠卷",
   "cop_title": "優惠卷名稱",
@@ -447,7 +423,6 @@
   "cop_amount_percent": "折扣優惠 %",
   "PercentageDiscount_req": "需要折扣",
   "PercentageDiscount_invalid": "折扣无效",
-
   "cop_restriction": "優惠限制",
   "cop_cate": "類別",
   "cop_sub_cate": "次類別",
@@ -467,14 +442,12 @@
   "cop_update": "更新",
   "cop_back": "背部",
   "cop_select_code": "Select Code",
-
   "csc": "新增積分",
   "csc_send_amount": "發放⾦額",
   "csc_reason": "原因",
   "csc_reciver": "接收者",
   "csc_type_email_press": "Type Email & Press Enter",
   "csc_email_here": "請電郵致",
-
   "bid_boosting": "廣告優化",
   "bid_boosting_desc": "「廣告優化」是一種按需要付費的廣告工具，旨在提高您在Marketoo上的可見度。您列出的產品將固定在搜索結果和廣告系列中的各個類別上，從而使更多的潛在買家能夠參與其中。",
   "bid_set_daily_bud": "設置每日預算",
@@ -486,7 +459,6 @@
   "bid_selected_keywords": "已選擇的關鍵字",
   "bid_new_keywords": "建立新關鍵字",
   "bid_boost_now": "放送廣告",
-
   "ref_email": "你的電郵",
   "ref_other_email": "請電郵致",
   "ref_desc": "you are about to look amazing. I'm in love with my Calorisonic, and I think you will be too.",
@@ -494,7 +466,6 @@
   "ref_send_email": "發送電郵",
   "ref_how_it": "如何在運作",
   "ref_powered_by": "版權所有人為Marketoo",
-
   "re_return_exchange": "退貨發及換貨",
   "re_return_details": "退貨發及換貨詳情",
   "re_desc": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium\ndoloremque\nlaudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto\nbeatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem,",
@@ -515,7 +486,6 @@
   "re_refund": "退款",
   "re_refund_item": "退款產品將不再履行",
   "re_send_not": "向客人發即時信息",
-
   "Accessories": "配件飾物",
   "clothing": "衣著服飾",
   "Other": "其他",
@@ -540,7 +510,6 @@
   "Masks": "口罩",
   "Eye Masks": "眼罩",
   "View All": "查看全部",
-
   "Womenswear": "女裝",
   "Blouse": "上衣",
   "Skirts": "裙",
@@ -556,7 +525,6 @@
   "Menswear": "男裝",
   "Underwear": "內衣",
   "Couple Clothing": "情侶服飾",
-
   "Paper Products": "紙品",
   "Post Cards": "明信片",
   "Stickers": "貼紙",
@@ -575,7 +543,6 @@
   "Stamps/ Stamp Pads": "印章/印台",
   "Bookmarks": "書籤",
   "Slipcases": "書套",
-
   "Home Decoration": "家飾佈置",
   "Furnish and Decorate": "擺設",
   "Candles/ scents": "蠟燭/香氛",
@@ -601,7 +568,6 @@
   "Sport Equipment/ Gear": "運動用品",
   "Technology": "電子科技",
   "DIY Materials": "媽咪寶寶材料",
-
   "Ladies": "女裝袋款",
   "Clutches": "手拿袋",
   "Crossbody Bags": "斜孭袋",
@@ -615,7 +581,6 @@
   "Laptop Pouch": "電腦袋",
   "Travel Bags/ Suitcases": "旅行袋/行李箱",
   "Gadget Bags": "相機袋",
-
   "Womens": "女士美容",
   "Cosmetic Products": "化妝產品",
   "Skincare Products": "護膚產品",
@@ -626,7 +591,6 @@
   "Fragrance": "香水",
   "Mens": "男士美容",
   "Beard Products": "剃鬚",
-
   "Handicraft": "手作班",
   "Candles/ Aromatherapy": "蠟燭/香薰",
   "Planting": "盆栽",
@@ -639,11 +603,9 @@
   "Outdoor Activities": "戶外活動",
   "Indoor Activities": "室外運動",
   "Casual Seminar": "休閒講座",
-
   "Mismatched items": "與訂單不符的商品",
   "Faulty items": "商品有缺陷瑕疵",
   "Wrong size": "商品與商品⾴說明不符",
-
   "sc_users": "用戶數",
   "sc_sellers": "Sellers",
   "ap_applicants": "Applicants",
@@ -660,7 +622,6 @@
   "sc_seller_code": "SELLER CODE",
   "sc_membership": "會員資格",
   "sc_country": "國家",
-
   "seller_filter_country": "Country",
   "seller_filter_accountStatus": "Status",
   "seller_filter_englishFname": "English Name",
@@ -669,7 +630,6 @@
   "seller_filter_email": "Email",
   "seller_filter_sellerId": "Seller Id",
   "seller_filter_designHallUrl": "Design Hall Url",
-
   "sd_reim_detail": "Reimbursement Details",
   "sd_seller_detail": "Seller Details",
   "sd_transaction_management_fee": "Transaction Management Fee",
@@ -698,19 +658,16 @@
   "sd_top_50_sellers": "Top 50 Sellers",
   "sd_new_signups_customer": "New Sign-ups (Customers)",
   "sd_new_signups_sellers": "New Sign-ups (Sellers)",
-
   "sd_payment": "Payment",
   "sd_orders": "Order",
   "sd_coupon": "Coupon",
   "sd_coupons": "Coupons",
   "sd_store_credit": "Store Credit",
   "sd_products": "View Products",
-
   "customer_filter_none": "None",
   "customer_filter_username": "用戶名",
   "customer_filter_customerId": "Customer Id",
   "customer_filter_email": "電郵",
-
   "r_heading": "報銷",
   "r_search": "搜索",
   "r_profile": "個人資料圖片",
@@ -722,7 +679,6 @@
   "r_email": "電子郵件",
   "r_join_date": "加入日期",
   "r_upload_trans": "上傳成績單",
-
   "ads_topperformingads": "表現最佳的廣告客戶",
   "ads_toptrendinggroup": "趨勢集團",
   "ads_heading": "廣告商",
@@ -734,7 +690,6 @@
   "ads_total_keyword_profit_acc": "60,000",
   "ads_total_advertisers_acc": "30",
   "ads_total_advertise_prod_acc": "40",
-
   "ads_profile": "Profile Picture",
   "ads_name": "Name",
   "ads_investment_amount": "Investment Amount",
@@ -744,7 +699,6 @@
   "ads_paid_keyword": "Pain Keyword",
   "ads_product_quality": "Product Quality",
   "ads_action": "Action",
-
   "ads_high_invest": "最高投資",
   "ads_best_seller": "暢銷書",
   "ads_high_ads_score": "highest Ads Score",
@@ -753,9 +707,7 @@
   "ads_cat": "分類目錄",
   "ads_sub_cat": "子類別",
   "ads_ex_sub_cat": "擴展子類別",
-
   "Magazine": "雜誌",
-
   "ab_about_us": "關於我們",
   "ab_privacy_policies": "私隐政策",
   "ab_contact_info": "联系信息",
@@ -765,16 +717,13 @@
   "ab_terms_conditions": "条款和条件",
   "ab_weekend_marketoo": "Weekend Marketoo",
   "ab_return_exchange_policy": "Return & Exchange Policy",
-
   "ban_banners": "标语",
   "ban_add_banner": "添加横幅",
   "close": "关",
-
   "pro_add_promotion": "添加促銷",
   "pro_create": "創造",
   "pro_title": "標題",
   "pro_search": "搜索",
-
   "not_all_sellers": "所有卖家",
   "not_all_customers": "所有顾客",
   "not_spread_all": "全部传播",
@@ -782,10 +731,9 @@
   "not_content": "Content",
   "not_created_date": "Created At",
   "not_preview": "Preview",
-
-  "Type":"類型",
-  "Created On":"創建於",
-  "Text":"文本",
-  "Sender":"發件人",
-  "Action":"行動"
+  "Type": "類型",
+  "Created On": "創建於",
+  "Text": "文本",
+  "Sender": "發件人",
+  "Action": "行動"
 }
