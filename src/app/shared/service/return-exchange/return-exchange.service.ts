@@ -21,4 +21,8 @@ export class ReturnExchangeService {
   updateOrder(id, data) {
     return this.commonService.put(`returnExchange/${id}`, data);
   }
+
+  sendMessage(data) {
+    return this.commonService.post(`send-msg`, data);
+  }
 }

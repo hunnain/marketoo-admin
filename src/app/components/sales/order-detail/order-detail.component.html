@@ -722,8 +722,8 @@
     <div class="action">
       <app-button
         [btnType]="'submit'"
-        [loading]="false"
-        [disabled]="false"
+        [loading]="loading"
+        [disabled]="loading"
         [btnText]="'Send'"
         (onSubmit)="onSendMessage()"
       ></app-button>

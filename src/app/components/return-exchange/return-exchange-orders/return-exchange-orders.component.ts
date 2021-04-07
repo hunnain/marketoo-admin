@@ -5,6 +5,8 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { ReturnExchangeService } from 'src/app/shared/service/return-exchange/return-exchange.service';
 import { returnDB } from '../../../shared/tables/return-list';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 import * as moment from 'moment';
 
 @Component({
@@ -14,8 +16,10 @@ import * as moment from 'moment';
 })
 export class ReturnExchanngeOrderComponent implements OnInit {
   public returnExchange = [];
+  public closeResult: string;
   public temp = [];
   public loading = false;
+  textMessage = '';
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   public pagination: Paginate = {
@@ -28,13 +32,44 @@ export class ReturnExchanngeOrderComponent implements OnInit {
   };
   pageSizeOptions: number[] = [5, 10, 25, 50];
   constructor(
+    private modalService: NgbModal,
     private router: Router,
     private rxService: ReturnExchangeService,
     private cs: CommonService
   ) {
     this.fetchOrders();
+    this.cs.isLoading.subscribe((loading) => {
+      this.loading = loading;
+    });
   }
 
+  openModal(content) {
+    this.open(content);
+  }
+
+  open(content) {
+    console.log(content);
+
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
   ngOnInit() {}
 
   onSelectRow(row) {
@@ -62,6 +97,17 @@ export class ReturnExchanngeOrderComponent implements OnInit {
     this.pagination.PageSize = data.pageSize;
     this.pagination.CurrentPage = data.pageIndex + 1;
     this.fetchOrders();
+  }
+
+  onSendMessage(): void {
+    this.loading = true;
+    this.rxService.sendMessage({ msg: this.textMessage }).subscribe((res) => {
+      console.log(res);
+      this.textMessage = '';
+      this.loading = false;
+      this.modalService.dismissAll('update');
+    });
+    console.log(this.textMessage, 'Msg Sent');
   }
 
   fetchOrders() {

@@ -5,7 +5,7 @@ import { CommonService } from '../common.service';
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
   getOrders(query) {
     return this.commonService.get(`admin/get-all-orders?${query}`);
@@ -34,5 +34,9 @@ export class OrderService {
   }
   updateShippingMethod(data) {
     return this.commonService.post(`order/update-shipping-details`, data);
+  }
+
+  sendMessage(data) {
+    return this.commonService.post(`send-msg`, data);
   }
 }
