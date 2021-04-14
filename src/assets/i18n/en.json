@@ -147,7 +147,7 @@
   "sidebar_Return_Exchange": "Return & Exchange",
   "sidebar_Refer_a_Seller": "Refer a Seller",
   "sidebar_Campaign": "Campaign",
-
+ "sidebar_Report_Product":"Report Product",
   "returnexchange_requestedon": "Requested On",
   "returnexchange_products": "Products",
   "returnexchange_type": "Type",
@@ -501,6 +501,7 @@
   "ref_powered_by": "Powered by Marketoo",
 
   "re_return_exchange": "Return & Exchange",
+  "re_report_product": "Report Product",
   "re_return_details": "Return/Exchange Details",
   "re_desc": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium\ndoloremque\nlaudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto\nbeatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem,",
   "re_product": "Product",
@@ -521,6 +522,12 @@
   "re_refund": "Refund",
   "re_refund_item": "Refunded items will no longer be fulfillable.",
   "re_send_not": "Send a notification to the customer",
+
+"reportproduct_name":"Product Name",
+"reportproduct_desc":"Description",
+"reportproduct_reason":"Reason",
+
+
 
   "Accessories": "Accessories",
   "clothing": "Clothing",

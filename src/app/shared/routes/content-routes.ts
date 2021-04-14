@@ -212,6 +212,16 @@ export const content: Routes = [
     },
   },
   {
+    path: 'report-product',
+    loadChildren: () =>
+      import('../../components/report-product/report-product.module').then(
+        (m) => m.ReportProductModule
+      ),
+    data: {
+      breadcrumb: 'Report Product',
+    },
+  },
+  {
     path: 'refer-seller',
     loadChildren: () =>
       import('../../components/refer/refer.module').then((m) => m.ReferModule),
@@ -232,9 +242,11 @@ export const content: Routes = [
   {
     path: 'push-notifications',
     loadChildren: () =>
-      import('../../components/push-notifications/push-notification.module').then((m) => m.PushNotificationModule),
+      import(
+        '../../components/push-notifications/push-notification.module'
+      ).then((m) => m.PushNotificationModule),
     data: {
       breadcrumb: 'Push Notification',
     },
-  }
+  },
 ];

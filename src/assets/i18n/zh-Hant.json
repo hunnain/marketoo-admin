@@ -466,7 +466,11 @@
   "ref_send_email": "發送電郵",
   "ref_how_it": "如何在運作",
   "ref_powered_by": "版權所有人為Marketoo",
+  
+  
   "re_return_exchange": "退貨發及換貨",
+  "re_report_product": "Report Product",
+  
   "re_return_details": "退貨發及換貨詳情",
   "re_desc": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium\ndoloremque\nlaudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto\nbeatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem,",
   "re_product": "商品",
@@ -486,6 +490,12 @@
   "re_refund": "退款",
   "re_refund_item": "退款產品將不再履行",
   "re_send_not": "向客人發即時信息",
+
+
+  "reportproduct_name":"Product Name",
+  "reportproduct_desc":"Description",
+  "reportproduct_reason":"Reason",
+
   "Accessories": "配件飾物",
   "clothing": "衣著服飾",
   "Other": "其他",

@@ -184,6 +184,14 @@ export class NavService {
       active: false,
     },
     {
+      path: '/report-product',
+      title: 'sidebar_Report_Product',
+      icon: 'package',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
+    },
+    {
       path: '/notifications',
       title: 'sidebar_Notifications',
       icon: 'bell',
