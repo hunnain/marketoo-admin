@@ -23,6 +23,6 @@ export class ReturnExchangeService {
   }
 
   sendMessage(data) {
-    return this.commonService.post(`send-msg`, data);
+    return this.commonService.post(`chat/send-msg`, data);
   }
 }

@@ -43,7 +43,9 @@ export class ReturnExchanngeOrderComponent implements OnInit {
     });
   }
 
-  openModal(content) {
+  openModal(content, data) {
+    console.log(content, data);
+
     this.open(content);
   }
 
@@ -101,12 +103,14 @@ export class ReturnExchanngeOrderComponent implements OnInit {
 
   onSendMessage(): void {
     this.loading = true;
-    this.rxService.sendMessage({ msg: this.textMessage }).subscribe((res) => {
-      console.log(res);
-      this.textMessage = '';
-      this.loading = false;
-      this.modalService.dismissAll('update');
-    });
+    this.rxService
+      .sendMessage({ receiverId: '', text: this.textMessage })
+      .subscribe((res) => {
+        console.log(res);
+        this.textMessage = '';
+        this.loading = false;
+        this.modalService.dismissAll('update');
+      });
     console.log(this.textMessage, 'Msg Sent');
   }
 

@@ -193,23 +193,21 @@ export class CreateCouponComponent implements OnInit {
   fetchCustomers() {
     let query = ``;
 
-    this.customerService
-      .getSellerOrCustomer('customers', query)
-      .subscribe((res) => {
-        console.log(res);
-        if (res) {
-          this.cs.isLoading.next(false);
-          this.fetching = false;
-          this.customersOptions = this.generateOptions(res.body || []);
-        }
-      });
+    this.customerService.getCustomersCode().subscribe((res) => {
+      console.log(res);
+      if (res) {
+        this.cs.isLoading.next(false);
+        this.fetching = false;
+        this.customersOptions = this.generateOptions(res.body || []);
+      }
+    });
   }
 
   generateOptions(data) {
     let options = [];
     if (data.length)
       data.forEach((dt) => {
-        let obj = { id: dt.customerId, text: dt.customerId };
+        let obj = { id: dt, text: dt };
         options.push(obj);
       });
     return options;

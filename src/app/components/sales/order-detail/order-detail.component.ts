@@ -100,7 +100,7 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   fetchOrderById(id) {
     this.loading = true;
@@ -175,12 +175,17 @@ export class OrderDetailComponent implements OnInit {
 
   onSendMessage(): void {
     this.loading = true;
-    this.orderService.sendMessage({ msg: this.textMessage }).subscribe((res) => {
-      console.log(res);
-      this.textMessage = ""
-      this.loading = false;
-      this.modalService.dismissAll('update');
-    });
+    this.orderService
+      .sendMessage({
+        receiverId: this.order.customerId,
+        text: this.textMessage,
+      })
+      .subscribe((res) => {
+        console.log(res);
+        this.textMessage = '';
+        this.loading = false;
+        this.modalService.dismissAll('update');
+      });
     console.log(this.textMessage, 'Msg Sent');
   }
 

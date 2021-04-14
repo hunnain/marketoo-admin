@@ -22,6 +22,9 @@ export class SellerCustomerService {
   getSellerInfoById(prefix, uuid) {
     return this.commonService.get(`admin/get-${prefix}-info-by-id/${uuid}`);
   }
+  getCustomersCode() {
+    return this.commonService.get(`coupon/get-customercodes`);
+  }
 
   approveRejectSeller(prefix, data) {
     return this.commonService.post(`admin/approve-reject-${prefix}`, {
