@@ -121,6 +121,25 @@ export class OrderDetailComponent implements OnInit {
 
   updateTotal() {
     // this.dummyData.total = this.dummyData.total + this.total;
+
+    let obj = {
+      amount: this.total,
+      orderId: Number(this.orderId),
+      reason: this.reason,
+    };
+    if (this.reason == 'other') {
+      obj['reason'] = this.reasonDesc || '';
+    }
+    this.orderService.updateOrderPrice(obj).subscribe((res) => {
+      if (res) {
+        console.log('fetch res---', res);
+        // let obj: Order = res;
+        // this.order = obj;
+        this.fetchOrderById(this.orderId);
+        // this.cs.isLoading.next(false);
+        // this.loading = false;
+      }
+    });
     this.modalService.dismissAll('save button clicked');
   }
 
