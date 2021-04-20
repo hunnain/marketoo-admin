@@ -236,10 +236,12 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of dashboardDetails | keyvalue">
-                <th scope="row">{{ getKey(item.key) | translate }}</th>
-                <td>{{ item.value }}</td>
+                <th *ngIf="checkIsObject(item.value)" scope="row">
+                  {{ getKey(item.key) | translate }}
+                </th>
+                <td *ngIf="checkIsObject(item.value)">{{ item.value }}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <th scope="row">{{ "dash_online_payment" | translate }}</th>
                 <td>$16</td>
               </tr>
@@ -326,7 +328,7 @@
               <tr>
                 <th scope="row">{{ "dash_sign_seller" | translate }}</th>
                 <td>25</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -369,15 +371,15 @@
               <div class="small-chartjs">
                 <canvas
                   baseChart
-                  id="small-graph-1"
+                  id="small-graph-2"
                   height="60vw"
                   width="140vw"
                   [datasets]="smallLineChartData"
-                  [labels]="smallLineChartLabels"
-                  [options]="smallLineChartOptions"
-                  [colors]="smallLineChartColors"
-                  [legend]="smallLineChartLegend"
-                  [chartType]="smallLineChartType"
+                  [labels]="smallLine2ChartLabels"
+                  [options]="smallLine2ChartOptions"
+                  [colors]="smallLine2ChartColors"
+                  [legend]="smallLine2ChartLegend"
+                  [chartType]="smallLine2ChartType"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"
                 ></canvas>
@@ -424,6 +426,7 @@
           <h6 style="font-family: sans-serif; font-weight: 600">
             {{ "dash_average_basket_value" | translate }}
           </h6>
+
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -550,12 +553,12 @@
                   id="small-graph-4"
                   height="60vw"
                   width="140vw"
-                  [datasets]="smallLine4ChartData"
-                  [labels]="smallLine4ChartLabels"
-                  [options]="smallLine4ChartOptions"
-                  [colors]="smallLine4ChartColors"
-                  [legend]="smallLine4ChartLegend"
-                  [chartType]="smallLine4ChartType"
+                  [datasets]="smallLine3ChartData"
+                  [labels]="smallLine3ChartLabels"
+                  [options]="smallLine3ChartOptions"
+                  [colors]="smallLine3ChartColors"
+                  [legend]="smallLine3ChartLegend"
+                  [chartType]="smallLine3ChartType"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"
                 ></canvas>
