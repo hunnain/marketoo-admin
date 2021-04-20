@@ -343,7 +343,8 @@
                 {{ "dash_shipped_via_own_account" | translate }}
               </div>
               <div class="report-dashboard-number">
-                <span class="dollar-unit">$</span>79
+                <span class="dollar-unit">$</span>
+                {{ dashboardDetails?.shippingViaOwnAccount }}
               </div>
             </div>
             <div class="report-dashboard-item">
@@ -351,7 +352,8 @@
                 {{ "dash_shipped_via_marketoo_account" | translate }}
               </div>
               <div class="report-dashboard-number">
-                <span class="dollar-unit">$</span>129
+                <span class="dollar-unit">$</span>
+                {{ dashboardDetails?.shippingViaMarketooAccount }}
               </div>
             </div>
           </div>
@@ -388,7 +390,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  42%
+                  {{ dashboardDetails?.totalRevenue }}
                   <!-- <span><i class="fa fa-angle-up font-primary"></i></span> -->
                 </h3>
               </div>
@@ -403,7 +405,7 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25%
+                {{ dashboardDetails?.totalRevenueLastMonth }}
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Gross sales of August</h5>
@@ -449,7 +451,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  20%
+                  {{ dashboardDetails?.averageBasketValue }}
                   <span>
                     <!-- <i class="fa fa-angle-up font-secondary"></i> -->
                   </span>
@@ -466,7 +468,8 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.13%
+                {{ dashboardDetails?.averageBasketValueLastMonth }}
+
                 <span>
                   <!-- <i class="fa fa-angle-up"></i> -->
                 </span>
@@ -567,7 +570,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  75%
+                  {{ dashboardDetails?.newCustomerSignUps }}
                   <!-- <span><i class="fa fa-angle-up font-danger"></i></span> -->
                 </h3>
               </div>
@@ -582,7 +585,7 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25%
+                {{ dashboardDetails?.customerSignUpsLastMonth }}
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Followers of June</h5>
@@ -627,7 +630,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  75%
+                  {{ dashboardDetails?.newSellerSignUps }}
                   <!-- <span><i class="fa fa-angle-up font-danger"></i></span> -->
                 </h3>
               </div>
@@ -642,7 +645,7 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25%
+                {{ dashboardDetails?.sellerSignUpsLastMonth }}
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Followers of June</h5>
