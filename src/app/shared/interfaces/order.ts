@@ -16,6 +16,7 @@ export interface Order {
     shipmentMethod: any;
     note: string;
     creationDate: string;
+    fpsImageUrl?: string;
     customer: any;
     invoice: any;
     orderedProductDetails: orderedProductDetails[];

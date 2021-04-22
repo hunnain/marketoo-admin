@@ -3,14 +3,15 @@
 self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.',event);
     var data = event.data.json();
-    console.log("notification data on sw--",data)
+    console.log("notification data on sw--",JSON.stringify(data))
 
     const title = formatType(data.Type);
     const options = {
         body: data.Text,
         icon: 'assets/push.png',
         badge: 'assets/push.png',
-        data: data.Url
+        data: '/push-notifications'
+        // data: data.Url
     };
 
     const promiseChain = self.registration.showNotification(title, options);
