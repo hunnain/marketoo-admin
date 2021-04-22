@@ -628,7 +628,7 @@
         <div class="content-right">
           <p>Invoice No.: {{ order?.invoice?.invoiceNo }}</p>
 
-          <p>Date: {{ order?.invoice?.creationDate }}</p>
+          <p>Date: {{ formetDate(order?.invoice?.creationDate) }}</p>
         </div>
         <div class="content-left">
           <p>Dear {{ order?.invoice?.customerName }},</p>
@@ -673,7 +673,7 @@
       </div>
       <div class="footer-right">
         <p>Total (HKD): ${{ order?.invoice?.grandTotal }}</p>
-        <p>Payments: Stripe</p>
+        <p>Payments: {{ order?.paymentService }}</p>
       </div>
       <div class="footer-desc">
         <span

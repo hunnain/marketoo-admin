@@ -36,15 +36,15 @@ export class DashboardComponent implements OnInit {
   public lineChartLegend = chartData.lineChartLegend;
   public lineChartType = chartData.lineChartType;
 
-  // lineChart
-  public smallLineChartData = chartData.smallLineChartData;
+  // lineChart revenue chart
+  public smallLineChartData = chartData.smallLine2ChartData;
   public smallLineChartLabels = chartData.smallLineChartLabels;
   public smallLineChartOptions = chartData.smallLineChartOptions;
   public smallLineChartColors = chartData.smallLineChartColors;
   public smallLineChartLegend = chartData.smallLineChartLegend;
   public smallLineChartType = chartData.smallLineChartType;
 
-  // lineChart
+  // lineChart  basket chart
   public smallLine2ChartData = chartData.smallLine2ChartData;
   public smallLine2ChartLabels = chartData.smallLine2ChartLabels;
   public smallLine2ChartOptions = chartData.smallLine2ChartOptions;
@@ -52,16 +52,16 @@ export class DashboardComponent implements OnInit {
   public smallLine2ChartLegend = chartData.smallLine2ChartLegend;
   public smallLine2ChartType = chartData.smallLine2ChartType;
 
-  // lineChart
-  public smallLine3ChartData = chartData.smallLine3ChartData;
+  // lineChart  customer chart
+  public smallLine3ChartData = chartData.smallLine2ChartData;
   public smallLine3ChartLabels = chartData.smallLine3ChartLabels;
   public smallLine3ChartOptions = chartData.smallLine3ChartOptions;
   public smallLine3ChartColors = chartData.smallLine3ChartColors;
   public smallLine3ChartLegend = chartData.smallLine3ChartLegend;
   public smallLine3ChartType = chartData.smallLine3ChartType;
 
-  // lineChart
-  public smallLine4ChartData = chartData.smallLine4ChartData;
+  // lineChart seller chart
+  public smallLine4ChartData = chartData.smallLine2ChartData;
   public smallLine4ChartLabels = chartData.smallLine4ChartLabels;
   public smallLine4ChartOptions = chartData.smallLine4ChartOptions;
   public smallLine4ChartColors = chartData.smallLine4ChartColors;
@@ -71,8 +71,8 @@ export class DashboardComponent implements OnInit {
   public chart3 = chartData.chart3;
 
   // events
-  public chartClicked(e: any): void { }
-  public chartHovered(e: any): void { }
+  public chartClicked(e: any): void {}
+  public chartHovered(e: any): void {}
   dashboardDetails = {
     adminCouponsAmt: 0,
     averageBasketValue: 0,
@@ -104,13 +104,42 @@ export class DashboardComponent implements OnInit {
     transactionsManagementFee: 0,
   };
   loading = true;
+
   ngOnInit() {
     this.fetchData();
+    console.log(this.smallLine2ChartData);
+  }
+
+  checkIsObject(value) {
+    console.log(value);
+
+    if (typeof value == 'object') return false;
+    else return true;
   }
 
   fetchData() {
     this.dashboardService.getDashboardData().subscribe((res) => {
       this.dashboardDetails = res.body || {};
+      this.smallLineChartData = [
+        {
+          data: Object.values(res.body.revenueDayWise),
+        },
+      ];
+      this.smallLine2ChartData = [
+        {
+          data: Object.values(res.body.avgBasketValueDayWise),
+        },
+      ];
+      this.smallLine3ChartData = [
+        {
+          data: Object.values(res.body.newCustomersDayWise),
+        },
+      ];
+      this.smallLine4ChartData = [
+        {
+          data: Object.values(res.body.newSellersDayWise),
+        },
+      ];
       this.loading = false;
       console.log(res);
     });
@@ -122,36 +151,35 @@ export class DashboardComponent implements OnInit {
     return tempKey;
   }
 
-
   public generating: boolean = false;
   downloadReport() {
     this.generating = true;
     let currentDate = new Date();
     let month = currentDate.getMonth() + 1;
     let year = currentDate.getFullYear();
-    this.dashboardService.generateReport(year, month).subscribe(res => {
+    this.dashboardService.generateReport(year, month).subscribe((res) => {
       if (res && res['body']) {
-        console.log(res['body'])
+        console.log(res['body']);
         this.generating = false;
         let content = res['body'].fileContents;
         let type = res['body'].contentType;
         let name = res['body'].fileDownloadName;
         this.downLoadFile(content, type, name);
       }
-    })
+    });
   }
 
   /**
-     * Method is use to download file.
-     * @param data - Array Buffer data
-     * @param type - type of the document.
-     */
+   * Method is use to download file.
+   * @param data - Array Buffer data
+   * @param type - type of the document.
+   */
   downLoadFile(data: any, type: string, filename: string) {
     // let blob = new Blob([data], { type: type });
     // let url = window.URL.createObjectURL(blob);
     let url = `data:${type};base64,${data}`;
     let downloadLink = document.createElement('a');
-    downloadLink.href = url
+    downloadLink.href = url;
     if (filename) {
       downloadLink.setAttribute('download', filename);
     }

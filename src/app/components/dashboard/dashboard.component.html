@@ -236,10 +236,12 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of dashboardDetails | keyvalue">
-                <th scope="row">{{ getKey(item.key) | translate }}</th>
-                <td>{{ item.value }}</td>
+                <th *ngIf="checkIsObject(item.value)" scope="row">
+                  {{ getKey(item.key) | translate }}
+                </th>
+                <td *ngIf="checkIsObject(item.value)">{{ item.value }}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <th scope="row">{{ "dash_online_payment" | translate }}</th>
                 <td>$16</td>
               </tr>
@@ -326,7 +328,7 @@
               <tr>
                 <th scope="row">{{ "dash_sign_seller" | translate }}</th>
                 <td>25</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -341,7 +343,8 @@
                 {{ "dash_shipped_via_own_account" | translate }}
               </div>
               <div class="report-dashboard-number">
-                <span class="dollar-unit">$</span>79
+                <span class="dollar-unit">$</span>
+                {{ dashboardDetails?.shippingViaOwnAccount }}
               </div>
             </div>
             <div class="report-dashboard-item">
@@ -349,7 +352,8 @@
                 {{ "dash_shipped_via_marketoo_account" | translate }}
               </div>
               <div class="report-dashboard-number">
-                <span class="dollar-unit">$</span>129
+                <span class="dollar-unit">$</span>
+                {{ dashboardDetails?.shippingViaMarketooAccount }}
               </div>
             </div>
           </div>
@@ -369,15 +373,15 @@
               <div class="small-chartjs">
                 <canvas
                   baseChart
-                  id="small-graph-1"
+                  id="small-graph-2"
                   height="60vw"
                   width="140vw"
                   [datasets]="smallLineChartData"
-                  [labels]="smallLineChartLabels"
-                  [options]="smallLineChartOptions"
-                  [colors]="smallLineChartColors"
-                  [legend]="smallLineChartLegend"
-                  [chartType]="smallLineChartType"
+                  [labels]="smallLine2ChartLabels"
+                  [options]="smallLine2ChartOptions"
+                  [colors]="smallLine2ChartColors"
+                  [legend]="smallLine2ChartLegend"
+                  [chartType]="smallLine2ChartType"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"
                 ></canvas>
@@ -386,7 +390,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  42%
+                  {{ dashboardDetails?.totalRevenue }}
                   <!-- <span><i class="fa fa-angle-up font-primary"></i></span> -->
                 </h3>
               </div>
@@ -401,7 +405,7 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25%
+                {{ dashboardDetails?.totalRevenueLastMonth }}
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Gross sales of August</h5>
@@ -424,6 +428,7 @@
           <h6 style="font-family: sans-serif; font-weight: 600">
             {{ "dash_average_basket_value" | translate }}
           </h6>
+
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -446,7 +451,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  20%
+                  {{ dashboardDetails?.averageBasketValue }}
                   <span>
                     <!-- <i class="fa fa-angle-up font-secondary"></i> -->
                   </span>
@@ -463,7 +468,8 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.13%
+                {{ dashboardDetails?.averageBasketValueLastMonth }}
+
                 <span>
                   <!-- <i class="fa fa-angle-up"></i> -->
                 </span>
@@ -550,12 +556,12 @@
                   id="small-graph-4"
                   height="60vw"
                   width="140vw"
-                  [datasets]="smallLine4ChartData"
-                  [labels]="smallLine4ChartLabels"
-                  [options]="smallLine4ChartOptions"
-                  [colors]="smallLine4ChartColors"
-                  [legend]="smallLine4ChartLegend"
-                  [chartType]="smallLine4ChartType"
+                  [datasets]="smallLine3ChartData"
+                  [labels]="smallLine3ChartLabels"
+                  [options]="smallLine3ChartOptions"
+                  [colors]="smallLine3ChartColors"
+                  [legend]="smallLine3ChartLegend"
+                  [chartType]="smallLine3ChartType"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"
                 ></canvas>
@@ -564,7 +570,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  75%
+                  {{ dashboardDetails?.newCustomerSignUps }}
                   <!-- <span><i class="fa fa-angle-up font-danger"></i></span> -->
                 </h3>
               </div>
@@ -579,7 +585,7 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25%
+                {{ dashboardDetails?.customerSignUpsLastMonth }}
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Followers of June</h5>
@@ -624,7 +630,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  75%
+                  {{ dashboardDetails?.newSellerSignUps }}
                   <!-- <span><i class="fa fa-angle-up font-danger"></i></span> -->
                 </h3>
               </div>
@@ -639,7 +645,7 @@
               }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25%
+                {{ dashboardDetails?.sellerSignUpsLastMonth }}
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Followers of June</h5>

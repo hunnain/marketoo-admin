@@ -100,7 +100,7 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   fetchOrderById(id) {
     this.loading = true;
@@ -136,11 +136,13 @@ export class OrderDetailComponent implements OnInit {
         // let obj: Order = res;
         // this.order = obj;
         this.fetchOrderById(this.orderId);
+        this.total = undefined;
+        this.reason = undefined
+        this.modalService.dismissAll('save button clicked');
         // this.cs.isLoading.next(false);
         // this.loading = false;
       }
     });
-    this.modalService.dismissAll('save button clicked');
   }
 
   onMessageSend() {
