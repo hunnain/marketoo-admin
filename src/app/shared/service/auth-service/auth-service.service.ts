@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
   writeToLS(key, value) {
     localStorage.setItem(key, value);

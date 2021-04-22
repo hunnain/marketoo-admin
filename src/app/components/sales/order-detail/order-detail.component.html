@@ -122,6 +122,20 @@
                   order?.paymentService
                 }}</span>
               </div>
+              <div class="font-size-13" *ngIf="order.fpsImageUrl">
+                <strong>{{ "FPS Image" | translate }}</strong
+                >:
+                <span class="badge badge-secondary">
+                  <img
+                    [src]="order.fpsImageUrl"
+                    alt="fps-image"
+                    width="60"
+                    height="60"
+                    style="cursor: pointer"
+                    (click)="openModal(imageModal)"
+                  />
+                </span>
+              </div>
               <div class="font-size-13">
                 <strong>{{
                   "ordermanagement_ordercustomerinvoiceno" | translate
@@ -728,6 +742,30 @@
         (onSubmit)="onSendMessage()"
       ></app-button>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #imageModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">FPS Reference Attachment</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <img [src]="order.fpsImageUrl" alt="fps-image" width="100%" />
+      </div>
+    </div>
+    <!-- <div class="action">
+      <a [href]="order.fpsImageUrl" download target="_blank">Download</a>
+    </div> -->
   </div>
 </ng-template>
 
