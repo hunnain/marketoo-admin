@@ -71,8 +71,8 @@ export class DashboardComponent implements OnInit {
   public chart3 = chartData.chart3;
 
   // events
-  public chartClicked(e: any): void {}
-  public chartHovered(e: any): void {}
+  public chartClicked(e: any): void { }
+  public chartHovered(e: any): void { }
   dashboardDetails = {
     adminCouponsAmt: 0,
     averageBasketValue: 0,
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
   }
 
   checkIsObject(value) {
-    console.log(value);
+    // console.log(value);
 
     if (typeof value == 'object') return false;
     else return true;
