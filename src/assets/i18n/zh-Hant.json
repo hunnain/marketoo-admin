@@ -492,6 +492,8 @@
   "re_send_not": "向客人發即時信息",
 
 
+  "reportproduct_reportedBy":"Reported By",
+  "reportproduct_seller":"Seller",
   "reportproduct_name":"Product Name",
   "reportproduct_desc":"Description",
   "reportproduct_reason":"Reason",
