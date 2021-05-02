@@ -523,6 +523,8 @@
   "re_refund_item": "Refunded items will no longer be fulfillable.",
   "re_send_not": "Send a notification to the customer",
 
+"reportproduct_reportedBy":"Reported By",
+"reportproduct_seller":"Seller",
 "reportproduct_name":"Product Name",
 "reportproduct_desc":"Description",
 "reportproduct_reason":"Reason",

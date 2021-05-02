@@ -24,7 +24,14 @@
               [rowHeight]="'auto'"
               [limit]="5"
             >
-              <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
+              <ngx-datatable-column
+                name="{{ 'reportproduct_reportedBy' | translate }}"
+                prop="customerEmail"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'reportproduct_seller' | translate }}"
+                prop="sellerEmail"
+              ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'reportproduct_name' | translate }}"
                 prop="productName"
