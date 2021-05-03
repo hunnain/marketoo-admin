@@ -21,7 +21,7 @@ export class EditorChoiceComponent implements OnInit {
       // rejectModal: false,
     },
     {
-      tab: 'Editor Choice',
+      tab: 'sidebar_Editor_Choice',
       tabIcon: 'settings',
 
       url: 'product/get-editors-pick',
