@@ -147,7 +147,7 @@
                   "ordermanagement_ordercustomershippingmethod" | translate
                 }}</strong
                 >:
-                {{ order?.shipmentMethod || "---" }}
+                {{ order?.shippingDetail?.courierService || "---" }}
                 <!-- <span
                   class="change-btn"
                   data-toggle="modal"
@@ -170,7 +170,7 @@
               {{ order?.address }}
             </div>
           </div>
-          <div class="container-gap">
+          <div class="container-gap" *ngIf="order.note">
             <h4 class="product-title">
               {{ "ordermanagement_note" | translate }}
             </h4>
@@ -183,16 +183,58 @@
             <h4 class="product-title">
               {{ "ordermanagement_ordercustomerproducts" | translate }}
             </h4>
-            <hr />
+            <div class="table-responsive">
+              <table class="table mt-4">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ "prod_image" | translate }}</th>
+                    <th scope="col">{{ "prod_name" | translate }}</th>
+                    <th scope="col">{{ "prod_unitAmount" | translate }}</th>
+                    <th scope="col">{{ "prod_qty" | translate }}</th>
+                    <th scope="col">{{ "prod_size" | translate }}</th>
+                    <th scope="col">{{ "prod_totalAmount" | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prod of order?.orderedProductDetails">
+                    <td>
+                      <img
+                        [src]="
+                          prod.src
+                            ? prod.src
+                            : 'assets/images/electronics/product/16.jpg'
+                        "
+                        class="img-30 mr-2"
+                      />
+                    </td>
+                    <td>{{ prod?.name | titlecase }}</td>
+                    <td>${{ prod?.unitAmount }}</td>
+                    <td>{{ prod?.quantity }}</td>
+                    <td>{{ prod?.size }}</td>
+                    <td>${{ prod?.totalAmount }}</td>
+                  </tr>
+                  <tr>
+                    <th colspan="5" style="text-align: right">
+                      {{
+                        "ordermanagement_ordercustomersummaryorderstotals"
+                          | translate
+                      }}
+                    </th>
+                    <th>${{ order?.total }}</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- <hr />
             <div>
               <ul>
                 <li class="mb-2">
                   <div class="row align-items-center">
-                    <!-- <div class="col-2 col-sm-4 col-md-2">
+                    <div class="col-2 col-sm-4 col-md-2">
                       <strong>
                         {{ "prod_image" | translate }}
                       </strong>
-                    </div> -->
+                    </div>
                     <div class="col-4 col-sm-4 col-md-4">
                       <strong>
                         {{ "prod_name" | translate }}
@@ -226,7 +268,7 @@
                   *ngFor="let prod of order?.orderedProductDetails"
                 >
                   <div class="row align-items-center">
-                    <!-- <div class="prod_img col-2 col-sm-4 col-md-2">
+                    <div class="prod_img col-2 col-sm-4 col-md-2">
                       <img
                         [src]="
                           prod.src
@@ -235,7 +277,7 @@
                         "
                         class="img-30 mr-2"
                       />
-                    </div> -->
+                    </div>
                     <div class="prod_name col-4 col-sm-4 col-md-4">
                       {{ prod?.name | titlecase }}
                     </div>
@@ -271,53 +313,7 @@
                   <hr />
                 </li>
               </ul>
-              <!-- <table class="table cart-table table-responsive-xs">
-                <thead>
-                </thead>
-                <tbody *ngFor="let product of order?.orderedProductDetails">
-                    <tr>
-                        <td>
-                          <img 
-                          [src]="product.images ? product.images[0].src : 'assets/images/electronics/product/16.jpg'" 
-                          [alt]="product.name"
-                          class="img-30 mr-2"
-                          >
-                        </td>
-                        <td>
-                            <span>{{ product.name | titlecase }}</span>
-                            <div class="mobile-cart-content row">
-                                <div class="col-xs-3">
-                                    <h2 class="td-color">
-                                        ${{ product?.unitAmount }}
-                                    </h2>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="qty-box">
-                              {{product?.quantity}}
-                                
-                            </div>
-                        </td>
-                        <td>
-                            <h2 class="td-color">
-                                ${{ product.totalAmount }}
-                            </h2>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table cart-table table-responsive-md">
-                <tfoot>
-                    <tr>
-                        <td>{{'ordermanagement_ordercustomersummaryorderstotals' | translate }}:</td>
-                        <td>
-                            <h2> {{ order?.total }}</h2>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table> -->
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

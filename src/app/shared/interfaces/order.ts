@@ -13,22 +13,78 @@ export interface Order {
     orderStatus: string;
     paymentStatus: string;
     paymentService: string;
-    shipmentMethod: any;
+    shipmentMethod?: null;
+    paymentMethod: string;
     note: string;
+    isDiscounted: boolean;
+    isReturnExchangeRequested: boolean;
+    couponCode: string;
+    couponKey: string;
+    discountAmount: number;
+    discountType: string;
+    paymentMethodKey: string;
+    fpsImageUrl: string;
     creationDate: string;
-    fpsImageUrl?: string;
-    customer: any;
-    invoice: any;
-    orderedProductDetails: orderedProductDetails[];
+    deliveryDate?: null;
+    confirmationDate?: null;
+    customer: Customer;
+    invoice: Invoice;
+    shippingDetail: ShippingDetail;
+    orderedProductDetails?: (OrderedProductDetailsEntity)[] | null;
+    additionalOrderAmounts?: (null)[] | null;
 }
-
-interface orderedProductDetails {
+export interface Customer {
+    username: string;
+    email: string;
+    customerId: string;
+    imageUrl?: null;
+    phoneNumber?: null;
+    country?: null;
+    zipCode?: null;
+    regionState?: null;
+    address?: null;
+    city?: null;
+    flatPlot?: null;
+    message?: null;
+    isNotificationSubscribed: boolean;
+}
+export interface Invoice {
+    invoiceNo: string;
+    customerName: string;
+    grandTotal: number;
+    orderId: number;
+    creationDate: string;
+    country: string;
+    address: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    paymentService?: null;
+    paymentMethod?: null;
+    invoiceProductDetails?: (InvoiceProductDetailsEntity)[] | null;
+}
+export interface InvoiceProductDetailsEntity {
+    invoiceNo: string;
+    productName: string;
+    qty: number;
+    price: number;
+    total: number;
+}
+export interface ShippingDetail {
+    orderId: number;
+    trackingDetails: string;
+    shippingCost: number;
+    courierService: string;
+    images?: (null)[] | null;
+    isMarketooAccount: boolean;
+}
+export interface OrderedProductDetailsEntity {
     orderId: number;
     productId: string;
     unitAmount: number;
-    qty: number;
+    quantity: number;
     totalAmount: number;
-    size: any;
-    colour: any;
+    size?: null;
+    color?: null;
     name: string;
 }
