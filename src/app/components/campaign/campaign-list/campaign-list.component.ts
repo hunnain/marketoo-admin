@@ -15,6 +15,7 @@ export class CampaignListComponent implements OnInit {
   public campaigns = [];
   public temp = [];
   public loading = false;
+  public fetching = false;
   public selectedCampaign = null;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   selectedRow;
@@ -35,6 +36,11 @@ export class CampaignListComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.getCampaigns();
+    this.cs.isLoading.subscribe(res => {
+      //   this.loading = res;
+      //   this.fetching = res;
+      this.submitting = res;
+    })
   }
 
   open(content) {
@@ -45,10 +51,12 @@ export class CampaignListComponent implements OnInit {
         (result) => {
           this.closeResult = `Closed with: ${result}`;
           this.selectedRow = null;
+          this.selectedCampaign = null
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
           this.selectedRow = null;
+          this.selectedCampaign = null
         }
       );
   }
@@ -62,7 +70,7 @@ export class CampaignListComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onAdd() {
     let route = `/campaign/create-campaign`;
@@ -83,10 +91,11 @@ export class CampaignListComponent implements OnInit {
   }
 
   onGetById(row) {
-    console.log(row, 'get by id');
+    this.fetching = true;
     this.campaignService.getCampaignById(row.id).subscribe((res) => {
-      console.log('res', res.body);
+      this.cs.isLoading.next(false);
       this.selectedCampaign = res.body;
+      this.fetching = false;
       // this.getCampaigns();
     });
   }
@@ -109,6 +118,7 @@ export class CampaignListComponent implements OnInit {
           this.loading = false;
           this.campaigns = this.structureData(res.body || []);
           let data = JSON.parse(res.headers.get('X-Pagination'));
+          console.log('💻', data);
           if (data) {
             this.pagination = data;
           }
@@ -142,13 +152,18 @@ export class CampaignListComponent implements OnInit {
     this.open(content);
   }
 
+  submitting = false
   onPublish() {
+    this.submitting = true
     this.campaignService
       .updateCampaignStatus(this.selectedRow.id, 1)
       .subscribe((res) => {
+        this.submitting = false
+        this.cs.isLoading.next(false);
+        this.loading = false;
         if (res) {
-          this.cs.isLoading.next(false);
-          this.loading = false;
+          this.modalService.dismissAll()
+          this.getCampaigns()
         }
       });
   }

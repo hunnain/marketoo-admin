@@ -103,7 +103,7 @@ export class CampaignComponent implements OnInit {
         name: this.name,
         text: this.template,
         status: this.status,
-        image: this.image,
+        image: this.removeBase64(this.image.dataURL),
       })
       .subscribe((res) => {
         this.cs.isLoading.next(false);
@@ -116,20 +116,41 @@ export class CampaignComponent implements OnInit {
     this.open(content);
   }
   public config: DropzoneConfigInterface = {
-    clickable: true,
     maxFiles: 1,
     autoReset: null,
     errorReset: null,
     cancelReset: null,
-    // autoProcessQueue: false,
-    // autoQueue: false,
     addRemoveLinks: true,
+
+    clickable: true,
+    acceptedFiles: 'image/*',
+    maxFilesize: 10,
+    autoProcessQueue: false,
+    autoQueue: false,
+    createImageThumbnails: true
   };
 
-  public onUploadError(args: any): void {}
+  public onUploadError(args: any): void { }
 
-  public onUploadSuccess(args: any): void {
-    console.log(args);
-    this.image = args;
+  public fileAdded(file: File): void {
+    console.log('💻', 'on dropzone file added', file);
+    this.image = file;
+  }
+  public removeFile(file: any): void {
+    console.log('💻', 'on dropzone remove', file);
+    this.image = null;
+  }
+
+
+  removeBase64(data) {
+    let base = data;
+    let splited = base.split('base64,');
+    let byteImg = splited[1];
+    return byteImg;
+  }
+
+  addBase64(data) {
+    let base = `data:image/jpeg;base64,${data}`;
+    return base;
   }
 }

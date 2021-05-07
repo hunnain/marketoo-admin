@@ -31,7 +31,6 @@
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
-              [limit]="5"
             >
               <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
 
@@ -45,8 +44,24 @@
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'campaign_image' | translate }}"
-                prop="creationDate"
-              ></ngx-datatable-column>
+                prop="imageUrl"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <div>
+                    <img
+                      width="40"
+                      [src]="row.imageUrl"
+                      alt="campaign-image"
+                      *ngIf="row.imageUrl"
+                    />
+                    <span *ngIf="!row.imageUrl">N/A</span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
               <!-- <ngx-datatable-column
                 name="{{ 'campaign_text' | translate }}"
                 prop="text"
@@ -112,7 +127,9 @@
 
 <ng-template #TemplateModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Template</h5>
+    <h5 class="modal-title" id="exampleModalLabel" ngbAutofocus>
+      {{ selectedCampaign?.name }}
+    </h5>
     <button
       type="button"
       class="close"
@@ -122,17 +139,25 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <div
+    style="display: flex; align-items: center; justify-content: center"
+    *ngIf="fetching"
+  >
+    <app-loader [loading]="fetching"></app-loader>
+  </div>
   <div class="modal-body">
-    <img [src]="selectedCampaign?.imageUrl || ''" />
+    <img style="width: 100%" [src]="selectedCampaign?.imageUrl || ''" />
     <div [innerHTML]="selectedCampaign?.text"></div>
     <div
       class="action"
-      *ngIf="selectedCampaign?.status != 'Published'"
+      *ngIf="selectedCampaign?.status == 'Drafted'"
       style="text-align: end"
     >
-      <button class="btn btn-primary" type="button" (click)="onPublish()">
-        Publish
-      </button>
+      <app-button
+        [loading]="submitting"
+        btnText="{{ 'Publish' | translate }}"
+        (onSubmit)="onPublish()"
+      ></app-button>
     </div>
   </div>
 </ng-template>
