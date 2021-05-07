@@ -123,10 +123,11 @@
     </button>
   </div>
   <div class="modal-body">
-    <div [innerHTML]="selectedRow.text"></div>
+    <img [src]="selectedCampaign?.imageUrl || ''" />
+    <div [innerHTML]="selectedCampaign?.text"></div>
     <div
       class="action"
-      *ngIf="selectedRow.status != 'Published'"
+      *ngIf="selectedCampaign?.status != 'Published'"
       style="text-align: end"
     >
       <button class="btn btn-primary" type="button" (click)="onPublish()">

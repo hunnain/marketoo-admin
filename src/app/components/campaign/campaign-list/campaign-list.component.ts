@@ -15,6 +15,7 @@ export class CampaignListComponent implements OnInit {
   public campaigns = [];
   public temp = [];
   public loading = false;
+  public selectedCampaign = null;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   selectedRow;
   public closeResult: string;
@@ -81,6 +82,15 @@ export class CampaignListComponent implements OnInit {
     });
   }
 
+  onGetById(row) {
+    console.log(row, 'get by id');
+    this.campaignService.getCampaignById(row.id).subscribe((res) => {
+      console.log('res', res.body);
+      this.selectedCampaign = res.body;
+      // this.getCampaigns();
+    });
+  }
+
   pageEvent(data) {
     console.log(data);
     this.pagination.PageSize = data.pageSize;
@@ -128,6 +138,7 @@ export class CampaignListComponent implements OnInit {
 
   onViewTemplate(row, content) {
     this.selectedRow = row;
+    this.onGetById(row);
     this.open(content);
   }
 

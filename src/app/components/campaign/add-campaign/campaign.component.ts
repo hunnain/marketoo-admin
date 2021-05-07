@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import {
+  DropzoneComponent,
+  DropzoneConfigInterface,
+  DropzoneDirective,
+} from 'ngx-dropzone-wrapper';
 import { CampaignService } from 'src/app/shared/service/campaign/campaign.service';
 import { CommonService } from 'src/app/shared/service/common.service';
 
@@ -21,11 +25,15 @@ export class CampaignComponent implements OnInit {
       this.loading = loading;
     });
   }
+  @ViewChild(DropzoneComponent, { static: false })
+  componentRef?: DropzoneComponent;
+  @ViewChild(DropzoneDirective, { static: false })
+  directiveRef?: DropzoneDirective;
   public closeResult: string;
   public name: string = '';
   status = 0;
   template = '';
-
+  image = null;
   open(content) {
     console.log(content);
     this.modalService
@@ -54,6 +62,7 @@ export class CampaignComponent implements OnInit {
   ngOnInit(): void {
     // this.getCampaigns();
   }
+
   campaigns = [];
   public loading: boolean = false;
 
@@ -94,6 +103,7 @@ export class CampaignComponent implements OnInit {
         name: this.name,
         text: this.template,
         status: this.status,
+        image: this.image,
       })
       .subscribe((res) => {
         this.cs.isLoading.next(false);
@@ -111,12 +121,15 @@ export class CampaignComponent implements OnInit {
     autoReset: null,
     errorReset: null,
     cancelReset: null,
-    autoProcessQueue: false,
-    autoQueue: false,
+    // autoProcessQueue: false,
+    // autoQueue: false,
     addRemoveLinks: true,
   };
 
   public onUploadError(args: any): void {}
 
-  public onUploadSuccess(args: any): void {}
+  public onUploadSuccess(args: any): void {
+    console.log(args);
+    this.image = args;
+  }
 }

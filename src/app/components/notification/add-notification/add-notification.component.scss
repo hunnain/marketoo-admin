@@ -17,3 +17,11 @@
 .image-upload > input {
   display: none;
 }
+
+::ng-deep .dz-preview{
+  width: 150px !important;
+  z-index: 1;
+}
+::ng-deep .dz-preview .dz-progress{
+  display: none;
+}

@@ -10,6 +10,15 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 // import { ReciversListComponent } from './recivers-list/recivers-list.component';
 // import { ChatBoxComponent } from '../messages/chat-box/chat-box.component';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  maxFilesize: 50,
+  url: 'https://httpbin.org/post',
+};
 @NgModule({
   declarations: [
     NotificationComponent,
@@ -25,6 +34,14 @@ import { AddNotificationComponent } from './add-notification/add-notification.co
     Ng2SmartTableModule,
     NgxDatatableModule,
     SharedModule,
+    DropzoneModule,
+  ],
+  providers: [
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG,
+    },
+    NgbActiveModal,
   ],
 })
 export class NotificationModule {}

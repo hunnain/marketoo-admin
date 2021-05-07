@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { BlastNotificationsService } from 'src/app/shared/service/blast-notifications/blast-notifications.service';
 import { CommonService } from 'src/app/shared/service/common.service';
 
@@ -52,17 +53,17 @@ export class AddNotificationComponent implements OnInit {
     };
   }
 
-  removeBase64(data) {
-    let base = data;
-    let splited = base.split('base64,');
-    let byteImg = splited[1];
-    return byteImg;
-  }
+  // removeBase64(data) {
+  //   let base = data;
+  //   let splited = base.split('base64,');
+  //   let byteImg = splited[1];
+  //   return byteImg;
+  // }
 
-  addBase64(data) {
-    let base = `data:image/jpeg;base64,${data}`;
-    return base;
-  }
+  // addBase64(data) {
+  //   let base = `data:image/jpeg;base64,${data}`;
+  //   return base;
+  // }
 
   handleChange(data) {
     this.content = data;
@@ -70,10 +71,31 @@ export class AddNotificationComponent implements OnInit {
 
   onAddNotification(type) {
     this.loading = true;
-    let data = { SendTo: type, content: this.content };
+    let data = {
+      SendTo: type,
+      content: this.content,
+      // image:""
+    };
     this.notificationService.addNotification(data).subscribe((res) => {
       this.loading = false;
       this.router.navigate(['/notifications']);
     });
+  }
+
+  public config: DropzoneConfigInterface = {
+    clickable: true,
+    maxFiles: 1,
+    autoReset: null,
+    errorReset: null,
+    cancelReset: null,
+    autoProcessQueue: false,
+    autoQueue: false,
+    addRemoveLinks: true,
+  };
+
+  public onUploadError(args: any): void {}
+
+  public onUploadSuccess(args: any): void {
+    console.log(args);
   }
 }

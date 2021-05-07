@@ -9,6 +9,9 @@ export class CampaignService {
   getAllCampaigns(query = '') {
     return this.commonService.get(`admin/get-all-campaigns${query}`);
   }
+  getCampaignById(id) {
+    return this.commonService.get(`common/get-campaign-by-id/${id}`);
+  }
   getRandomCampaigns(query = '') {
     return this.commonService.get(`admin/get-random-campaigns${query}`);
   }

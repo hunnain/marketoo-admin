@@ -7,17 +7,23 @@
     </div> -->
     <div class="col-12 col-md-12" style="margin-bottom: 20px">
       <div class="card editor-box">
-        <div class="image-upload">
+        <dropzone
+          [config]="config"
+          [message]="'Click or drag images here to upload'"
+          (error)="onUploadError($event)"
+          (success)="onUploadSuccess($event)"
+        ></dropzone>
+        <!-- <div class="image-upload">
           <label for="file-input">
             <app-feather-icons
               [icon]="'upload'"
               class="font-warning"
             ></app-feather-icons>
-            <!-- <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg"/> -->
+           
           </label>
 
           <input id="file-input" type="file" (change)="readUrl($event)" />
-        </div>
+        </div> -->
 
         <app-text-editor
           [(text)]="content"
