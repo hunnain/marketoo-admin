@@ -84,9 +84,11 @@ export class OrderDetailComponent implements OnInit {
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
+          this.prodImage = '';
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          this.prodImage = '';
         }
       );
   }
@@ -244,5 +246,14 @@ export class OrderDetailComponent implements OnInit {
   formetDate(date) {
     let formatedDate = moment(date).format('DD-MM-YYYY');
     return formatedDate;
+  }
+
+  prodImage: string = '';
+  OpenImage(img, content) {
+    this.prodImage = img;
+    this.open(content);
+  }
+  downloadImage() {
+    console.log('download')
   }
 }
